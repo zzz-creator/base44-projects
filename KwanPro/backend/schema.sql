@@ -134,7 +134,7 @@ CREATE TABLE Payments (
     due_date     DATETIME2     NOT NULL,
     paid_date    DATETIME2     NULL,
     status       NVARCHAR(255) NOT NULL DEFAULT 'pending',
-    plan         NVARCHAR(255) NULL,
+    [plan]        NVARCHAR(255) NULL,
     notes        NVARCHAR(MAX) NULL,
     created_date DATETIME2     NOT NULL DEFAULT GETDATE(),
     updated_date DATETIME2     NULL

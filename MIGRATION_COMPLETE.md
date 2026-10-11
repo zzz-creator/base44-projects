@@ -2,7 +2,7 @@
 
 **Last updated:** 11 October 2026
 **Status:** All 8 projects normalised onto the local MSSQL backend architecture.
-Workflow applied: `.agents/workflows/base44-to-local.md`.
+Workflow applied: `docs/base44-to-local.md`.
 
 > Supersedes the February 2026 summary. The old blanket claim that everything was
 > "complete" was true only for the frontend import removal; the backends, env and

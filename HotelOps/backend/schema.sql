@@ -1,14 +1,11 @@
 -- HotelOps - MSSQL Schema
 -- Generated from entity definitions
 
-CREATE DATABASE hotelops;
-GO
 
-USE hotelops;
-GO
 
 -- ─── Authentication ───────────────────────────────────────────────────────────
 
+IF OBJECT_ID('Users', 'U') IS NULL
 CREATE TABLE Users (
     UserID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Email NVARCHAR(255) NOT NULL UNIQUE,
@@ -21,6 +18,7 @@ CREATE TABLE Users (
 
 -- ─── Entities ─────────────────────────────────────────────────────────────────
 
+IF OBJECT_ID('Floor', 'U') IS NULL
 CREATE TABLE Floor (
     FloorID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FloorNumber INT,
@@ -31,6 +29,7 @@ CREATE TABLE Floor (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Room', 'U') IS NULL
 CREATE TABLE Room (
     RoomID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     RoomNumber NVARCHAR(50),
@@ -45,6 +44,7 @@ CREATE TABLE Room (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Guest', 'U') IS NULL
 CREATE TABLE Guest (
     GuestID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FirstName NVARCHAR(255),
@@ -64,6 +64,7 @@ CREATE TABLE Guest (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Reservation', 'U') IS NULL
 CREATE TABLE Reservation (
     ReservationID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -83,6 +84,7 @@ CREATE TABLE Reservation (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ServiceRequest', 'U') IS NULL
 CREATE TABLE ServiceRequest (
     ServiceRequestID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -98,6 +100,7 @@ CREATE TABLE ServiceRequest (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('StaffMember', 'U') IS NULL
 CREATE TABLE StaffMember (
     StaffMemberID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     UserID NVARCHAR(100),
@@ -114,6 +117,7 @@ CREATE TABLE StaffMember (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('StaffTask', 'U') IS NULL
 CREATE TABLE StaffTask (
     StaffTaskID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     StaffMemberID NVARCHAR(100),
@@ -130,6 +134,7 @@ CREATE TABLE StaffTask (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('StaffAlert', 'U') IS NULL
 CREATE TABLE StaffAlert (
     StaffAlertID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     StaffMemberID NVARCHAR(100),
@@ -141,6 +146,7 @@ CREATE TABLE StaffAlert (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('RoomControl', 'U') IS NULL
 CREATE TABLE RoomControl (
     RoomControlID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     RoomID NVARCHAR(100),
@@ -152,6 +158,7 @@ CREATE TABLE RoomControl (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('RoomServiceItem', 'U') IS NULL
 CREATE TABLE RoomServiceItem (
     RoomServiceItemID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -163,6 +170,7 @@ CREATE TABLE RoomServiceItem (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('RoomServiceOrder', 'U') IS NULL
 CREATE TABLE RoomServiceOrder (
     RoomServiceOrderID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -177,6 +185,7 @@ CREATE TABLE RoomServiceOrder (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('MaintenanceAlert', 'U') IS NULL
 CREATE TABLE MaintenanceAlert (
     MaintenanceAlertID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     RoomID NVARCHAR(100),
@@ -191,6 +200,7 @@ CREATE TABLE MaintenanceAlert (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Notification', 'U') IS NULL
 CREATE TABLE Notification (
     NotificationID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     RecipientType NVARCHAR(50),
@@ -204,6 +214,7 @@ CREATE TABLE Notification (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('GuestMessage', 'U') IS NULL
 CREATE TABLE GuestMessage (
     GuestMessageID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -217,6 +228,7 @@ CREATE TABLE GuestMessage (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Feedback', 'U') IS NULL
 CREATE TABLE Feedback (
     FeedbackID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -231,6 +243,7 @@ CREATE TABLE Feedback (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Invoice', 'U') IS NULL
 CREATE TABLE Invoice (
     InvoiceID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -246,6 +259,7 @@ CREATE TABLE Invoice (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('LoyaltyPoints', 'U') IS NULL
 CREATE TABLE LoyaltyPoints (
     LoyaltyPointsID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -257,6 +271,7 @@ CREATE TABLE LoyaltyPoints (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('LoyaltyTransaction', 'U') IS NULL
 CREATE TABLE LoyaltyTransaction (
     LoyaltyTransactionID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -269,6 +284,7 @@ CREATE TABLE LoyaltyTransaction (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('LoyaltyReward', 'U') IS NULL
 CREATE TABLE LoyaltyReward (
     LoyaltyRewardID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -281,6 +297,7 @@ CREATE TABLE LoyaltyReward (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ConferenceRoom', 'U') IS NULL
 CREATE TABLE ConferenceRoom (
     ConferenceRoomID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -293,6 +310,7 @@ CREATE TABLE ConferenceRoom (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ConferenceRoomBooking', 'U') IS NULL
 CREATE TABLE ConferenceRoomBooking (
     ConferenceRoomBookingID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ConferenceRoomID NVARCHAR(100),
@@ -308,6 +326,7 @@ CREATE TABLE ConferenceRoomBooking (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ParkingSpot', 'U') IS NULL
 CREATE TABLE ParkingSpot (
     ParkingSpotID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     SpotNumber NVARCHAR(50),
@@ -320,6 +339,7 @@ CREATE TABLE ParkingSpot (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Vehicle', 'U') IS NULL
 CREATE TABLE Vehicle (
     VehicleID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -334,6 +354,7 @@ CREATE TABLE Vehicle (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Elevator', 'U') IS NULL
 CREATE TABLE Elevator (
     ElevatorID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ElevatorNumber NVARCHAR(50),
@@ -346,6 +367,7 @@ CREATE TABLE Elevator (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ElevatorRequest', 'U') IS NULL
 CREATE TABLE ElevatorRequest (
     ElevatorRequestID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ElevatorID NVARCHAR(100),
@@ -361,6 +383,7 @@ CREATE TABLE ElevatorRequest (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('AccessPass', 'U') IS NULL
 CREATE TABLE AccessPass (
     AccessPassID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     GuestID NVARCHAR(100),
@@ -374,6 +397,7 @@ CREATE TABLE AccessPass (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Campaign', 'U') IS NULL
 CREATE TABLE Campaign (
     CampaignID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -394,6 +418,7 @@ CREATE TABLE Campaign (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Offer', 'U') IS NULL
 CREATE TABLE Offer (
     OfferID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -411,6 +436,7 @@ CREATE TABLE Offer (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('PricingRecommendation', 'U') IS NULL
 CREATE TABLE PricingRecommendation (
     PricingRecommendationID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     RoomType NVARCHAR(50),
@@ -427,6 +453,7 @@ CREATE TABLE PricingRecommendation (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('AnalyticsData', 'U') IS NULL
 CREATE TABLE AnalyticsData (
     AnalyticsDataID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     MetricType NVARCHAR(100),

@@ -1,14 +1,11 @@
 -- AstroSim Nexus - MSSQL Schema
 -- Generated from entity definitions
 
-CREATE DATABASE astrosim;
-GO
 
-USE astrosim;
-GO
 
 -- ─── Authentication ──────────────────────────────────────────────────────────
 
+IF OBJECT_ID('Users', 'U') IS NULL
 CREATE TABLE Users (
     UserID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Email NVARCHAR(255) NOT NULL UNIQUE,
@@ -21,6 +18,7 @@ CREATE TABLE Users (
 
 -- ─── Entities ────────────────────────────────────────────────────────────────
 
+IF OBJECT_ID('AuditTrail', 'U') IS NULL
 CREATE TABLE AuditTrail (
     AuditTrailID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     EntityName NVARCHAR(100),
@@ -35,6 +33,7 @@ CREATE TABLE AuditTrail (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('CargoManifest', 'U') IS NULL
 CREATE TABLE CargoManifest (
     CargoManifestID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ShipID NVARCHAR(100),
@@ -46,6 +45,7 @@ CREATE TABLE CargoManifest (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Colony', 'U') IS NULL
 CREATE TABLE Colony (
     ColonyID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -62,6 +62,7 @@ CREATE TABLE Colony (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('CombatEncounter', 'U') IS NULL
 CREATE TABLE CombatEncounter (
     CombatEncounterID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     LocationColonyID NVARCHAR(100),
@@ -79,6 +80,7 @@ CREATE TABLE CombatEncounter (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('CombatLog', 'U') IS NULL
 CREATE TABLE CombatLog (
     CombatLogID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     EncounterID NVARCHAR(100),
@@ -93,6 +95,7 @@ CREATE TABLE CombatLog (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('CombatParticipant', 'U') IS NULL
 CREATE TABLE CombatParticipant (
     CombatParticipantID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     EncounterID NVARCHAR(100),
@@ -108,6 +111,7 @@ CREATE TABLE CombatParticipant (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('CustomShipClass', 'U') IS NULL
 CREATE TABLE CustomShipClass (
     CustomShipClassID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -124,6 +128,7 @@ CREATE TABLE CustomShipClass (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('DiplomacyAgreement', 'U') IS NULL
 CREATE TABLE DiplomacyAgreement (
     DiplomacyAgreementID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionAIDirectional NVARCHAR(100),
@@ -136,6 +141,7 @@ CREATE TABLE DiplomacyAgreement (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('EconomicPolicy', 'U') IS NULL
 CREATE TABLE EconomicPolicy (
     EconomicPolicyID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionID NVARCHAR(100),
@@ -151,6 +157,7 @@ CREATE TABLE EconomicPolicy (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('EventLog', 'U') IS NULL
 CREATE TABLE EventLog (
     EventLogID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Timestamp DATETIME2,
@@ -164,6 +171,7 @@ CREATE TABLE EventLog (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Faction', 'U') IS NULL
 CREATE TABLE Faction (
     FactionID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -177,6 +185,7 @@ CREATE TABLE Faction (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('FactionStrategicMemory', 'U') IS NULL
 CREATE TABLE FactionStrategicMemory (
     FactionStrategicMemoryID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionID NVARCHAR(100),
@@ -192,6 +201,7 @@ CREATE TABLE FactionStrategicMemory (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('FactionStrategyProfile', 'U') IS NULL
 CREATE TABLE FactionStrategyProfile (
     FactionStrategyProfileID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionID NVARCHAR(100),
@@ -205,6 +215,7 @@ CREATE TABLE FactionStrategyProfile (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Fleet', 'U') IS NULL
 CREATE TABLE Fleet (
     FleetID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -220,6 +231,7 @@ CREATE TABLE Fleet (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('FleetAssignment', 'U') IS NULL
 CREATE TABLE FleetAssignment (
     FleetAssignmentID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FleetID NVARCHAR(100),
@@ -231,6 +243,7 @@ CREATE TABLE FleetAssignment (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('InfrastructureModule', 'U') IS NULL
 CREATE TABLE InfrastructureModule (
     InfrastructureModuleID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -243,6 +256,7 @@ CREATE TABLE InfrastructureModule (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Inventory', 'U') IS NULL
 CREATE TABLE Inventory (
     InventoryID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -253,6 +267,7 @@ CREATE TABLE Inventory (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('MarketData', 'U') IS NULL
 CREATE TABLE MarketData (
     MarketDataID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -268,6 +283,7 @@ CREATE TABLE MarketData (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('MarketEvent', 'U') IS NULL
 CREATE TABLE MarketEvent (
     MarketEventID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     EventType NVARCHAR(50),
@@ -282,6 +298,7 @@ CREATE TABLE MarketEvent (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('MarketTransaction', 'U') IS NULL
 CREATE TABLE MarketTransaction (
     MarketTransactionID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -294,6 +311,7 @@ CREATE TABLE MarketTransaction (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ResearchProject', 'U') IS NULL
 CREATE TABLE ResearchProject (
     ResearchProjectID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionID NVARCHAR(100),
@@ -306,6 +324,7 @@ CREATE TABLE ResearchProject (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Resource', 'U') IS NULL
 CREATE TABLE Resource (
     ResourceID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -318,6 +337,7 @@ CREATE TABLE Resource (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Ship', 'U') IS NULL
 CREATE TABLE Ship (
     ShipID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -334,6 +354,7 @@ CREATE TABLE Ship (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ShipComponent', 'U') IS NULL
 CREATE TABLE ShipComponent (
     ShipComponentID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -351,6 +372,7 @@ CREATE TABLE ShipComponent (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ShipConstructionOrder', 'U') IS NULL
 CREATE TABLE ShipConstructionOrder (
     ShipConstructionOrderID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -364,6 +386,7 @@ CREATE TABLE ShipConstructionOrder (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ShipHull', 'U') IS NULL
 CREATE TABLE ShipHull (
     ShipHullID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255),
@@ -382,6 +405,7 @@ CREATE TABLE ShipHull (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('ShipLoadout', 'U') IS NULL
 CREATE TABLE ShipLoadout (
     ShipLoadoutID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ShipID NVARCHAR(100),
@@ -393,6 +417,7 @@ CREATE TABLE ShipLoadout (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('Threat', 'U') IS NULL
 CREATE TABLE Threat (
     ThreatID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     ColonyID NVARCHAR(100),
@@ -406,6 +431,7 @@ CREATE TABLE Threat (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('TradeAgreement', 'U') IS NULL
 CREATE TABLE TradeAgreement (
     TradeAgreementID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     FactionAIDirectional NVARCHAR(100),
@@ -419,6 +445,7 @@ CREATE TABLE TradeAgreement (
     CreatedBy NVARCHAR(255)
 );
 
+IF OBJECT_ID('TradeRoute', 'U') IS NULL
 CREATE TABLE TradeRoute (
     TradeRouteID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     OriginColonyID NVARCHAR(100),

@@ -38,7 +38,7 @@ CREATE TABLE AlertRecord (
     assigned_to          NVARCHAR(255) NULL,
     notes                NVARCHAR(MAX) NULL,
     actions_taken        NVARCHAR(MAX) NULL,
-    read                 BIT           NOT NULL DEFAULT 0,
+    [read]               BIT           NOT NULL DEFAULT 0,
     source               NVARCHAR(255) NULL,
     created_date         DATETIME2     NOT NULL DEFAULT GETDATE(),
     updated_date         DATETIME2     NULL

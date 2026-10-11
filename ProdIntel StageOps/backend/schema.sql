@@ -7,6 +7,7 @@
 -- PRODUCTION DOMAIN
 -- =============================================
 
+IF OBJECT_ID('Venue', 'U') IS NULL
 CREATE TABLE [dbo].[Venue] (
     [VenueID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [Name] NVARCHAR(255) NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE [dbo].[Venue] (
     [Version] INT DEFAULT 1
 );
 
+IF OBJECT_ID('Production', 'U') IS NULL
 CREATE TABLE [dbo].[Production] (
     [ProductionID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [Name] NVARCHAR(255) NOT NULL,
@@ -34,6 +36,7 @@ CREATE TABLE [dbo].[Production] (
     CONSTRAINT [FK_Production_Venue] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venue]([VenueID])
 );
 
+IF OBJECT_ID('CrewAssignment', 'U') IS NULL
 CREATE TABLE [dbo].[CrewAssignment] (
     [AssignmentID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [ProductionID] UNIQUEIDENTIFIER NOT NULL,
@@ -48,6 +51,7 @@ CREATE TABLE [dbo].[CrewAssignment] (
     CONSTRAINT [FK_CrewAssignment_Production] FOREIGN KEY ([ProductionID]) REFERENCES [dbo].[Production]([ProductionID])
 );
 
+IF OBJECT_ID('TaskChecklist', 'U') IS NULL
 CREATE TABLE [dbo].[TaskChecklist] (
     [TaskID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [ProductionID] UNIQUEIDENTIFIER NOT NULL,
@@ -63,6 +67,7 @@ CREATE TABLE [dbo].[TaskChecklist] (
     CONSTRAINT [FK_TaskChecklist_Production] FOREIGN KEY ([ProductionID]) REFERENCES [dbo].[Production]([ProductionID])
 );
 
+IF OBJECT_ID('IncidentLog', 'U') IS NULL
 CREATE TABLE [dbo].[IncidentLog] (
     [IncidentID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [ProductionID] UNIQUEIDENTIFIER NULL,
@@ -85,6 +90,7 @@ CREATE TABLE [dbo].[IncidentLog] (
 -- EQUIPMENT INTELLIGENCE DOMAIN
 -- =============================================
 
+IF OBJECT_ID('AssetLocation', 'U') IS NULL
 CREATE TABLE [dbo].[AssetLocation] (
     [LocationID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [LocationName] NVARCHAR(255) NOT NULL,
@@ -97,6 +103,7 @@ CREATE TABLE [dbo].[AssetLocation] (
     CONSTRAINT [FK_AssetLocation_Venue] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venue]([VenueID])
 );
 
+IF OBJECT_ID('EquipmentAsset', 'U') IS NULL
 CREATE TABLE [dbo].[EquipmentAsset] (
     [AssetID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [AssetName] NVARCHAR(255) NOT NULL,
@@ -113,6 +120,7 @@ CREATE TABLE [dbo].[EquipmentAsset] (
     CONSTRAINT [FK_EquipmentAsset_Location] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[AssetLocation]([LocationID])
 );
 
+IF OBJECT_ID('MaintenanceRecord', 'U') IS NULL
 CREATE TABLE [dbo].[MaintenanceRecord] (
     [MaintenanceID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [AssetID] UNIQUEIDENTIFIER NOT NULL,
@@ -128,6 +136,7 @@ CREATE TABLE [dbo].[MaintenanceRecord] (
     CONSTRAINT [FK_MaintenanceRecord_Asset] FOREIGN KEY ([AssetID]) REFERENCES [dbo].[EquipmentAsset]([AssetID])
 );
 
+IF OBJECT_ID('UsageMetrics', 'U') IS NULL
 CREATE TABLE [dbo].[UsageMetrics] (
     [UsageID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [AssetID] UNIQUEIDENTIFIER NOT NULL,
@@ -147,6 +156,7 @@ CREATE TABLE [dbo].[UsageMetrics] (
 -- KNOWLEDGE AND DOCUMENTATION DOMAIN
 -- =============================================
 
+IF OBJECT_ID('KnowledgeRecord', 'U') IS NULL
 CREATE TABLE [dbo].[KnowledgeRecord] (
     [RecordID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [ProductionID] UNIQUEIDENTIFIER NULL,
@@ -161,6 +171,7 @@ CREATE TABLE [dbo].[KnowledgeRecord] (
     CONSTRAINT [FK_KnowledgeRecord_Production] FOREIGN KEY ([ProductionID]) REFERENCES [dbo].[Production]([ProductionID])
 );
 
+IF OBJECT_ID('CueDocumentation', 'U') IS NULL
 CREATE TABLE [dbo].[CueDocumentation] (
     [CueID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [ProductionID] UNIQUEIDENTIFIER NOT NULL,
@@ -176,6 +187,7 @@ CREATE TABLE [dbo].[CueDocumentation] (
     CONSTRAINT [FK_CueDocumentation_Production] FOREIGN KEY ([ProductionID]) REFERENCES [dbo].[Production]([ProductionID])
 );
 
+IF OBJECT_ID('ProcedureLibrary', 'U') IS NULL
 CREATE TABLE [dbo].[ProcedureLibrary] (
     [ProcedureID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [Title] NVARCHAR(255) NOT NULL,
@@ -188,6 +200,7 @@ CREATE TABLE [dbo].[ProcedureLibrary] (
     [CreatedBy] NVARCHAR(255) NULL
 );
 
+IF OBJECT_ID('HistoricalIncidentAnalysis', 'U') IS NULL
 CREATE TABLE [dbo].[HistoricalIncidentAnalysis] (
     [AnalysisID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [IncidentID] UNIQUEIDENTIFIER NOT NULL,
@@ -206,6 +219,7 @@ CREATE TABLE [dbo].[HistoricalIncidentAnalysis] (
 -- AUTOMATION DOMAIN
 -- =============================================
 
+IF OBJECT_ID('AutomationRule', 'U') IS NULL
 CREATE TABLE [dbo].[AutomationRule] (
     [RuleID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [RuleName] NVARCHAR(255) NOT NULL,
@@ -219,6 +233,7 @@ CREATE TABLE [dbo].[AutomationRule] (
     [Version] INT DEFAULT 1
 );
 
+IF OBJECT_ID('TriggerCondition', 'U') IS NULL
 CREATE TABLE [dbo].[TriggerCondition] (
     [TriggerID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [RuleID] UNIQUEIDENTIFIER NOT NULL,
@@ -233,6 +248,7 @@ CREATE TABLE [dbo].[TriggerCondition] (
     CONSTRAINT [FK_TriggerCondition_Rule] FOREIGN KEY ([RuleID]) REFERENCES [dbo].[AutomationRule]([RuleID])
 );
 
+IF OBJECT_ID('WorkflowAction', 'U') IS NULL
 CREATE TABLE [dbo].[WorkflowAction] (
     [ActionID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [RuleID] UNIQUEIDENTIFIER NOT NULL,
@@ -246,6 +262,7 @@ CREATE TABLE [dbo].[WorkflowAction] (
     CONSTRAINT [FK_WorkflowAction_Rule] FOREIGN KEY ([RuleID]) REFERENCES [dbo].[AutomationRule]([RuleID])
 );
 
+IF OBJECT_ID('ExecutionLog', 'U') IS NULL
 CREATE TABLE [dbo].[ExecutionLog] (
     [ExecutionID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [RuleID] UNIQUEIDENTIFIER NOT NULL,
@@ -263,17 +280,31 @@ CREATE TABLE [dbo].[ExecutionLog] (
 -- INDEXES FOR PERFORMANCE
 -- =============================================
 
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_Production_Status' AND object_id = OBJECT_ID('dbo.Production'))
 CREATE INDEX [IX_Production_Status] ON [dbo].[Production]([Status]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_Production_VenueID' AND object_id = OBJECT_ID('dbo.Production'))
 CREATE INDEX [IX_Production_VenueID] ON [dbo].[Production]([VenueID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_CrewAssignment_ProductionID' AND object_id = OBJECT_ID('dbo.CrewAssignment'))
 CREATE INDEX [IX_CrewAssignment_ProductionID] ON [dbo].[CrewAssignment]([ProductionID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_TaskChecklist_ProductionID' AND object_id = OBJECT_ID('dbo.TaskChecklist'))
 CREATE INDEX [IX_TaskChecklist_ProductionID] ON [dbo].[TaskChecklist]([ProductionID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_TaskChecklist_Status' AND object_id = OBJECT_ID('dbo.TaskChecklist'))
 CREATE INDEX [IX_TaskChecklist_Status] ON [dbo].[TaskChecklist]([CompletionStatus]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_IncidentLog_ProductionID' AND object_id = OBJECT_ID('dbo.IncidentLog'))
 CREATE INDEX [IX_IncidentLog_ProductionID] ON [dbo].[IncidentLog]([ProductionID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_IncidentLog_Status' AND object_id = OBJECT_ID('dbo.IncidentLog'))
 CREATE INDEX [IX_IncidentLog_Status] ON [dbo].[IncidentLog]([ResolutionStatus]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_EquipmentAsset_Status' AND object_id = OBJECT_ID('dbo.EquipmentAsset'))
 CREATE INDEX [IX_EquipmentAsset_Status] ON [dbo].[EquipmentAsset]([Status]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_EquipmentAsset_LocationID' AND object_id = OBJECT_ID('dbo.EquipmentAsset'))
 CREATE INDEX [IX_EquipmentAsset_LocationID] ON [dbo].[EquipmentAsset]([LocationID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_MaintenanceRecord_AssetID' AND object_id = OBJECT_ID('dbo.MaintenanceRecord'))
 CREATE INDEX [IX_MaintenanceRecord_AssetID] ON [dbo].[MaintenanceRecord]([AssetID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_UsageMetrics_AssetID' AND object_id = OBJECT_ID('dbo.UsageMetrics'))
 CREATE INDEX [IX_UsageMetrics_AssetID] ON [dbo].[UsageMetrics]([AssetID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_CueDocumentation_ProductionID' AND object_id = OBJECT_ID('dbo.CueDocumentation'))
 CREATE INDEX [IX_CueDocumentation_ProductionID] ON [dbo].[CueDocumentation]([ProductionID]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_AutomationRule_IsActive' AND object_id = OBJECT_ID('dbo.AutomationRule'))
 CREATE INDEX [IX_AutomationRule_IsActive] ON [dbo].[AutomationRule]([IsActive]);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_ExecutionLog_RuleID' AND object_id = OBJECT_ID('dbo.ExecutionLog'))
 CREATE INDEX [IX_ExecutionLog_RuleID] ON [dbo].[ExecutionLog]([RuleID]);
