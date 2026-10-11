@@ -24,12 +24,7 @@ config.json
 # --- Logs / scratch ---
 *.log
 logs/
-
-# --- Switchboard runtime state (churn / binaries / exports) ---
-.switchboard/kanban.db
-.switchboard/state.json
-.switchboard/airlock/
-.switchboard/MCP/
+/tmp/
 
 # --- OS / editor cruft ---
 .DS_Store
