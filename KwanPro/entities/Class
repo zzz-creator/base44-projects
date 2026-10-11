@@ -1,0 +1,86 @@
+{
+  "name": "Class",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Class Name"
+    },
+    "level": {
+      "type": "string",
+      "title": "Level",
+      "enum": [
+        "Beginner",
+        "Intermediate",
+        "Advanced",
+        "All Levels"
+      ]
+    },
+    "instructor_name": {
+      "type": "string",
+      "title": "Instructor Name"
+    },
+    "day_of_week": {
+      "type": "string",
+      "title": "Day of Week",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "start_time": {
+      "type": "string",
+      "title": "Start Time"
+    },
+    "end_time": {
+      "type": "string",
+      "title": "End Time"
+    },
+    "capacity": {
+      "type": "number",
+      "title": "Capacity"
+    },
+    "belt_min": {
+      "type": "string",
+      "title": "Min Belt",
+      "enum": [
+        "White",
+        "Yellow",
+        "Orange",
+        "Green",
+        "Blue",
+        "Red",
+        "Black"
+      ]
+    },
+    "belt_max": {
+      "type": "string",
+      "title": "Max Belt",
+      "enum": [
+        "White",
+        "Yellow",
+        "Orange",
+        "Green",
+        "Blue",
+        "Red",
+        "Black"
+      ]
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "level",
+    "day_of_week",
+    "start_time"
+  ]
+}

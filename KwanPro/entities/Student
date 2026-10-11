@@ -1,0 +1,141 @@
+{
+  "name": "Student",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "title": "Date of Birth"
+    },
+    "emergency_contact_name": {
+      "type": "string",
+      "title": "Emergency Contact Name"
+    },
+    "emergency_contact_phone": {
+      "type": "string",
+      "title": "Emergency Contact Phone"
+    },
+    "current_belt": {
+      "type": "string",
+      "title": "Current Belt",
+      "enum": [
+        "White",
+        "Yellow",
+        "Orange",
+        "Green",
+        "Blue",
+        "Red",
+        "Black"
+      ],
+      "default": "White"
+    },
+    "classes_in_current_belt": {
+      "type": "number",
+      "title": "Classes in Current Belt",
+      "default": 0
+    },
+    "belt_start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Belt Start Date"
+    },
+    "total_classes_attended": {
+      "type": "number",
+      "title": "Total Classes Attended",
+      "default": 0
+    },
+    "membership_status": {
+      "type": "string",
+      "title": "Membership Status",
+      "enum": [
+        "active",
+        "inactive",
+        "suspended"
+      ],
+      "default": "active"
+    },
+    "membership_plan": {
+      "type": "string",
+      "title": "Membership Plan",
+      "enum": [
+        "monthly",
+        "quarterly",
+        "annual"
+      ],
+      "default": "monthly"
+    },
+    "instructor_notes": {
+      "type": "string",
+      "title": "Instructor Notes"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo URL"
+    },
+    "join_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Join Date"
+    },
+    "stripes": {
+      "type": "number",
+      "title": "Stripes",
+      "default": 0
+    },
+    "eligible_for_testing": {
+      "type": "boolean",
+      "title": "Eligible for Testing",
+      "default": false
+    },
+    "instructor_approved": {
+      "type": "boolean",
+      "title": "Instructor Approved",
+      "default": false
+    }
+  },
+  "required": [
+    "full_name",
+    "current_belt"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

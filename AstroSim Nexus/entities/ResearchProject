@@ -1,0 +1,39 @@
+{
+  "name": "ResearchProject",
+  "type": "object",
+  "properties": {
+    "faction_id": {
+      "type": "string",
+      "description": "Faction ID"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Energy",
+        "Defense",
+        "Logistics",
+        "Economics",
+        "Expansion"
+      ],
+      "description": "Research category"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0,
+      "description": "Current progress"
+    },
+    "completion_threshold": {
+      "type": "number",
+      "default": 1000,
+      "description": "Required progress for completion"
+    },
+    "unlock_type": {
+      "type": "string",
+      "description": "What gets unlocked"
+    }
+  },
+  "required": [
+    "faction_id",
+    "category"
+  ]
+}

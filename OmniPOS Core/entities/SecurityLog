@@ -1,0 +1,34 @@
+{
+  "name": "SecurityLog",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string"
+    },
+    "staff_id": {
+      "type": "string"
+    },
+    "terminal_id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_type",
+    "description"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": null,
+    "delete": null
+  }
+}

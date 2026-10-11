@@ -1,0 +1,53 @@
+{
+  "name": "EquipmentSchedule",
+  "type": "object",
+  "properties": {
+    "asset_id": {
+      "type": "string",
+      "description": "Reference to EquipmentAsset"
+    },
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "Optional reference to TaskChecklist"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Booking start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Booking end date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "in_use",
+        "returned",
+        "cancelled"
+      ],
+      "default": "scheduled",
+      "description": "Booking status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Booking notes"
+    },
+    "booked_by": {
+      "type": "string",
+      "description": "Person who made the booking"
+    }
+  },
+  "required": [
+    "asset_id",
+    "production_id",
+    "start_date",
+    "end_date"
+  ]
+}

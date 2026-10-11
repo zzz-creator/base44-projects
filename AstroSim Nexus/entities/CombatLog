@@ -1,0 +1,48 @@
+{
+  "name": "CombatLog",
+  "type": "object",
+  "properties": {
+    "encounter_id": {
+      "type": "string",
+      "description": "Combat encounter ID"
+    },
+    "turn_number": {
+      "type": "number",
+      "description": "Combat turn"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "Attack",
+        "Retreat",
+        "Destroyed",
+        "Tactical",
+        "Morale"
+      ],
+      "description": "Action type"
+    },
+    "actor_ship_id": {
+      "type": "string",
+      "description": "Acting ship ID"
+    },
+    "target_ship_id": {
+      "type": "string",
+      "description": "Target ship ID"
+    },
+    "damage_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Damage dealt"
+    },
+    "description": {
+      "type": "string",
+      "description": "Combat action description"
+    }
+  },
+  "required": [
+    "encounter_id",
+    "turn_number",
+    "action_type",
+    "description"
+  ]
+}

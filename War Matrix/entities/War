@@ -1,0 +1,153 @@
+{
+  "name": "War",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the war/conflict"
+    },
+    "countries_involved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of country codes involved"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the war started"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the war ended (null if ongoing)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ongoing",
+        "ended",
+        "predicted",
+        "inevitable"
+      ],
+      "description": "Current status of the war"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "territorial",
+        "civil",
+        "religious",
+        "economic",
+        "colonial",
+        "galactic",
+        "interspecies"
+      ],
+      "description": "Type of conflict"
+    },
+    "casualties": {
+      "type": "object",
+      "properties": {
+        "military": {
+          "type": "number"
+        },
+        "civilian": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "countries_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "country_code": {
+            "type": "string"
+          },
+          "country_name": {
+            "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "ally",
+              "axis",
+              "neutral",
+              "aggressor",
+              "defender"
+            ]
+          },
+          "army_size": {
+            "type": "number"
+          },
+          "military_budget": {
+            "type": "number"
+          },
+          "casualties": {
+            "type": "number"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the conflict"
+    },
+    "economic_impact": {
+      "type": "number",
+      "description": "Economic impact in billions USD"
+    },
+    "probability": {
+      "type": "number",
+      "description": "Probability percentage for predicted wars"
+    },
+    "year": {
+      "type": "number",
+      "description": "Year for future/galaxy wars"
+    },
+    "era": {
+      "type": "string",
+      "enum": [
+        "past",
+        "current",
+        "near_future",
+        "far_future",
+        "galactic"
+      ],
+      "description": "Time period classification"
+    }
+  },
+  "required": [
+    "name",
+    "status",
+    "era"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

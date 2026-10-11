@@ -1,0 +1,64 @@
+{
+  "name": "Colony",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Colony name"
+    },
+    "planet_type": {
+      "type": "string",
+      "enum": [
+        "Terrestrial",
+        "Desert",
+        "Ice",
+        "Gas Giant Moon",
+        "Asteroid"
+      ],
+      "default": "Terrestrial",
+      "description": "Planet type"
+    },
+    "population": {
+      "type": "number",
+      "default": 1000,
+      "description": "Population count"
+    },
+    "stability_index": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 80,
+      "description": "Stability 0-100"
+    },
+    "energy_output": {
+      "type": "number",
+      "default": 100,
+      "description": "Energy production per turn"
+    },
+    "storage_capacity": {
+      "type": "number",
+      "default": 10000,
+      "description": "Maximum storage"
+    },
+    "defense_rating": {
+      "type": "number",
+      "default": 50,
+      "description": "Defense strength"
+    },
+    "threat_level": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Current threat level"
+    },
+    "owner_faction_id": {
+      "type": "string",
+      "description": "Owning faction ID"
+    }
+  },
+  "required": [
+    "name",
+    "owner_faction_id"
+  ]
+}

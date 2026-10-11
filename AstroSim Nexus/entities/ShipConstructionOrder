@@ -1,0 +1,43 @@
+{
+  "name": "ShipConstructionOrder",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Colony ID"
+    },
+    "class_id": {
+      "type": "string",
+      "description": "Custom ship class ID"
+    },
+    "ship_name": {
+      "type": "string",
+      "description": "Name for new ship"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0,
+      "description": "Construction progress"
+    },
+    "completion_turn": {
+      "type": "number",
+      "default": 0,
+      "description": "Estimated completion turn"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "In Progress",
+        "Completed",
+        "Cancelled"
+      ],
+      "default": "In Progress",
+      "description": "Order status"
+    }
+  },
+  "required": [
+    "colony_id",
+    "class_id",
+    "ship_name"
+  ]
+}

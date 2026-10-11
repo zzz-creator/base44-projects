@@ -1,0 +1,49 @@
+{
+  "name": "Budget",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "labor",
+        "equipment",
+        "venue",
+        "materials",
+        "transportation",
+        "catering",
+        "marketing",
+        "insurance",
+        "permits",
+        "contingency",
+        "other"
+      ],
+      "description": "Budget category"
+    },
+    "category_name": {
+      "type": "string",
+      "description": "Custom category name if other"
+    },
+    "allocated_amount": {
+      "type": "number",
+      "description": "Budgeted amount"
+    },
+    "actual_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Actual spent amount"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Budget notes"
+    }
+  },
+  "required": [
+    "production_id",
+    "category",
+    "allocated_amount"
+  ]
+}

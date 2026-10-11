@@ -1,0 +1,82 @@
+{
+  "name": "AutomationRule",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": [
+        "alert_created",
+        "metric_threshold",
+        "user_action",
+        "scheduled"
+      ],
+      "default": "alert_created"
+    },
+    "trigger_config": {
+      "type": "string",
+      "description": "JSON config for trigger conditions"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "send_notification",
+        "trigger_workflow",
+        "escalate_alert",
+        "execute_command",
+        "update_record"
+      ],
+      "default": "send_notification"
+    },
+    "action_config": {
+      "type": "string",
+      "description": "JSON config for action parameters"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "draft"
+      ],
+      "default": "active"
+    },
+    "triggered_count": {
+      "type": "number",
+      "default": 0
+    },
+    "last_triggered": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "name",
+    "trigger_type",
+    "action_type"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

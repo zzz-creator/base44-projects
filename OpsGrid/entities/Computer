@@ -1,0 +1,105 @@
+{
+  "name": "Computer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the computer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "online",
+        "stressed",
+        "offline",
+        "idle"
+      ],
+      "default": "idle"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "has_cpu": {
+      "type": "boolean",
+      "default": true
+    },
+    "has_ram": {
+      "type": "boolean",
+      "default": true
+    },
+    "has_storage": {
+      "type": "boolean",
+      "default": true
+    },
+    "has_gpu": {
+      "type": "boolean",
+      "default": false
+    },
+    "cpu_usage": {
+      "type": "number",
+      "default": 0,
+      "description": "Simulated CPU usage percent"
+    },
+    "ram_usage": {
+      "type": "number",
+      "default": 0,
+      "description": "Simulated RAM usage percent"
+    },
+    "storage_usage": {
+      "type": "number",
+      "default": 0,
+      "description": "Simulated storage usage percent"
+    },
+    "gpu_usage": {
+      "type": "number",
+      "default": 0,
+      "description": "Simulated GPU usage percent"
+    },
+    "simulation_id": {
+      "type": "string",
+      "description": "ID of the active simulation targeting this computer"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "CustomShipClass",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Custom class name"
+    },
+    "faction_id": {
+      "type": "string",
+      "description": "Faction ID"
+    },
+    "hull_id": {
+      "type": "string",
+      "description": "Hull ID"
+    },
+    "component_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Installed component IDs"
+    },
+    "total_cargo_capacity": {
+      "type": "number",
+      "default": 0,
+      "description": "Total cargo capacity"
+    },
+    "total_speed": {
+      "type": "number",
+      "default": 0,
+      "description": "Total speed"
+    },
+    "total_defense": {
+      "type": "number",
+      "default": 0,
+      "description": "Total defense"
+    },
+    "total_maintenance_cost": {
+      "type": "number",
+      "default": 0,
+      "description": "Maintenance per turn"
+    },
+    "production_cost_credits": {
+      "type": "number",
+      "default": 0,
+      "description": "Build cost"
+    }
+  },
+  "required": [
+    "name",
+    "faction_id",
+    "hull_id"
+  ]
+}

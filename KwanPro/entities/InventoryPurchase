@@ -1,0 +1,49 @@
+{
+  "name": "InventoryPurchase",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "title": "Item ID"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "student_id": {
+      "type": "string",
+      "title": "Student ID"
+    },
+    "student_name": {
+      "type": "string",
+      "title": "Student Name"
+    },
+    "quantity": {
+      "type": "number",
+      "title": "Quantity",
+      "default": 1
+    },
+    "unit_price": {
+      "type": "number",
+      "title": "Unit Price"
+    },
+    "total_price": {
+      "type": "number",
+      "title": "Total Price"
+    },
+    "purchase_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Purchase Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "item_id",
+    "quantity",
+    "purchase_date"
+  ]
+}

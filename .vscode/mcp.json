@@ -1,0 +1,15 @@
+{
+  "inputs": [],
+  "servers": {
+    "switchboard": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/.switchboard/MCP/mcp-server.js"
+      ],
+      "env": {
+        "SWITCHBOARD_WORKSPACE_ROOT": "c:/Users/mrkee/Documents/HTML/Base44"
+      }
+    }
+  }
+}

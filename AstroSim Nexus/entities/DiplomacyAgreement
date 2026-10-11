@@ -1,0 +1,44 @@
+{
+  "name": "DiplomacyAgreement",
+  "type": "object",
+  "properties": {
+    "faction_a_id": {
+      "type": "string",
+      "description": "First faction ID"
+    },
+    "faction_b_id": {
+      "type": "string",
+      "description": "Second faction ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Trade Pact",
+        "Non-Aggression",
+        "Alliance",
+        "War"
+      ],
+      "description": "Agreement type"
+    },
+    "duration": {
+      "type": "number",
+      "default": 10,
+      "description": "Duration in turns"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Expired",
+        "Broken"
+      ],
+      "default": "Active",
+      "description": "Agreement status"
+    }
+  },
+  "required": [
+    "faction_a_id",
+    "faction_b_id",
+    "type"
+  ]
+}

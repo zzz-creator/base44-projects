@@ -1,0 +1,66 @@
+{
+  "name": "ShipComponent",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Component name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Engine",
+        "Cargo",
+        "Weapon",
+        "Shield",
+        "Utility",
+        "Fuel"
+      ],
+      "default": "Utility",
+      "description": "Component category"
+    },
+    "speed_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Speed bonus/penalty"
+    },
+    "cargo_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Cargo capacity bonus"
+    },
+    "fuel_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Fuel capacity bonus"
+    },
+    "defense_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Defense bonus"
+    },
+    "maintenance_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Maintenance cost modifier"
+    },
+    "power_consumption": {
+      "type": "number",
+      "default": 10,
+      "description": "Power draw"
+    },
+    "resource_cost": {
+      "type": "number",
+      "default": 1000,
+      "description": "Purchase cost"
+    },
+    "required_tech_id": {
+      "type": "string",
+      "description": "Required research project ID"
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ]
+}

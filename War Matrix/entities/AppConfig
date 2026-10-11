@@ -1,0 +1,72 @@
+{
+  "name": "AppConfig",
+  "type": "object",
+  "properties": {
+    "config_key": {
+      "type": "string",
+      "description": "Unique identifier for the config setting"
+    },
+    "background_music_url": {
+      "type": "string",
+      "description": "URL to background music MP3 file"
+    },
+    "background_video_url": {
+      "type": "string",
+      "description": "URL to background video MP4 file"
+    },
+    "sound_effects": {
+      "type": "object",
+      "properties": {
+        "button_click": {
+          "type": "string"
+        },
+        "alert": {
+          "type": "string"
+        },
+        "notification": {
+          "type": "string"
+        },
+        "success": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "URLs to various sound effect MP3 files"
+    },
+    "theme_settings": {
+      "type": "object",
+      "properties": {
+        "primary_color": {
+          "type": "string"
+        },
+        "accent_color": {
+          "type": "string"
+        }
+      },
+      "description": "Theme customization settings"
+    }
+  },
+  "required": [
+    "config_key"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

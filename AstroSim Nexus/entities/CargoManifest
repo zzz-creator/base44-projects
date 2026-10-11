@@ -1,0 +1,28 @@
+{
+  "name": "CargoManifest",
+  "type": "object",
+  "properties": {
+    "ship_id": {
+      "type": "string",
+      "description": "Ship ID"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 0,
+      "description": "Cargo quantity"
+    },
+    "destination_colony_id": {
+      "type": "string",
+      "description": "Destination colony ID"
+    }
+  },
+  "required": [
+    "ship_id",
+    "resource_id",
+    "destination_colony_id"
+  ]
+}

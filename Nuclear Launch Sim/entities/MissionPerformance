@@ -1,0 +1,89 @@
+{
+  "name": "MissionPerformance",
+  "type": "object",
+  "properties": {
+    "scenarioId": {
+      "type": "string",
+      "description": "ID of the scenario played"
+    },
+    "scenarioName": {
+      "type": "string",
+      "description": "Name of the scenario at time of play"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "extreme"
+      ],
+      "description": "Difficulty level"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "training",
+        "assessment",
+        "emergency",
+        "custom"
+      ],
+      "description": "Scenario category"
+    },
+    "completionStatus": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "aborted",
+        "failed",
+        "timeout"
+      ],
+      "description": "How the mission ended"
+    },
+    "score": {
+      "type": "number",
+      "description": "Final score (0-100)"
+    },
+    "completionTime": {
+      "type": "integer",
+      "description": "Time to complete in milliseconds"
+    },
+    "phaseReached": {
+      "type": "integer",
+      "description": "Highest phase reached (0-5)"
+    },
+    "errorCount": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of errors during mission"
+    },
+    "warningCount": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of warnings during mission"
+    },
+    "failurePoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subsystems or phases where failures occurred"
+    },
+    "checklistCompletion": {
+      "type": "number",
+      "description": "Percentage of checklist items completed"
+    },
+    "diagnosticResults": {
+      "type": "object",
+      "description": "Final state of diagnostics"
+    },
+    "environmentConditions": {
+      "type": "object",
+      "description": "Environmental factors during mission"
+    }
+  },
+  "required": [
+    "scenarioId",
+    "completionStatus"
+  ]
+}

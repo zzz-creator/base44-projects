@@ -1,0 +1,78 @@
+{
+  "name": "SparringMatch",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "student1_id": {
+      "type": "string",
+      "title": "Student 1 ID"
+    },
+    "student1_name": {
+      "type": "string",
+      "title": "Student 1 Name"
+    },
+    "student1_belt": {
+      "type": "string",
+      "title": "Student 1 Belt"
+    },
+    "student2_id": {
+      "type": "string",
+      "title": "Student 2 ID"
+    },
+    "student2_name": {
+      "type": "string",
+      "title": "Student 2 Name"
+    },
+    "student2_belt": {
+      "type": "string",
+      "title": "Student 2 Belt"
+    },
+    "winner_id": {
+      "type": "string",
+      "title": "Winner ID"
+    },
+    "winner_name": {
+      "type": "string",
+      "title": "Winner Name"
+    },
+    "result": {
+      "type": "string",
+      "title": "Result",
+      "enum": [
+        "student1_wins",
+        "student2_wins",
+        "draw"
+      ],
+      "default": "draw"
+    },
+    "instructor_feedback": {
+      "type": "string",
+      "title": "Instructor Feedback"
+    },
+    "student1_feedback": {
+      "type": "string",
+      "title": "Feedback for Student 1"
+    },
+    "student2_feedback": {
+      "type": "string",
+      "title": "Feedback for Student 2"
+    },
+    "class_id": {
+      "type": "string",
+      "title": "Class ID"
+    },
+    "class_name": {
+      "type": "string",
+      "title": "Class Name"
+    }
+  },
+  "required": [
+    "date",
+    "student1_id",
+    "student2_id"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Resource",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Resource name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Energy",
+        "Materials",
+        "Food",
+        "Technology",
+        "Luxury"
+      ],
+      "description": "Resource category"
+    },
+    "base_value": {
+      "type": "number",
+      "default": 100,
+      "description": "Base market value"
+    },
+    "volatility_index": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.1,
+      "description": "Market volatility 0-1"
+    },
+    "weight": {
+      "type": "number",
+      "default": 1,
+      "description": "Cargo weight per unit"
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ]
+}

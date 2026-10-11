@@ -1,0 +1,49 @@
+{
+  "name": "RoomServiceItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Item name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "breakfast",
+        "lunch",
+        "dinner",
+        "drinks",
+        "snacks",
+        "desserts"
+      ],
+      "description": "Menu category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Item description"
+    },
+    "price": {
+      "type": "number",
+      "description": "Item price"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Item image URL"
+    },
+    "available": {
+      "type": "boolean",
+      "default": true,
+      "description": "Item availability"
+    },
+    "preparation_time": {
+      "type": "integer",
+      "default": 30,
+      "description": "Estimated preparation time in minutes"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "price"
+  ]
+}

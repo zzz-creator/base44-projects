@@ -1,0 +1,44 @@
+{
+  "name": "Comment",
+  "type": "object",
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "production",
+        "task",
+        "incident"
+      ],
+      "description": "Type of entity the comment belongs to"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "ID of the entity being commented on"
+    },
+    "content": {
+      "type": "string",
+      "description": "Comment content (may include @mentions)"
+    },
+    "mentions": {
+      "type": "string",
+      "description": "JSON array of mentioned user emails"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Email of the comment author"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Name of the comment author"
+    },
+    "parent_comment_id": {
+      "type": "string",
+      "description": "ID of parent comment for replies"
+    }
+  },
+  "required": [
+    "entity_type",
+    "entity_id",
+    "content"
+  ]
+}

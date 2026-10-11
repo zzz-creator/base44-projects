@@ -1,0 +1,49 @@
+{
+  "name": "TradeAgreement",
+  "type": "object",
+  "properties": {
+    "faction_a_id": {
+      "type": "string",
+      "description": "First faction ID"
+    },
+    "faction_b_id": {
+      "type": "string",
+      "description": "Second faction ID"
+    },
+    "agreement_type": {
+      "type": "string",
+      "enum": [
+        "Free Trade",
+        "Preferential",
+        "Embargo",
+        "Sanctions"
+      ],
+      "default": "Free Trade",
+      "description": "Trade agreement type"
+    },
+    "tariff_reduction": {
+      "type": "number",
+      "default": 50,
+      "description": "Tariff reduction percentage"
+    },
+    "trade_volume": {
+      "type": "number",
+      "default": 0,
+      "description": "Total trade volume"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Suspended",
+        "Terminated"
+      ],
+      "default": "Active",
+      "description": "Agreement status"
+    }
+  },
+  "required": [
+    "faction_a_id",
+    "faction_b_id"
+  ]
+}

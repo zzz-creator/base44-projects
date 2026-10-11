@@ -1,0 +1,93 @@
+{
+  "name": "AdminAccessControl",
+  "type": "object",
+  "properties": {
+    "userEmail": {
+      "type": "string",
+      "description": "Email of the user"
+    },
+    "adminAccessEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user has admin panel access enabled"
+    },
+    "isSuperAdmin": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user is a super admin"
+    },
+    "accessDisabledReason": {
+      "type": "string",
+      "description": "Reason for disabling access"
+    },
+    "accessDisabledUntil": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Temporary access disabled until this timestamp"
+    },
+    "lastLoginTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last successful admin login"
+    },
+    "lastActivityTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last admin panel activity"
+    },
+    "failedLoginAttempts": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of failed login attempts"
+    },
+    "sessionToken": {
+      "type": "string",
+      "description": "Current session token"
+    },
+    "sessionExpiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Session expiration timestamp"
+    }
+  },
+  "required": [
+    "userEmail"
+  ],
+  "rls": {
+    "create": {
+      "data.userEmail": "{{user.email}}",
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.userEmail": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.userEmail": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

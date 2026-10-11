@@ -1,0 +1,111 @@
+{
+  "name": "MissionScenario",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Scenario name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description and training objectives"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "extreme"
+      ],
+      "default": "medium",
+      "description": "Difficulty level"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "training",
+        "assessment",
+        "emergency",
+        "custom"
+      ],
+      "default": "training",
+      "description": "Scenario category"
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Mission objectives to complete"
+    },
+    "faultConfig": {
+      "type": "object",
+      "description": "Configured fault injections for subsystems"
+    },
+    "environmentConfig": {
+      "type": "object",
+      "description": "Environmental conditions (weather, time, temperature)"
+    },
+    "timeLimit": {
+      "type": "integer",
+      "description": "Time limit in seconds (0 for no limit)"
+    },
+    "targetCoords": {
+      "type": "object",
+      "description": "Pre-configured target coordinates"
+    },
+    "trainingCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom auth codes for this scenario"
+    },
+    "successCriteria": {
+      "type": "object",
+      "description": "Criteria for mission success"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata (source, AI prompt, etc.)"
+    },
+    "isPublic": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether scenario is shared publicly"
+    },
+    "timesPlayed": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of times this scenario has been played"
+    },
+    "avgScore": {
+      "type": "number",
+      "default": 0,
+      "description": "Average score achieved"
+    },
+    "version": {
+      "type": "integer",
+      "default": 1,
+      "description": "Current version number"
+    },
+    "parentScenarioId": {
+      "type": "string",
+      "description": "ID of parent scenario for version tracking"
+    },
+    "versionNotes": {
+      "type": "string",
+      "description": "Notes describing changes in this version"
+    },
+    "isLatestVersion": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this is the latest version"
+    }
+  },
+  "required": [
+    "name",
+    "difficulty"
+  ]
+}

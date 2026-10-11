@@ -1,0 +1,48 @@
+{
+  "name": "MarketEvent",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Resource Discovery",
+        "Trade Embargo",
+        "Pirate Surge",
+        "Trade Boom",
+        "Economic Depression",
+        "Speculation Bubble"
+      ],
+      "description": "Market event type"
+    },
+    "affected_resource_id": {
+      "type": "string",
+      "description": "Affected resource ID"
+    },
+    "affected_colony_id": {
+      "type": "string",
+      "description": "Affected colony ID"
+    },
+    "affected_faction_id": {
+      "type": "string",
+      "description": "Affected faction ID"
+    },
+    "price_impact": {
+      "type": "number",
+      "default": 0,
+      "description": "Price impact percentage"
+    },
+    "duration_turns": {
+      "type": "number",
+      "default": 5,
+      "description": "Event duration in turns"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Event active status"
+    }
+  },
+  "required": [
+    "event_type"
+  ]
+}

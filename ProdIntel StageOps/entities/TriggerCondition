@@ -1,0 +1,41 @@
+{
+  "name": "TriggerCondition",
+  "type": "object",
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Reference to AutomationRule"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Entity type to monitor"
+    },
+    "field_name": {
+      "type": "string",
+      "description": "Field to evaluate"
+    },
+    "comparison_operator": {
+      "type": "string",
+      "enum": [
+        "equals",
+        "not_equals",
+        "greater_than",
+        "less_than",
+        "contains",
+        "is_empty",
+        "is_not_empty"
+      ],
+      "description": "Comparison operator"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value to compare against"
+    }
+  },
+  "required": [
+    "rule_id",
+    "entity_type",
+    "field_name",
+    "comparison_operator"
+  ]
+}

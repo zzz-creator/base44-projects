@@ -1,0 +1,33 @@
+{
+  "name": "ShipLoadout",
+  "type": "object",
+  "properties": {
+    "ship_id": {
+      "type": "string",
+      "description": "Ship ID"
+    },
+    "component_id": {
+      "type": "string",
+      "description": "Component ID"
+    },
+    "slot_type": {
+      "type": "string",
+      "enum": [
+        "Weapon",
+        "Utility"
+      ],
+      "default": "Utility",
+      "description": "Slot type"
+    },
+    "installed_turn": {
+      "type": "number",
+      "default": 0,
+      "description": "Turn when installed"
+    }
+  },
+  "required": [
+    "ship_id",
+    "component_id",
+    "slot_type"
+  ]
+}

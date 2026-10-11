@@ -1,0 +1,48 @@
+{
+  "name": "FactionStrategyProfile",
+  "type": "object",
+  "properties": {
+    "faction_id": {
+      "type": "string",
+      "description": "Faction ID"
+    },
+    "economic_priority_weight": {
+      "type": "number",
+      "default": 0.33,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Economic priority weight"
+    },
+    "military_priority_weight": {
+      "type": "number",
+      "default": 0.33,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Military priority weight"
+    },
+    "expansion_priority_weight": {
+      "type": "number",
+      "default": 0.34,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Expansion priority weight"
+    },
+    "risk_tolerance": {
+      "type": "number",
+      "default": 0.5,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Risk tolerance 0-1"
+    },
+    "historical_success_rate": {
+      "type": "number",
+      "default": 0.5,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Historical success rate"
+    }
+  },
+  "required": [
+    "faction_id"
+  ]
+}

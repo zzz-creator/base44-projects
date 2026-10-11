@@ -1,0 +1,106 @@
+{
+  "name": "ProductionTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Template name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Template description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "theater",
+        "concert",
+        "corporate_event",
+        "conference",
+        "workshop",
+        "other"
+      ],
+      "description": "Template category"
+    },
+    "default_status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "rehearsal",
+        "active"
+      ],
+      "default": "planning",
+      "description": "Default status for productions created from this template"
+    },
+    "template_tasks": {
+      "type": "string",
+      "description": "JSON array of task templates with task_name, description, priority, category, estimated_hours"
+    },
+    "template_roles": {
+      "type": "string",
+      "description": "JSON array of crew role templates with role, estimated_count"
+    },
+    "default_settings": {
+      "type": "string",
+      "description": "JSON object with template settings like budget_categories, default_venue_id"
+    },
+    "is_public": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether template is shared with other team members"
+    },
+    "usage_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of times this template has been used"
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "data.created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "data.is_public": true
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "CombatEncounter",
+  "type": "object",
+  "properties": {
+    "location_colony_id": {
+      "type": "string",
+      "description": "Combat location colony ID"
+    },
+    "attacker_faction_id": {
+      "type": "string",
+      "description": "Attacking faction ID"
+    },
+    "defender_faction_id": {
+      "type": "string",
+      "description": "Defending faction ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Attacker Victory",
+        "Defender Victory",
+        "Retreat",
+        "Stalemate"
+      ],
+      "default": "Active",
+      "description": "Combat status"
+    },
+    "current_turn": {
+      "type": "number",
+      "default": 1,
+      "description": "Current combat turn"
+    },
+    "attacker_morale": {
+      "type": "number",
+      "default": 100,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Attacker fleet morale"
+    },
+    "defender_morale": {
+      "type": "number",
+      "default": 100,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Defender fleet morale"
+    },
+    "total_attacker_damage": {
+      "type": "number",
+      "default": 0,
+      "description": "Total damage dealt by attacker"
+    },
+    "total_defender_damage": {
+      "type": "number",
+      "default": 0,
+      "description": "Total damage dealt by defender"
+    },
+    "threat_id": {
+      "type": "string",
+      "description": "Associated threat ID if applicable"
+    }
+  },
+  "required": [
+    "attacker_faction_id",
+    "defender_faction_id"
+  ]
+}

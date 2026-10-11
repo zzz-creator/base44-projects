@@ -1,0 +1,115 @@
+{
+  "name": "TaskChecklist",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "task_name": {
+      "type": "string",
+      "description": "Task name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Task description"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Person assigned to task (name)"
+    },
+    "assigned_to_email": {
+      "type": "string",
+      "description": "Email of assigned person"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Task due date"
+    },
+    "completion_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "blocked"
+      ],
+      "default": "pending",
+      "description": "Task completion status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium",
+      "description": "Task priority"
+    },
+    "parent_task_id": {
+      "type": "string",
+      "description": "Parent task ID for sub-tasks"
+    },
+    "depends_on": {
+      "type": "string",
+      "description": "JSON array of task IDs this task depends on"
+    },
+    "is_recurring": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a recurring task"
+    },
+    "recurrence_pattern": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "biweekly",
+        "monthly"
+      ],
+      "description": "Recurrence pattern"
+    },
+    "recurrence_end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When recurring task should stop"
+    },
+    "last_generated_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last date a recurring instance was created"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "technical",
+        "administrative",
+        "creative",
+        "logistics",
+        "safety",
+        "other"
+      ],
+      "description": "Task category"
+    },
+    "estimated_hours": {
+      "type": "number",
+      "description": "Estimated hours to complete"
+    },
+    "actual_hours": {
+      "type": "number",
+      "description": "Actual hours spent"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the task was completed"
+    }
+  },
+  "required": [
+    "production_id",
+    "task_name"
+  ]
+}

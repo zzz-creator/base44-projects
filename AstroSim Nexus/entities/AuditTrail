@@ -1,0 +1,40 @@
+{
+  "name": "AuditTrail",
+  "type": "object",
+  "properties": {
+    "entity_name": {
+      "type": "string",
+      "description": "Entity type name"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Entity ID"
+    },
+    "changed_field": {
+      "type": "string",
+      "description": "Field that was changed"
+    },
+    "old_value": {
+      "type": "string",
+      "description": "Previous value"
+    },
+    "new_value": {
+      "type": "string",
+      "description": "New value"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Change timestamp"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who made the change"
+    }
+  },
+  "required": [
+    "entity_name",
+    "entity_id",
+    "changed_field"
+  ]
+}

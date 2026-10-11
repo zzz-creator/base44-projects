@@ -1,0 +1,33 @@
+{
+  "name": "BeltLevel",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Belt Name"
+    },
+    "color_hex": {
+      "type": "string",
+      "title": "Color (Hex)"
+    },
+    "text_color_hex": {
+      "type": "string",
+      "title": "Text Color (Hex)",
+      "default": "#000000"
+    },
+    "order": {
+      "type": "number",
+      "title": "Order/Rank Position"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "color_hex",
+    "order"
+  ]
+}

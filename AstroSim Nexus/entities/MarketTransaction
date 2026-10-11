@@ -1,0 +1,33 @@
+{
+  "name": "MarketTransaction",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Colony ID"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Transaction quantity"
+    },
+    "price": {
+      "type": "number",
+      "description": "Transaction price"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Transaction timestamp"
+    }
+  },
+  "required": [
+    "colony_id",
+    "resource_id",
+    "quantity",
+    "price"
+  ]
+}

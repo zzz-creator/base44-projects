@@ -1,0 +1,47 @@
+{
+  "name": "Floor",
+  "type": "object",
+  "properties": {
+    "floor_number": {
+      "type": "integer",
+      "description": "Floor number (0 for ground, negative for basement)"
+    },
+    "floor_name": {
+      "type": "string",
+      "description": "Floor name or designation"
+    },
+    "floor_type": {
+      "type": "string",
+      "enum": [
+        "guest_rooms",
+        "lobby",
+        "parking",
+        "amenities",
+        "restricted"
+      ],
+      "default": "guest_rooms",
+      "description": "Type of floor"
+    },
+    "total_rooms": {
+      "type": "integer",
+      "default": 0,
+      "description": "Total number of rooms on this floor"
+    },
+    "access_level": {
+      "type": "string",
+      "enum": [
+        "public",
+        "guest_only",
+        "vip_only",
+        "staff_only",
+        "restricted"
+      ],
+      "default": "guest_only",
+      "description": "Required access level for this floor"
+    }
+  },
+  "required": [
+    "floor_number",
+    "floor_name"
+  ]
+}

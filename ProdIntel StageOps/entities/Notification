@@ -1,0 +1,48 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user receiving the notification"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "mention",
+        "incident_created",
+        "task_overdue",
+        "task_assigned",
+        "production_status_change",
+        "new_message"
+      ],
+      "description": "Type of notification"
+    },
+    "message": {
+      "type": "string",
+      "description": "Notification message content"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the notification has been read"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL to navigate to when notification is clicked"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Type of entity related to the notification"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "ID of the entity related to the notification"
+    }
+  },
+  "required": [
+    "user_email",
+    "type",
+    "message"
+  ]
+}

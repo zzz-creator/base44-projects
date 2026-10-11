@@ -1,0 +1,72 @@
+{
+  "name": "Announcement",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "content": {
+      "type": "string",
+      "title": "Content"
+    },
+    "target_belt": {
+      "type": "string",
+      "title": "Target Belt",
+      "enum": [
+        "All",
+        "White",
+        "Yellow",
+        "Orange",
+        "Green",
+        "Blue",
+        "Red",
+        "Black"
+      ],
+      "default": "All"
+    },
+    "is_published": {
+      "type": "boolean",
+      "title": "Published",
+      "default": true
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Event Date"
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "enum": [
+        "announcement",
+        "test_date",
+        "event",
+        "closure"
+      ],
+      "default": "announcement"
+    }
+  },
+  "required": [
+    "title",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

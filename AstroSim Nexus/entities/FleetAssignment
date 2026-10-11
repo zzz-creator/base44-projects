@@ -1,0 +1,36 @@
+{
+  "name": "FleetAssignment",
+  "type": "object",
+  "properties": {
+    "fleet_id": {
+      "type": "string",
+      "description": "Fleet ID"
+    },
+    "ship_id": {
+      "type": "string",
+      "description": "Ship ID"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "Flagship",
+        "Vanguard",
+        "Flanker",
+        "Escort",
+        "Support",
+        "Reserve"
+      ],
+      "default": "Escort",
+      "description": "Ship role in fleet"
+    },
+    "position_index": {
+      "type": "number",
+      "default": 0,
+      "description": "Position in formation"
+    }
+  },
+  "required": [
+    "fleet_id",
+    "ship_id"
+  ]
+}

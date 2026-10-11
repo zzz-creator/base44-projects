@@ -1,0 +1,44 @@
+{
+  "name": "Action",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "system",
+        "workflow",
+        "batch",
+        "toggle",
+        "script"
+      ],
+      "default": "system"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "triggered_by": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string"
+    },
+    "is_critical": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

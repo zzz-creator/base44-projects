@@ -1,0 +1,43 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "user_action",
+        "system",
+        "security",
+        "config_change",
+        "alert"
+      ],
+      "default": "system"
+    },
+    "description": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "string",
+      "description": "JSON string of extra data"
+    }
+  },
+  "required": [
+    "type",
+    "description"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "never": true
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

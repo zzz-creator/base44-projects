@@ -1,0 +1,30 @@
+{
+  "name": "HistoricalIncidentAnalysis",
+  "type": "object",
+  "properties": {
+    "incident_id": {
+      "type": "string",
+      "description": "Reference to IncidentLog"
+    },
+    "root_cause": {
+      "type": "string",
+      "description": "Root cause analysis"
+    },
+    "corrective_action": {
+      "type": "string",
+      "description": "Corrective action taken"
+    },
+    "preventative_action": {
+      "type": "string",
+      "description": "Preventative measures"
+    },
+    "analyzed_by": {
+      "type": "string",
+      "description": "Person who performed analysis"
+    }
+  },
+  "required": [
+    "incident_id",
+    "root_cause"
+  ]
+}

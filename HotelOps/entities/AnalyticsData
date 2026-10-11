@@ -1,0 +1,46 @@
+{
+  "name": "AnalyticsData",
+  "type": "object",
+  "properties": {
+    "metric_type": {
+      "type": "string",
+      "enum": [
+        "occupancy",
+        "parking_utilization",
+        "elevator_usage",
+        "revenue",
+        "guest_satisfaction"
+      ],
+      "description": "Type of metric being tracked"
+    },
+    "metric_value": {
+      "type": "number",
+      "description": "Numeric value of the metric"
+    },
+    "metric_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the metric"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "hotel",
+        "parking",
+        "elevator",
+        "overall"
+      ],
+      "description": "Domain this metric belongs to"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional context and data for the metric"
+    }
+  },
+  "required": [
+    "metric_type",
+    "metric_value",
+    "metric_date",
+    "domain"
+  ]
+}

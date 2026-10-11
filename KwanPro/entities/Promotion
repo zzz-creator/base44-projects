@@ -1,0 +1,50 @@
+{
+  "name": "Promotion",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "title": "Student ID"
+    },
+    "student_name": {
+      "type": "string",
+      "title": "Student Name"
+    },
+    "from_belt": {
+      "type": "string",
+      "title": "From Belt"
+    },
+    "to_belt": {
+      "type": "string",
+      "title": "To Belt"
+    },
+    "promotion_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Promotion Date"
+    },
+    "test_result": {
+      "type": "string",
+      "title": "Test Result",
+      "enum": [
+        "pass",
+        "fail",
+        "pending"
+      ]
+    },
+    "instructor_notes": {
+      "type": "string",
+      "title": "Instructor Notes"
+    },
+    "classes_completed": {
+      "type": "number",
+      "title": "Classes Completed at Promotion"
+    }
+  },
+  "required": [
+    "student_id",
+    "from_belt",
+    "to_belt",
+    "promotion_date"
+  ]
+}

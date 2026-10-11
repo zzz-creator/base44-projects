@@ -1,0 +1,43 @@
+{
+  "name": "Workspace",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "monitoring",
+        "incident_response",
+        "analytics",
+        "simulation",
+        "custom"
+      ],
+      "default": "monitoring"
+    },
+    "description": {
+      "type": "string"
+    },
+    "dashboard_links": {
+      "type": "string",
+      "description": "JSON array of linked dashboard IDs"
+    },
+    "is_shared": {
+      "type": "boolean",
+      "default": false
+    },
+    "color": {
+      "type": "string",
+      "default": "blue"
+    },
+    "icon": {
+      "type": "string",
+      "default": "monitor"
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

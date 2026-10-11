@@ -1,0 +1,52 @@
+{
+  "name": "InventoryItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "enum": [
+        "Uniform",
+        "Sparring Gear",
+        "Weapon",
+        "Accessory",
+        "Other"
+      ]
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU"
+    },
+    "price": {
+      "type": "number",
+      "title": "Price"
+    },
+    "quantity": {
+      "type": "number",
+      "title": "Quantity in Stock",
+      "default": 0
+    },
+    "low_stock_threshold": {
+      "type": "number",
+      "title": "Low Stock Alert Threshold",
+      "default": 5
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ]
+}

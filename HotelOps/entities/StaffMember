@@ -1,0 +1,64 @@
+{
+  "name": "StaffMember",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Foreign key to User entity"
+    },
+    "staff_name": {
+      "type": "string",
+      "description": "Staff member name"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "housekeeping",
+        "maintenance",
+        "concierge",
+        "room_service",
+        "front_desk",
+        "manager"
+      ],
+      "description": "Staff role/department"
+    },
+    "employee_id": {
+      "type": "string",
+      "description": "Employee ID number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "on_duty",
+        "off_duty",
+        "on_break"
+      ],
+      "default": "off_duty",
+      "description": "Current duty status"
+    },
+    "tasks_completed_today": {
+      "type": "integer",
+      "default": 0,
+      "description": "Tasks completed today"
+    },
+    "total_tasks_completed": {
+      "type": "integer",
+      "default": 0,
+      "description": "Lifetime tasks completed"
+    },
+    "average_rating": {
+      "type": "number",
+      "default": 5,
+      "description": "Average guest satisfaction rating"
+    },
+    "performance_score": {
+      "type": "number",
+      "default": 100,
+      "description": "Overall performance score"
+    }
+  },
+  "required": [
+    "staff_name",
+    "role"
+  ]
+}

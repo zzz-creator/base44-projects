@@ -1,0 +1,32 @@
+{
+  "name": "ExecutionLog",
+  "type": "object",
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Reference to AutomationRule"
+    },
+    "execution_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When rule was executed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failed",
+        "partial"
+      ],
+      "description": "Execution status"
+    },
+    "result_message": {
+      "type": "string",
+      "description": "Result details"
+    }
+  },
+  "required": [
+    "rule_id",
+    "status"
+  ]
+}

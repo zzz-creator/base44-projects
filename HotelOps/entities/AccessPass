@@ -1,0 +1,64 @@
+{
+  "name": "AccessPass",
+  "type": "object",
+  "properties": {
+    "guest_id": {
+      "type": "string",
+      "description": "Foreign key to Guest entity"
+    },
+    "vehicle_id": {
+      "type": "string",
+      "description": "Foreign key to Vehicle entity"
+    },
+    "pass_code": {
+      "type": "string",
+      "description": "Unique access pass code"
+    },
+    "valid_from": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Pass valid from date/time"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Pass expiration date/time"
+    },
+    "allowed_floors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of floor IDs guest can access"
+    },
+    "parking_levels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of parking levels guest can access"
+    },
+    "vip_priority": {
+      "type": "boolean",
+      "default": false,
+      "description": "VIP priority flag for elevator and parking"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "revoked",
+        "suspended"
+      ],
+      "default": "active",
+      "description": "Access pass status"
+    }
+  },
+  "required": [
+    "guest_id",
+    "pass_code",
+    "valid_from",
+    "valid_until"
+  ]
+}

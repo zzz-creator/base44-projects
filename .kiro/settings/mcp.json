@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "switchboard": {
+      "command": "node",
+      "args": ["c:/Users/mrkee/Documents/HTML/Base44/.switchboard/MCP/mcp-server.js"],
+      "env": {
+        "SWITCHBOARD_WORKSPACE_ROOT": "c:/Users/mrkee/Documents/HTML/Base44"
+      }
+    }
+  }
+}

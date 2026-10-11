@@ -1,0 +1,76 @@
+{
+  "name": "Transaction",
+  "type": "object",
+  "properties": {
+    "transaction_id": {
+      "type": "string"
+    },
+    "staff_id": {
+      "type": "string"
+    },
+    "terminal_id": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "subtotal": {
+      "type": "number"
+    },
+    "tax": {
+      "type": "number"
+    },
+    "discount": {
+      "type": "number",
+      "default": 0
+    },
+    "total": {
+      "type": "number"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "cash",
+        "credit",
+        "debit",
+        "gift_card",
+        "contactless"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "voided",
+        "refunded",
+        "pending"
+      ],
+      "default": "pending"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "staff",
+        "self_checkout"
+      ],
+      "default": "staff"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "transaction_id",
+    "total",
+    "payment_method"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {},
+    "delete": null
+  }
+}

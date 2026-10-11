@@ -1,0 +1,25 @@
+{
+  "name": "Venue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Venue name"
+    },
+    "location": {
+      "type": "string",
+      "description": "Venue address/location"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Venue capacity"
+    },
+    "contact_info": {
+      "type": "string",
+      "description": "Contact information"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

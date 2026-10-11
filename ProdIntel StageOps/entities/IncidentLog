@@ -1,0 +1,94 @@
+{
+  "name": "IncidentLog",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "description": {
+      "type": "string",
+      "description": "Incident description"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium",
+      "description": "Incident severity"
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "investigating",
+        "resolved",
+        "closed"
+      ],
+      "default": "open",
+      "description": "Resolution status"
+    },
+    "reported_by": {
+      "type": "string",
+      "description": "Person who reported"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Person assigned to resolve"
+    },
+    "resolution_notes": {
+      "type": "string",
+      "description": "Resolution notes"
+    },
+    "closed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When incident was closed"
+    }
+  },
+  "required": [
+    "production_id",
+    "description",
+    "severity"
+  ],
+  "rls": {
+    "create": {
+      "data.created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "data.reported_by": "{{user.full_name}}"
+        },
+        {
+          "data.assigned_to": "{{user.full_name}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

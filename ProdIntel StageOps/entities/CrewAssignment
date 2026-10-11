@@ -1,0 +1,69 @@
+{
+  "name": "CrewAssignment",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "crew_member_id": {
+      "type": "string",
+      "description": "Reference to CrewMember entity"
+    },
+    "crew_member_name": {
+      "type": "string",
+      "description": "Name of crew member (legacy or manual entry)"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "stage_manager",
+        "lighting",
+        "sound",
+        "props",
+        "wardrobe",
+        "set",
+        "technical_director",
+        "rigger",
+        "carpenter",
+        "electrician",
+        "other"
+      ],
+      "description": "Role for this production"
+    },
+    "contact_info": {
+      "type": "string",
+      "description": "Contact information"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "assigned",
+        "confirmed",
+        "active",
+        "completed",
+        "cancelled"
+      ],
+      "default": "assigned",
+      "description": "Assignment status"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Assignment start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Assignment end date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Assignment notes"
+    }
+  },
+  "required": [
+    "production_id",
+    "role"
+  ]
+}

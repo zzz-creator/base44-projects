@@ -1,0 +1,72 @@
+{
+  "name": "StoreSettings",
+  "type": "object",
+  "properties": {
+    "store_name": {
+      "type": "string"
+    },
+    "store_id": {
+      "type": "string"
+    },
+    "terminal_id": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "taxes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "tips_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "tip_options": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "footer_message": {
+      "type": "string"
+    },
+    "return_policy": {
+      "type": "string"
+    },
+    "currency_symbol": {
+      "type": "string",
+      "default": "$"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

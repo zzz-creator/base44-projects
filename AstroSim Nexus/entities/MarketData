@@ -1,0 +1,53 @@
+{
+  "name": "MarketData",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Colony ID"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID"
+    },
+    "local_supply": {
+      "type": "number",
+      "default": 0,
+      "description": "Local supply quantity"
+    },
+    "local_demand": {
+      "type": "number",
+      "default": 100,
+      "description": "Local demand quantity"
+    },
+    "current_price": {
+      "type": "number",
+      "default": 100,
+      "description": "Current market price"
+    },
+    "price_trend": {
+      "type": "string",
+      "enum": [
+        "Rising",
+        "Falling",
+        "Stable"
+      ],
+      "default": "Stable",
+      "description": "Price trend"
+    },
+    "scarcity_multiplier": {
+      "type": "number",
+      "default": 1.0,
+      "description": "Scarcity price multiplier"
+    },
+    "transport_cost": {
+      "type": "number",
+      "default": 5,
+      "description": "Transport cost modifier"
+    }
+  },
+  "required": [
+    "colony_id",
+    "resource_id"
+  ]
+}

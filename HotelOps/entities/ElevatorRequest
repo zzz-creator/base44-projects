@@ -1,0 +1,79 @@
+{
+  "name": "ElevatorRequest",
+  "type": "object",
+  "properties": {
+    "guest_id": {
+      "type": "string",
+      "description": "Foreign key to Guest entity"
+    },
+    "vehicle_id": {
+      "type": "string",
+      "description": "Foreign key to Vehicle entity (if applicable)"
+    },
+    "floor_id": {
+      "type": "string",
+      "description": "Foreign key to Floor entity (destination)"
+    },
+    "access_pass_id": {
+      "type": "string",
+      "description": "Foreign key to AccessPass entity"
+    },
+    "elevator_id": {
+      "type": "string",
+      "description": "Foreign key to Elevator entity (assigned)"
+    },
+    "from_floor": {
+      "type": "integer",
+      "description": "Origin floor number"
+    },
+    "to_floor": {
+      "type": "integer",
+      "description": "Destination floor number"
+    },
+    "request_type": {
+      "type": "string",
+      "enum": [
+        "guest",
+        "service",
+        "emergency",
+        "maintenance"
+      ],
+      "default": "guest",
+      "description": "Type of elevator request"
+    },
+    "priority_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5,
+      "description": "Request priority (1=lowest, 10=highest)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "assigned",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Request status"
+    },
+    "request_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Request timestamp"
+    },
+    "completion_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Request completion timestamp"
+    }
+  },
+  "required": [
+    "from_floor",
+    "to_floor",
+    "request_type"
+  ]
+}

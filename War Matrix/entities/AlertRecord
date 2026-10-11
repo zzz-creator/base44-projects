@@ -1,0 +1,170 @@
+{
+  "name": "AlertRecord",
+  "type": "object",
+  "properties": {
+    "alert_type": {
+      "type": "string",
+      "enum": [
+        "critical_news",
+        "high_escalation",
+        "flashpoint",
+        "simulation_changes",
+        "economic",
+        "military"
+      ],
+      "description": "Type of alert"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "description": "Alert severity level"
+    },
+    "title": {
+      "type": "string",
+      "description": "Alert title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Alert message content"
+    },
+    "ai_summary": {
+      "type": "string",
+      "description": "AI-generated summary of the alert"
+    },
+    "ai_priority_score": {
+      "type": "number",
+      "description": "AI-calculated priority score (0-100)"
+    },
+    "historical_context": {
+      "type": "string",
+      "description": "Historical data related to this alert"
+    },
+    "related_events": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related events or conflicts"
+    },
+    "geographical_context": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string"
+        },
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "impact_analysis": {
+      "type": "object",
+      "properties": {
+        "economic_impact": {
+          "type": "string"
+        },
+        "military_impact": {
+          "type": "string"
+        },
+        "civilian_impact": {
+          "type": "string"
+        },
+        "regional_stability": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "acknowledged",
+        "assigned",
+        "in_progress",
+        "resolved",
+        "dismissed"
+      ],
+      "default": "new"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Email of assigned user"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "description": "Collaboration notes"
+    },
+    "actions_taken": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "by": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notified": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "read": {
+      "type": "boolean",
+      "default": false
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the alert"
+    }
+  },
+  "required": [
+    "alert_type",
+    "severity",
+    "title",
+    "message"
+  ]
+}

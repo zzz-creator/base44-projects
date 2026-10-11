@@ -1,0 +1,38 @@
+{
+  "name": "KnowledgeRecord",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production if applicable"
+    },
+    "title": {
+      "type": "string",
+      "description": "Record title"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "procedure",
+        "technical",
+        "safety",
+        "reference",
+        "lesson_learned",
+        "other"
+      ],
+      "description": "Knowledge category"
+    },
+    "content": {
+      "type": "string",
+      "description": "Record content"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated tags"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ]
+}

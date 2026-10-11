@@ -1,0 +1,75 @@
+{
+  "name": "EquipmentAsset",
+  "type": "object",
+  "properties": {
+    "asset_name": {
+      "type": "string",
+      "description": "Asset name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "lighting",
+        "sound",
+        "rigging",
+        "staging",
+        "video",
+        "props",
+        "tools",
+        "safety",
+        "other"
+      ],
+      "description": "Equipment category"
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "Serial number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "in_use",
+        "maintenance",
+        "retired"
+      ],
+      "default": "available",
+      "description": "Current status"
+    },
+    "location_id": {
+      "type": "string",
+      "description": "Reference to AssetLocation"
+    },
+    "purchase_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Purchase date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "asset_name",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

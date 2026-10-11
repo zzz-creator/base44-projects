@@ -1,0 +1,66 @@
+{
+  "name": "Ship",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Ship name"
+    },
+    "class": {
+      "type": "string",
+      "enum": [
+        "Shuttle",
+        "Freighter",
+        "Hauler",
+        "Tanker"
+      ],
+      "default": "Freighter",
+      "description": "Ship class"
+    },
+    "cargo_capacity": {
+      "type": "number",
+      "default": 1000,
+      "description": "Maximum cargo capacity"
+    },
+    "fuel_capacity": {
+      "type": "number",
+      "default": 500,
+      "description": "Maximum fuel capacity"
+    },
+    "fuel_level": {
+      "type": "number",
+      "default": 500,
+      "description": "Current fuel level"
+    },
+    "maintenance_level": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 100,
+      "description": "Maintenance condition 0-100"
+    },
+    "current_colony_id": {
+      "type": "string",
+      "description": "Current docked colony"
+    },
+    "owner_faction_id": {
+      "type": "string",
+      "description": "Owning faction ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Docked",
+        "In Transit",
+        "Maintenance",
+        "Destroyed"
+      ],
+      "default": "Docked",
+      "description": "Ship status"
+    }
+  },
+  "required": [
+    "name",
+    "owner_faction_id"
+  ]
+}

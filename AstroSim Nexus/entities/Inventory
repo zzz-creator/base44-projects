@@ -1,0 +1,23 @@
+{
+  "name": "Inventory",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Colony ID"
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "Resource ID"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 0,
+      "description": "Quantity available"
+    }
+  },
+  "required": [
+    "colony_id",
+    "resource_id"
+  ]
+}

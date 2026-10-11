@@ -1,0 +1,69 @@
+{
+  "name": "Coupon",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "fixed",
+        "bogo",
+        "category_percent"
+      ],
+      "default": "percent"
+    },
+    "value": {
+      "type": "number"
+    },
+    "category": {
+      "type": "string"
+    },
+    "min_purchase": {
+      "type": "number",
+      "default": 0
+    },
+    "max_uses": {
+      "type": "number"
+    },
+    "uses": {
+      "type": "number",
+      "default": 0
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "expires": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "code",
+    "type",
+    "value"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

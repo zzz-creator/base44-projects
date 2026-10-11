@@ -1,0 +1,58 @@
+{
+  "name": "Conversation",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "direct_message",
+        "production_channel",
+        "department_channel",
+        "group_chat"
+      ],
+      "description": "Type of conversation"
+    },
+    "production_id": {
+      "type": "string",
+      "description": "ID of the production if type is production_channel"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department name if type is department_channel"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the conversation/channel"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Topic or description of the channel"
+    },
+    "participants": {
+      "type": "string",
+      "description": "JSON array of participant user emails"
+    },
+    "admins": {
+      "type": "string",
+      "description": "JSON array of admin user emails for group chats"
+    },
+    "last_message_preview": {
+      "type": "string",
+      "description": "Preview of the last message"
+    },
+    "last_message_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last message"
+    },
+    "is_archived": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether conversation is archived"
+    }
+  },
+  "required": [
+    "type",
+    "participants"
+  ]
+}

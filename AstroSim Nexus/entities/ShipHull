@@ -1,0 +1,62 @@
+{
+  "name": "ShipHull",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Hull chassis name"
+    },
+    "base_cargo_capacity": {
+      "type": "number",
+      "default": 500,
+      "description": "Base cargo capacity"
+    },
+    "base_fuel_capacity": {
+      "type": "number",
+      "default": 300,
+      "description": "Base fuel capacity"
+    },
+    "base_speed": {
+      "type": "number",
+      "default": 100,
+      "description": "Base speed rating"
+    },
+    "base_defense": {
+      "type": "number",
+      "default": 50,
+      "description": "Base defense rating"
+    },
+    "base_weapon_slots": {
+      "type": "number",
+      "default": 2,
+      "description": "Weapon slot count"
+    },
+    "base_utility_slots": {
+      "type": "number",
+      "default": 3,
+      "description": "Utility slot count"
+    },
+    "power_capacity": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum power capacity"
+    },
+    "build_cost_credits": {
+      "type": "number",
+      "default": 5000,
+      "description": "Construction cost"
+    },
+    "build_time_turns": {
+      "type": "number",
+      "default": 5,
+      "description": "Construction duration"
+    },
+    "required_tech_id": {
+      "type": "string",
+      "description": "Required research project ID"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

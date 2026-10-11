@@ -1,0 +1,301 @@
+{
+  "name": "UserProfile",
+  "type": "object",
+  "properties": {
+    "dashboard_layout": {
+      "type": "object",
+      "properties": {
+        "widget_positions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "w": {
+                "type": "number"
+              },
+              "h": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "enabled_widgets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "widget_order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Order of widgets on the dashboard"
+        }
+      },
+      "description": "Custom dashboard layout configuration"
+    },
+    "default_regions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Default regions of interest"
+    },
+    "preferred_visualization_types": {
+      "type": "object",
+      "properties": {
+        "economic_data": {
+          "type": "string",
+          "enum": [
+            "line",
+            "bar",
+            "area"
+          ]
+        },
+        "threat_level": {
+          "type": "string",
+          "enum": [
+            "heatmap",
+            "gauge",
+            "chart"
+          ]
+        },
+        "conflicts": {
+          "type": "string",
+          "enum": [
+            "map",
+            "list",
+            "timeline"
+          ]
+        }
+      },
+      "description": "Preferred visualization types for different data categories"
+    },
+    "saved_analysis_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "template_data": {
+            "type": "object"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "description": "Saved analysis templates"
+    },
+    "external_data_feeds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "rss",
+              "api",
+              "webhook"
+            ]
+          },
+          "url": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "news",
+              "economic",
+              "intelligence",
+              "sentiment"
+            ]
+          },
+          "refresh_interval": {
+            "type": "number"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "mapping": {
+            "type": "object",
+            "properties": {
+              "field_mappings": {
+                "type": "object"
+              },
+              "target_indicator": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "External data feed configurations"
+    },
+    "alert_preferences": {
+      "type": "object",
+      "properties": {
+        "email_frequency": {
+          "type": "string",
+          "enum": [
+            "immediate",
+            "daily",
+            "weekly"
+          ]
+        },
+        "priority_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threat_threshold": {
+          "type": "number"
+        },
+        "quiet_hours": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "start": {
+              "type": "string"
+            },
+            "end": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "Alert notification preferences"
+    },
+    "dashboard_alert_thresholds": {
+      "type": "object",
+      "properties": {
+        "threat_level_threshold": {
+          "type": "number",
+          "description": "Alert when threat level exceeds this value (0-100)"
+        },
+        "active_conflicts_threshold": {
+          "type": "number",
+          "description": "Alert when active conflicts exceed this count"
+        },
+        "economic_impact_threshold": {
+          "type": "number",
+          "description": "Alert when economic impact exceeds this value in billions"
+        },
+        "casualty_threshold": {
+          "type": "number",
+          "description": "Alert when casualties exceed this count"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "description": "Personalized alert thresholds for dashboard metrics"
+    },
+    "future_wars_alert_thresholds": {
+      "type": "object",
+      "properties": {
+        "conflict_probability_threshold": {
+          "type": "number",
+          "description": "Alert for conflicts above this probability"
+        },
+        "climate_impact_threshold": {
+          "type": "number",
+          "description": "Alert for high climate impact scores"
+        },
+        "resource_scarcity_threshold": {
+          "type": "number",
+          "description": "Alert for high resource scarcity scores"
+        },
+        "monitored_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "monitored_conflict_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "description": "Personalized alert thresholds for FutureWars predictions"
+    },
+    "selected_theme": {
+      "type": "string",
+      "description": "ID of the selected theme"
+    },
+    "saved_policy_simulations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "object"
+          },
+          "results": {
+            "type": "object"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "description": "Saved policy simulation results for comparison"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": true,
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

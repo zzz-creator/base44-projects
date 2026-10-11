@@ -1,0 +1,59 @@
+{
+  "name": "EconomicPolicy",
+  "type": "object",
+  "properties": {
+    "faction_id": {
+      "type": "string",
+      "description": "Faction ID"
+    },
+    "policy_type": {
+      "type": "string",
+      "enum": [
+        "Free Market",
+        "State Controlled",
+        "Militarized",
+        "Mercantile",
+        "Isolationist"
+      ],
+      "default": "Free Market",
+      "description": "Economic policy type"
+    },
+    "import_tariff": {
+      "type": "number",
+      "default": 10,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Import tariff percentage"
+    },
+    "export_tax": {
+      "type": "number",
+      "default": 5,
+      "minimum": 0,
+      "maximum": 50,
+      "description": "Export tax percentage"
+    },
+    "production_efficiency_modifier": {
+      "type": "number",
+      "default": 1.0,
+      "description": "Production efficiency multiplier"
+    },
+    "market_volatility_modifier": {
+      "type": "number",
+      "default": 1.0,
+      "description": "Market volatility multiplier"
+    },
+    "stability_modifier": {
+      "type": "number",
+      "default": 0,
+      "description": "Stability bonus/penalty"
+    },
+    "inflation_rate": {
+      "type": "number",
+      "default": 0,
+      "description": "Current inflation rate"
+    }
+  },
+  "required": [
+    "faction_id"
+  ]
+}

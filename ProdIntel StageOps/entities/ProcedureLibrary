@@ -1,0 +1,41 @@
+{
+  "name": "ProcedureLibrary",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Procedure title"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "safety",
+        "technical",
+        "operational",
+        "emergency",
+        "maintenance",
+        "setup",
+        "teardown"
+      ],
+      "description": "Procedure category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Procedure description/content"
+    },
+    "last_reviewed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last reviewed date"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Version number"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ]
+}

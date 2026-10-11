@@ -1,0 +1,49 @@
+{
+  "name": "CrewOnboarding",
+  "type": "object",
+  "properties": {
+    "crew_member_id": {
+      "type": "string",
+      "description": "Reference to CrewMember"
+    },
+    "crew_member_name": {
+      "type": "string",
+      "description": "Name of crew member"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed"
+      ],
+      "default": "pending",
+      "description": "Onboarding status"
+    },
+    "checklist_items": {
+      "type": "string",
+      "description": "JSON array of checklist items with title, completed, completed_date"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Onboarding start date"
+    },
+    "completion_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Onboarding completion date"
+    },
+    "assigned_mentor": {
+      "type": "string",
+      "description": "Email of assigned mentor"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "crew_member_name"
+  ]
+}

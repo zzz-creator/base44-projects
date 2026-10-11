@@ -1,0 +1,16 @@
+{
+  "DatabaseMode": {
+    "UseBase44Entities": false,
+    "UseLocalSQLServer": true,
+    "LocalSQLConnectionString": "Server=localhost;Database=ProdIntelStageOps;User ID=admin;Password=;TrustServerCertificate=True;"
+  },
+  "_comments": {
+    "description": "Configuration file for database mode switching",
+    "usage": "Set UseBase44Entities=true for production (Base44), UseLocalSQLServer=true for local development",
+    "rules": [
+      "Both modes must never be true simultaneously",
+      "When UseBase44Entities is true, SQL Server is ignored",
+      "When UseLocalSQLServer is true, Base44 entity services are bypassed"
+    ]
+  }
+}

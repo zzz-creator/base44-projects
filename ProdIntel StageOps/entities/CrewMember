@@ -1,0 +1,105 @@
+{
+  "name": "CrewMember",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "Full name of the crew member"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Link to User entity if they have an account"
+    },
+    "primary_role": {
+      "type": "string",
+      "enum": [
+        "stage_manager",
+        "lighting",
+        "sound",
+        "props",
+        "wardrobe",
+        "set",
+        "technical_director",
+        "rigger",
+        "carpenter",
+        "electrician",
+        "other"
+      ],
+      "description": "Primary role/specialty"
+    },
+    "secondary_roles": {
+      "type": "string",
+      "description": "Comma-separated secondary roles"
+    },
+    "preferred_roles": {
+      "type": "string",
+      "description": "JSON array of preferred roles in order of preference"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "on_leave"
+      ],
+      "default": "active",
+      "description": "Availability status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "emergency_contact": {
+      "type": "string",
+      "description": "Emergency contact info"
+    },
+    "certifications": {
+      "type": "string",
+      "description": "JSON array of certifications with name, issuer, expiry_date"
+    },
+    "skills": {
+      "type": "string",
+      "description": "Comma-separated skills"
+    },
+    "skill_levels": {
+      "type": "string",
+      "description": "JSON object mapping skill to level (beginner, intermediate, advanced, expert)"
+    },
+    "skill_endorsements": {
+      "type": "string",
+      "description": "JSON array of endorsements with skill, endorsed_by, endorsed_by_name, date"
+    },
+    "blocked_dates": {
+      "type": "string",
+      "description": "JSON array of unavailable date ranges with start_date, end_date, reason"
+    },
+    "available_days": {
+      "type": "string",
+      "description": "JSON array of available weekdays (0-6, Sunday-Saturday)"
+    },
+    "max_hours_per_week": {
+      "type": "number",
+      "description": "Maximum hours available per week"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "description": "Standard hourly rate"
+    },
+    "profile_image_url": {
+      "type": "string",
+      "description": "Profile image URL"
+    }
+  },
+  "required": [
+    "full_name",
+    "primary_role"
+  ]
+}

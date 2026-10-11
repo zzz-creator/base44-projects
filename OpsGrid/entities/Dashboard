@@ -1,0 +1,34 @@
+{
+  "name": "Dashboard",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "layout_config": {
+      "type": "string",
+      "description": "JSON string of widget positions/sizes"
+    },
+    "is_default": {
+      "type": "boolean",
+      "default": false
+    },
+    "profile_type": {
+      "type": "string",
+      "enum": [
+        "operations",
+        "security",
+        "analytics",
+        "infrastructure",
+        "custom"
+      ],
+      "default": "operations"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

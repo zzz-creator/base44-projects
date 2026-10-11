@@ -1,0 +1,54 @@
+{
+  "name": "Elevator",
+  "type": "object",
+  "properties": {
+    "elevator_name": {
+      "type": "string",
+      "description": "Elevator identifier (e.g., 'Elevator A')"
+    },
+    "current_floor": {
+      "type": "integer",
+      "description": "Current floor position"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "moving_up",
+        "moving_down",
+        "maintenance",
+        "emergency"
+      ],
+      "default": "idle",
+      "description": "Current elevator status"
+    },
+    "capacity": {
+      "type": "integer",
+      "default": 10,
+      "description": "Maximum passenger capacity"
+    },
+    "current_load": {
+      "type": "integer",
+      "default": 0,
+      "description": "Current number of passengers"
+    },
+    "last_maintenance": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last maintenance date"
+    },
+    "next_maintenance": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled next maintenance"
+    },
+    "emergency_mode": {
+      "type": "boolean",
+      "default": false,
+      "description": "Emergency override active"
+    }
+  },
+  "required": [
+    "elevator_name"
+  ]
+}

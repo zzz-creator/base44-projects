@@ -1,0 +1,33 @@
+{
+  "name": "WorkflowAction",
+  "type": "object",
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Reference to AutomationRule"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "notify",
+        "create_task",
+        "update_status",
+        "send_email",
+        "log_event"
+      ],
+      "description": "Type of action"
+    },
+    "target_entity": {
+      "type": "string",
+      "description": "Target entity for action"
+    },
+    "parameters": {
+      "type": "string",
+      "description": "JSON parameters for action"
+    }
+  },
+  "required": [
+    "rule_id",
+    "action_type"
+  ]
+}

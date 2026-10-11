@@ -1,0 +1,36 @@
+# ============================================================
+# Base44 local-development monorepo - root ignore rules
+# Each project keeps its own .gitignore for node_modules/dist/.env.
+# Anything here that is a credential must have a committed
+# .example twin with the same keys and blank values.
+# ============================================================
+
+# --- Environment files ---
+.local.env
+.env
+.env.*
+!.env.example
+
+# --- Legacy root Supabase client ---
+# custom-sdk.js embeds a Supabase *service-role* key and imports a
+# missing ./supabase-client.js; it is dead code kept on disk only.
+custom-sdk.js
+
+# --- Runtime config carrying DB credentials ---
+# Commit the matching config.example.json instead.
+config.json
+!config.example.json
+
+# --- Logs / scratch ---
+*.log
+logs/
+
+# --- Switchboard runtime state (churn / binaries / exports) ---
+.switchboard/kanban.db
+.switchboard/state.json
+.switchboard/airlock/
+.switchboard/MCP/
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db

@@ -1,0 +1,77 @@
+{
+  "name": "MaintenanceRecord",
+  "type": "object",
+  "properties": {
+    "asset_id": {
+      "type": "string",
+      "description": "Reference to EquipmentAsset"
+    },
+    "maintenance_type": {
+      "type": "string",
+      "enum": [
+        "routine",
+        "repair",
+        "inspection",
+        "calibration",
+        "emergency"
+      ],
+      "description": "Type of maintenance"
+    },
+    "performed_by": {
+      "type": "string",
+      "description": "Person who performed maintenance"
+    },
+    "performed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date maintenance performed"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Maintenance notes"
+    },
+    "next_scheduled_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Next scheduled maintenance date"
+    }
+  },
+  "required": [
+    "asset_id",
+    "maintenance_type",
+    "performed_date"
+  ],
+  "rls": {
+    "create": {
+      "data.created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "data.performed_by": "{{user.full_name}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

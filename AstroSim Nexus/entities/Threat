@@ -1,0 +1,53 @@
+{
+  "name": "Threat",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Affected colony ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Piracy",
+        "Rebellion",
+        "Natural Disaster",
+        "Equipment Failure",
+        "Disease"
+      ],
+      "description": "Threat type"
+    },
+    "severity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 30,
+      "description": "Severity 0-100"
+    },
+    "duration": {
+      "type": "number",
+      "default": 5,
+      "description": "Duration in turns"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "Detection",
+        "Escalation",
+        "Critical",
+        "Resolution"
+      ],
+      "default": "Detection",
+      "description": "Threat stage"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Threat active status"
+    }
+  },
+  "required": [
+    "colony_id",
+    "type"
+  ]
+}

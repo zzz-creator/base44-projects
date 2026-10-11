@@ -1,0 +1,57 @@
+{
+  "name": "FactionStrategicMemory",
+  "type": "object",
+  "properties": {
+    "faction_id": {
+      "type": "string",
+      "description": "Faction ID"
+    },
+    "recent_economic_losses": {
+      "type": "number",
+      "default": 0,
+      "description": "Economic losses in last 3 turns"
+    },
+    "recent_military_losses": {
+      "type": "number",
+      "default": 0,
+      "description": "Military losses in last 3 turns"
+    },
+    "successful_expansion_rate": {
+      "type": "number",
+      "default": 0.5,
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Expansion success rate"
+    },
+    "historical_threat_index": {
+      "type": "number",
+      "default": 0,
+      "description": "Average historical threat level"
+    },
+    "last_priority_shift_turn": {
+      "type": "number",
+      "default": 0,
+      "description": "Turn of last priority change"
+    },
+    "current_strategic_mode": {
+      "type": "string",
+      "enum": [
+        "Defensive",
+        "Economic",
+        "TechCatchUp",
+        "Expansion",
+        "Retrenchment"
+      ],
+      "default": "Economic",
+      "description": "Current strategy mode"
+    },
+    "mode_duration": {
+      "type": "number",
+      "default": 0,
+      "description": "Turns in current mode"
+    }
+  },
+  "required": [
+    "faction_id"
+  ]
+}

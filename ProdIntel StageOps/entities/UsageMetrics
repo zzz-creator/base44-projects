@@ -1,0 +1,32 @@
+{
+  "name": "UsageMetrics",
+  "type": "object",
+  "properties": {
+    "asset_id": {
+      "type": "string",
+      "description": "Reference to EquipmentAsset"
+    },
+    "usage_hours": {
+      "type": "number",
+      "description": "Hours of usage"
+    },
+    "usage_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of usage"
+    },
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production if applicable"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Usage notes"
+    }
+  },
+  "required": [
+    "asset_id",
+    "usage_hours",
+    "usage_date"
+  ]
+}

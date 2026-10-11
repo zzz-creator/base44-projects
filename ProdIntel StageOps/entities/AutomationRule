@@ -1,0 +1,32 @@
+{
+  "name": "AutomationRule",
+  "type": "object",
+  "properties": {
+    "rule_name": {
+      "type": "string",
+      "description": "Rule name"
+    },
+    "trigger_event": {
+      "type": "string",
+      "description": "Event that triggers the rule"
+    },
+    "condition_logic": {
+      "type": "string",
+      "description": "Condition logic expression"
+    },
+    "action_definition": {
+      "type": "string",
+      "description": "Action to perform"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether rule is active"
+    }
+  },
+  "required": [
+    "rule_name",
+    "trigger_event",
+    "action_definition"
+  ]
+}

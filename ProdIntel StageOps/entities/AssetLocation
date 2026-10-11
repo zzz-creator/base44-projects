@@ -1,0 +1,21 @@
+{
+  "name": "AssetLocation",
+  "type": "object",
+  "properties": {
+    "location_name": {
+      "type": "string",
+      "description": "Location name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Location description"
+    },
+    "venue_id": {
+      "type": "string",
+      "description": "Reference to Venue if applicable"
+    }
+  },
+  "required": [
+    "location_name"
+  ]
+}

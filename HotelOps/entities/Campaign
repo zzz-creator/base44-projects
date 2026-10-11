@@ -1,0 +1,100 @@
+{
+  "name": "Campaign",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Campaign name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Campaign description"
+    },
+    "campaign_type": {
+      "type": "string",
+      "enum": [
+        "email",
+        "push_notification",
+        "sms",
+        "in_app"
+      ],
+      "description": "Type of campaign"
+    },
+    "target_segment": {
+      "type": "string",
+      "enum": [
+        "all",
+        "vip",
+        "loyalty_tier",
+        "inactive",
+        "frequent",
+        "custom"
+      ],
+      "description": "Target audience segment"
+    },
+    "tier_filter": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "standard",
+          "silver",
+          "gold",
+          "platinum"
+        ]
+      },
+      "description": "Specific loyalty tiers to target"
+    },
+    "offer_id": {
+      "type": "string",
+      "description": "Foreign key to Offer entity"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "scheduled",
+        "active",
+        "completed",
+        "paused"
+      ],
+      "default": "draft",
+      "description": "Campaign status"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Campaign start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Campaign end date"
+    },
+    "total_sent": {
+      "type": "integer",
+      "default": 0,
+      "description": "Total notifications sent"
+    },
+    "total_opened": {
+      "type": "integer",
+      "default": 0,
+      "description": "Total notifications opened"
+    },
+    "total_conversions": {
+      "type": "integer",
+      "default": 0,
+      "description": "Total conversions/bookings from campaign"
+    },
+    "ai_generated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether campaign was AI-generated"
+    }
+  },
+  "required": [
+    "name",
+    "campaign_type",
+    "target_segment"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "StaffTask",
+  "type": "object",
+  "properties": {
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "room_cleaning",
+        "maintenance",
+        "room_service_delivery",
+        "guest_request",
+        "inspection",
+        "other"
+      ],
+      "description": "Type of task"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Foreign key to StaffMember entity"
+    },
+    "room_id": {
+      "type": "string",
+      "description": "Foreign key to Room entity if applicable"
+    },
+    "guest_id": {
+      "type": "string",
+      "description": "Foreign key to Guest entity if applicable"
+    },
+    "related_order_id": {
+      "type": "string",
+      "description": "Related RoomServiceOrder ID if applicable"
+    },
+    "description": {
+      "type": "string",
+      "description": "Task description"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium",
+      "description": "Task priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Task status"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Task creation timestamp"
+    },
+    "started_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Task start timestamp"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Task completion timestamp"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Staff notes on task"
+    }
+  },
+  "required": [
+    "task_type",
+    "description"
+  ]
+}

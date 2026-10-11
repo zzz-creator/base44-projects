@@ -1,0 +1,8 @@
+{
+  "DatabaseMode": {
+    "LocalSQLConnectionString": "Server=localhost;Database=HotelOps;User ID=admin;Password=;TrustServerCertificate=true;"
+  },
+  "Auth": {
+    "JWT_SECRET": ""
+  }
+}

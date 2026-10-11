@@ -1,0 +1,42 @@
+{
+  "name": "InfrastructureModule",
+  "type": "object",
+  "properties": {
+    "colony_id": {
+      "type": "string",
+      "description": "Colony ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Power Plant",
+        "Storage Facility",
+        "Defense Grid",
+        "Research Lab",
+        "Medical Center"
+      ],
+      "description": "Module type"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Module level 1-5"
+    },
+    "efficiency_boost": {
+      "type": "number",
+      "default": 10,
+      "description": "Efficiency boost percentage"
+    },
+    "maintenance_cost": {
+      "type": "number",
+      "default": 100,
+      "description": "Maintenance cost per turn"
+    }
+  },
+  "required": [
+    "colony_id",
+    "type"
+  ]
+}

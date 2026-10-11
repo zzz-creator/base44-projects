@@ -1,0 +1,85 @@
+{
+  "name": "MaintenanceAlert",
+  "type": "object",
+  "properties": {
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "elevator",
+        "parking_spot",
+        "room",
+        "hvac",
+        "plumbing"
+      ],
+      "description": "Type of asset requiring maintenance"
+    },
+    "asset_id": {
+      "type": "string",
+      "description": "Foreign key to the specific asset entity"
+    },
+    "alert_type": {
+      "type": "string",
+      "enum": [
+        "predictive",
+        "scheduled",
+        "urgent",
+        "critical"
+      ],
+      "description": "Type of maintenance alert"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium",
+      "description": "Severity level of the alert"
+    },
+    "predicted_failure_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "AI predicted failure date"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "AI confidence percentage (0-100)"
+    },
+    "issue_description": {
+      "type": "string",
+      "description": "Description of the predicted issue"
+    },
+    "recommended_action": {
+      "type": "string",
+      "description": "Recommended maintenance action"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "acknowledged",
+        "scheduled",
+        "in_progress",
+        "completed",
+        "dismissed"
+      ],
+      "default": "pending",
+      "description": "Current status of the alert"
+    },
+    "usage_data": {
+      "type": "object",
+      "description": "Historical usage data used for prediction"
+    }
+  },
+  "required": [
+    "asset_type",
+    "asset_id",
+    "alert_type",
+    "severity",
+    "issue_description"
+  ]
+}

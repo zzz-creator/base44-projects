@@ -1,0 +1,84 @@
+{
+  "name": "Production",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Production name"
+    },
+    "venue_id": {
+      "type": "string",
+      "description": "Reference to Venue"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Production start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Production end date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "rehearsal",
+        "active",
+        "completed",
+        "cancelled",
+        "archived"
+      ],
+      "default": "planning",
+      "description": "Current production status"
+    },
+    "description": {
+      "type": "string",
+      "description": "Production description"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Version for change tracking"
+    },
+    "archived_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when production was archived"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "data.created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "Announcement",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Announcement title"
+    },
+    "content": {
+      "type": "string",
+      "description": "Announcement content"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Email of author"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Name of author"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "all",
+        "production",
+        "department",
+        "role"
+      ],
+      "default": "all",
+      "description": "Who can see this announcement"
+    },
+    "target_production_id": {
+      "type": "string",
+      "description": "Production ID if visibility is production"
+    },
+    "target_department": {
+      "type": "string",
+      "description": "Department if visibility is department"
+    },
+    "target_roles": {
+      "type": "string",
+      "description": "JSON array of production_roles if visibility is role"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "important",
+        "urgent"
+      ],
+      "default": "normal",
+      "description": "Priority level"
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether announcement is pinned"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When announcement expires"
+    },
+    "read_by": {
+      "type": "string",
+      "description": "JSON array of user emails who have read this"
+    }
+  },
+  "required": [
+    "title",
+    "content"
+  ]
+}

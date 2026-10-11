@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"connectionTimeout": 15,
+				"mssqlOptions": {
+					"appName": "SQLTools",
+					"useUTC": false,
+					"encrypt": false,
+					"trustServerCertificate": true
+				},
+				"ssh": "Disabled",
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 1433,
+				"driver": "MSSQL",
+				"name": "SQL Server",
+				"username": "admin",
+				"password": "admin"
+			}
+		],
+		"switchboard.team.strictPrompts": false,
+		"switchboard.planner.strictPrompts": false,
+		"switchboard.review.strictPrompts": false,
+		"switchboard.accurateCoding.enabled": true,
+		"switchboard.reviewer.advancedMode": false,
+		"switchboard.leadCoder.inlineChallenge": false,
+		"switchboard.jules.autoSync": true,
+		"switchboard.pairProgramming.aggressive": false,
+		"switchboard.planner.designDocEnabled": false
+	}
+}

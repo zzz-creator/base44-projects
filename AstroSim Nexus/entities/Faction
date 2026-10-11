@@ -1,0 +1,48 @@
+{
+  "name": "Faction",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Faction name"
+    },
+    "aggression_level": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 50,
+      "description": "Aggression level 0-100"
+    },
+    "economic_focus": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 50,
+      "description": "Economic focus 0-100"
+    },
+    "technology_level": {
+      "type": "number",
+      "default": 1,
+      "description": "Technology level"
+    },
+    "diplomatic_stance": {
+      "type": "string",
+      "enum": [
+        "Neutral",
+        "Friendly",
+        "Hostile",
+        "Allied"
+      ],
+      "default": "Neutral",
+      "description": "Diplomatic stance"
+    },
+    "credits": {
+      "type": "number",
+      "default": 10000,
+      "description": "Available credits"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Simulation",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "stress_test",
+        "failure_scenario",
+        "traffic_spike",
+        "security_drill",
+        "custom"
+      ],
+      "default": "stress_test"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "running",
+        "paused",
+        "completed"
+      ],
+      "default": "idle"
+    },
+    "speed": {
+      "type": "number",
+      "default": 1
+    },
+    "parameters": {
+      "type": "string",
+      "description": "JSON config for simulation parameters"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "default": 60
+    },
+    "events_generated": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

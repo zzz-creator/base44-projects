@@ -1,0 +1,40 @@
+{
+  "name": "TradeRoute",
+  "type": "object",
+  "properties": {
+    "origin_colony_id": {
+      "type": "string",
+      "description": "Origin colony ID"
+    },
+    "destination_colony_id": {
+      "type": "string",
+      "description": "Destination colony ID"
+    },
+    "assigned_ship_id": {
+      "type": "string",
+      "description": "Assigned ship ID"
+    },
+    "risk_rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 20,
+      "description": "Risk rating 0-100"
+    },
+    "distance": {
+      "type": "number",
+      "default": 100,
+      "description": "Distance in units"
+    },
+    "active_status": {
+      "type": "boolean",
+      "default": true,
+      "description": "Route active status"
+    }
+  },
+  "required": [
+    "origin_colony_id",
+    "destination_colony_id",
+    "assigned_ship_id"
+  ]
+}

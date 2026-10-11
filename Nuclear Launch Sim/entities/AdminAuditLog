@@ -1,0 +1,70 @@
+{
+  "name": "AdminAuditLog",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "LOGIN",
+        "LOGOUT",
+        "ROLE_CHANGE",
+        "ACCESS_REVOKED",
+        "ACCESS_GRANTED",
+        "SCENARIO_CREATED",
+        "FAULT_INJECTED",
+        "SYSTEM_LOCK",
+        "PASSWORD_RESET",
+        "ADMIN_DISABLED",
+        "ADMIN_ENABLED"
+      ],
+      "description": "Type of administrative action"
+    },
+    "targetUser": {
+      "type": "string",
+      "description": "Email of the user affected by the action (if applicable)"
+    },
+    "performedBy": {
+      "type": "string",
+      "description": "Email of the admin who performed the action"
+    },
+    "details": {
+      "type": "object",
+      "description": "Additional details about the action"
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "IP address from which the action was performed"
+    },
+    "success": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the action succeeded"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message if action failed"
+    }
+  },
+  "required": [
+    "action",
+    "performedBy"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "data.action": "nonexistent_action"
+    },
+    "delete": {
+      "data.action": "nonexistent_action"
+    }
+  }
+}

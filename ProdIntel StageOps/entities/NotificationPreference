@@ -1,0 +1,43 @@
+{
+  "name": "NotificationPreference",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user"
+    },
+    "mention_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify when mentioned"
+    },
+    "incident_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify on new incidents"
+    },
+    "task_overdue_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify on overdue tasks"
+    },
+    "task_assigned_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify when tasks are assigned"
+    },
+    "production_status_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify on production status changes"
+    },
+    "message_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Notify on new messages"
+    }
+  },
+  "required": [
+    "user_email"
+  ]
+}

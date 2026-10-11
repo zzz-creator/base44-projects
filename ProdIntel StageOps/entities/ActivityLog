@@ -1,0 +1,53 @@
+{
+  "name": "ActivityLog",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Production this activity relates to"
+    },
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "comment",
+        "task_created",
+        "task_completed",
+        "task_updated",
+        "incident_logged",
+        "incident_resolved",
+        "crew_assigned",
+        "status_change",
+        "budget_update"
+      ],
+      "description": "Type of activity"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Type of entity involved"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "ID of the entity involved"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "User who performed the action"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Name of user who performed the action"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the activity"
+    },
+    "metadata": {
+      "type": "string",
+      "description": "JSON string with additional data"
+    }
+  },
+  "required": [
+    "activity_type",
+    "description"
+  ]
+}

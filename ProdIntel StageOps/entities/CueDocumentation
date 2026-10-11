@@ -1,0 +1,44 @@
+{
+  "name": "CueDocumentation",
+  "type": "object",
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "description": "Reference to Production"
+    },
+    "cue_number": {
+      "type": "string",
+      "description": "Cue number/identifier"
+    },
+    "description": {
+      "type": "string",
+      "description": "Cue description"
+    },
+    "department": {
+      "type": "string",
+      "enum": [
+        "lighting",
+        "sound",
+        "staging",
+        "video",
+        "fly",
+        "props",
+        "special_effects"
+      ],
+      "description": "Department"
+    },
+    "revision_number": {
+      "type": "number",
+      "default": 1,
+      "description": "Revision number"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "production_id",
+    "cue_number"
+  ]
+}

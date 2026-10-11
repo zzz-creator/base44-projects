@@ -1,0 +1,89 @@
+{
+  "name": "Prediction",
+  "type": "object",
+  "properties": {
+    "year": {
+      "type": "number",
+      "description": "Year of prediction"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "economic",
+        "territorial",
+        "technological",
+        "climate",
+        "galactic",
+        "interstellar"
+      ],
+      "description": "Type of prediction"
+    },
+    "scenario": {
+      "type": "string",
+      "description": "Detailed scenario description"
+    },
+    "probability": {
+      "type": "number",
+      "description": "Probability percentage"
+    },
+    "factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Contributing factors"
+    },
+    "affected_regions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Regions/entities affected"
+    },
+    "potential_wars": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Potential wars that may result"
+    },
+    "economic_indicators": {
+      "type": "object",
+      "properties": {
+        "global_gdp_change": {
+          "type": "number"
+        },
+        "resource_scarcity": {
+          "type": "number"
+        },
+        "technological_advancement": {
+          "type": "number"
+        }
+      }
+    },
+    "is_galactic": {
+      "type": "boolean",
+      "description": "Whether this involves space/alien species"
+    },
+    "alien_species_involved": {
+      "type": "string",
+      "description": "Name of alien species if applicable"
+    }
+  },
+  "required": [
+    "year",
+    "type",
+    "scenario",
+    "probability"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

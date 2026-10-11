@@ -1,0 +1,90 @@
+{
+  "name": "AlertRule",
+  "type": "object",
+  "properties": {
+    "rule_name": {
+      "type": "string",
+      "description": "Name of the alert rule"
+    },
+    "rule_logic": {
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "default": "AND",
+      "description": "Logic operator for combining conditions"
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Array of conditions that define the alert rule"
+    },
+    "total_score": {
+      "type": "number",
+      "description": "Total weighted score of all conditions"
+    },
+    "notification_methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "in_app",
+          "email"
+        ]
+      },
+      "description": "How to send notifications"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the rule is active"
+    },
+    "last_triggered": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the rule was last triggered"
+    },
+    "trigger_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of times triggered"
+    }
+  },
+  "required": [
+    "rule_name",
+    "conditions",
+    "notification_methods"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "ShiftSession",
+  "type": "object",
+  "properties": {
+    "staff_id": {
+      "type": "string"
+    },
+    "terminal_id": {
+      "type": "string"
+    },
+    "login_time": {
+      "type": "string"
+    },
+    "logout_time": {
+      "type": "string"
+    },
+    "opening_float": {
+      "type": "number"
+    },
+    "transactions_count": {
+      "type": "number",
+      "default": 0
+    },
+    "discount_count": {
+      "type": "number",
+      "default": 0
+    },
+    "void_count": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "closed"
+      ],
+      "default": "active"
+    }
+  },
+  "required": [
+    "staff_id",
+    "terminal_id"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {},
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

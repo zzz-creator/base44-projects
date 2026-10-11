@@ -1,0 +1,57 @@
+{
+  "name": "Vehicle",
+  "type": "object",
+  "properties": {
+    "guest_id": {
+      "type": "string",
+      "description": "Foreign key to Guest entity"
+    },
+    "parking_spot_id": {
+      "type": "string",
+      "description": "Foreign key to ParkingSpot entity"
+    },
+    "license_plate": {
+      "type": "string",
+      "description": "Vehicle license plate number"
+    },
+    "make": {
+      "type": "string",
+      "description": "Vehicle make"
+    },
+    "model": {
+      "type": "string",
+      "description": "Vehicle model"
+    },
+    "color": {
+      "type": "string",
+      "description": "Vehicle color"
+    },
+    "vehicle_type": {
+      "type": "string",
+      "enum": [
+        "sedan",
+        "suv",
+        "truck",
+        "van",
+        "motorcycle",
+        "electric"
+      ],
+      "default": "sedan",
+      "description": "Type of vehicle"
+    },
+    "check_in_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Vehicle parking check-in time"
+    },
+    "check_out_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Vehicle parking check-out time"
+    }
+  },
+  "required": [
+    "guest_id",
+    "license_plate"
+  ]
+}

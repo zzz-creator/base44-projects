@@ -1,0 +1,58 @@
+{
+  "name": "CombatParticipant",
+  "type": "object",
+  "properties": {
+    "encounter_id": {
+      "type": "string",
+      "description": "Combat encounter ID"
+    },
+    "ship_id": {
+      "type": "string",
+      "description": "Ship ID"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "Attacker",
+        "Defender"
+      ],
+      "description": "Combat side"
+    },
+    "current_hull": {
+      "type": "number",
+      "default": 100,
+      "description": "Current hull integrity"
+    },
+    "current_shields": {
+      "type": "number",
+      "default": 100,
+      "description": "Current shield strength"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Engaged",
+        "Retreating",
+        "Destroyed",
+        "Victorious"
+      ],
+      "default": "Engaged",
+      "description": "Ship combat status"
+    },
+    "damage_dealt": {
+      "type": "number",
+      "default": 0,
+      "description": "Total damage dealt"
+    },
+    "damage_taken": {
+      "type": "number",
+      "default": 0,
+      "description": "Total damage taken"
+    }
+  },
+  "required": [
+    "encounter_id",
+    "ship_id",
+    "side"
+  ]
+}

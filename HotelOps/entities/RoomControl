@@ -1,0 +1,38 @@
+{
+  "name": "RoomControl",
+  "type": "object",
+  "properties": {
+    "room_id": {
+      "type": "string",
+      "description": "Foreign key to Room entity"
+    },
+    "guest_id": {
+      "type": "string",
+      "description": "Foreign key to Guest entity"
+    },
+    "do_not_disturb": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do Not Disturb status"
+    },
+    "make_up_room": {
+      "type": "boolean",
+      "default": false,
+      "description": "Make Up Room request"
+    },
+    "temperature_preference": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 80,
+      "description": "Room temperature preference (Fahrenheit)"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last control update timestamp"
+    }
+  },
+  "required": [
+    "room_id"
+  ]
+}

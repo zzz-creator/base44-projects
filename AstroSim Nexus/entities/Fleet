@@ -1,0 +1,72 @@
+{
+  "name": "Fleet",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Fleet name"
+    },
+    "faction_id": {
+      "type": "string",
+      "description": "Owning faction ID"
+    },
+    "task": {
+      "type": "string",
+      "enum": [
+        "Patrol",
+        "Trade Escort",
+        "Attack",
+        "Defense",
+        "Exploration",
+        "Idle"
+      ],
+      "default": "Idle",
+      "description": "Fleet task assignment"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Idling",
+        "In Transit",
+        "Under Attack",
+        "Retreating",
+        "Docked"
+      ],
+      "default": "Docked",
+      "description": "Fleet operational status"
+    },
+    "target_colony_id": {
+      "type": "string",
+      "description": "Target/destination colony ID"
+    },
+    "formation": {
+      "type": "string",
+      "enum": [
+        "Line",
+        "Wedge",
+        "Screen",
+        "Box",
+        "Sphere"
+      ],
+      "default": "Line",
+      "description": "Fleet formation"
+    },
+    "morale": {
+      "type": "number",
+      "default": 100,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Fleet morale"
+    },
+    "combat_effectiveness": {
+      "type": "number",
+      "default": 100,
+      "description": "Combat effectiveness rating"
+    }
+  },
+  "required": [
+    "name",
+    "faction_id"
+  ]
+}

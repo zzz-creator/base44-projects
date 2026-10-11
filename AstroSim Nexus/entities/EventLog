@@ -1,0 +1,45 @@
+{
+  "name": "EventLog",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event timestamp"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Turn",
+        "Trade",
+        "Threat",
+        "AI Decision",
+        "Production",
+        "Market",
+        "Maintenance"
+      ],
+      "description": "Event type"
+    },
+    "source_entity": {
+      "type": "string",
+      "description": "Source entity type"
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Source entity ID"
+    },
+    "description": {
+      "type": "string",
+      "description": "Event description"
+    },
+    "impact_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Impact score"
+    }
+  },
+  "required": [
+    "event_type",
+    "description"
+  ]
+}
