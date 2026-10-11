@@ -26,7 +26,7 @@ project-root/
 ```bash
 cd server
 npm install
-node server.js          # or: npm run dev  (auto-restart with nodemon)
+node server.js          # or: npm run dev  (auto-restart via node --watch)
 ```
 
 The API will start at **http://localhost:3001**
