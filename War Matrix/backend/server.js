@@ -14,7 +14,6 @@ const { poolPromise } = require('./db');
 const apiRoutes = require('./routes/api');
 const commsRoutes = require('./routes/comms');
 const authRoutes = require('./routes/auth');
-const sasRoutes = require('./routes/sas');
 
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
@@ -36,7 +35,8 @@ app.use((req, res, next) => {
 app.use('/api', apiRoutes);
 app.use('/api/comms', commsRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/sas', sasRoutes);
+// /api/sas route removed: routes/sas.js referenced a SASCodes table that does
+// not exist in the schema and no frontend code calls it (dead route → 500).
 
 // Simple liveness probe (no DB).
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
@@ -72,4 +72,18 @@ function listenWithFallback(port, onReady) {
 
 listenWithFallback(PORT, (actualPort) => {
     console.log(`War Matrix backend running on http://localhost:${actualPort}`);
+    poolPromise
+      .then((pool) => pool.request().query("SELECT COUNT(*) AS n FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"))
+      .then((r) => {
+        const n = r.recordset[0].n;
+        if (n === 0) {
+          console.error(`❌ DB has no tables — apply backend/schema.sql to the database, then restart.`);
+          process.exit(1);
+        }
+        console.log(`✅ DB OK: ${n} tables present.`);
+      })
+      .catch((err) => {
+        console.error(`❌ DB connection failed: ${err.message}`);
+        process.exit(1);
+      });
 });
