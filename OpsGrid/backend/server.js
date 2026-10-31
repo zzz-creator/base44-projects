@@ -5,7 +5,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import path from 'path';
@@ -82,7 +81,7 @@ app.post('/api/auth/register', async (req, res) => {
     if (existing.recordset.length > 0) return res.status(409).json({ error: 'Email already registered' });
 
     const id = crypto.randomUUID();
-    const password_hash = await bcrypt.hash(password, 10);
+    const password_hash = password;
     await pool.request()
       .input('id', id)
       .input('email', email)
@@ -106,7 +105,7 @@ app.post('/api/auth/login', async (req, res) => {
     const pool = await getPool();
     const result = await pool.request().input('email', email).query('SELECT * FROM Users WHERE email = @email');
     const row = result.recordset[0];
-    if (!row || !(await bcrypt.compare(password, row.password_hash))) {
+    if (!row || row.password_hash !== password) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     const user = { id: row.id, email: row.email, full_name: row.full_name, role: row.role };

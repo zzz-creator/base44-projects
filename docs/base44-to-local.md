@@ -52,7 +52,7 @@ a new project.
 <Project>/backend/schema.sql         hand-written from <Project>/entities/*
 <Project>/backend/.env               DB + JWT + Gemini secrets (untracked)
 <Project>/backend/.env.example       same keys, blank values (committed)
-<Project>/backend/package.json       express, mssql, cors, dotenv, bcryptjs, jsonwebtoken
+<Project>/backend/package.json       express, mssql, cors, dotenv, jsonwebtoken
 <Project>/.env                       VITE_API_URL, VITE_GEMINI_API_KEY (Vite reads here)
 <Project>/src/api/base44-local-client.js
 <Project>/src/api/base44Client.js     re-exports the local client as `base44`
@@ -88,7 +88,10 @@ Preserve the backend's existing module system (CommonJS or ESM) — do not rewri
    - Wrap each `CREATE TABLE` in `IF OBJECT_ID('<Table>', 'U') IS NULL`.
    - Table names must match the backend's `TABLE_MAP`.
 
-3. **Apply the schema manually** (assistant must not run DB DDL):
+3. **Apply the schema** — the assistant may run `schema.sql` against an existing
+   database after asking the user for permission; creating the database itself
+   (`CREATE DATABASE`) is never done by the assistant (permission errors). Manual
+   alternative:
    ```powershell
    sqlcmd -S localhost -U admin -P admin -d <dbname> -i backend/schema.sql
    ```
