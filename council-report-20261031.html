@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Council Report — what do we need to fix?</title>
+<style>
+  :root { --accent:#2563eb; --muted:#6b7280; --border:#e5e7eb; --bg:#fafafa; --card:#fff; }
+  * { box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:#111; margin:0; padding:24px; line-height:1.6; }
+  .container { max-width:960px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .subtitle { color:var(--muted); font-size:13px; margin-bottom:24px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:16px; }
+  .verdict { border-left:4px solid var(--accent); }
+  .verdict h2 { margin:0 0 12px; font-size:18px; color:var(--accent); }
+  h2 { font-size:16px; margin:20px 0 8px; }
+  h3 { font-size:14px; margin:14px 0 6px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  ul { margin:6px 0 6px 20px; }
+  li { margin:4px 0; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:700px){ .grid{grid-template-columns:1fr;} }
+  .advisor-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; margin:12px 0; }
+  .advisor-chip { background:#f3f4f6; border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:12px; }
+  .advisor-chip .name { font-weight:600; }
+  .advisor-chip .stance { color:var(--muted); font-size:11px; }
+  .agree { color:#059669; }
+  .clash { color:#dc2626; }
+  details { border:1px solid var(--border); border-radius:8px; margin:8px 0; background:var(--card); }
+  details summary { cursor:pointer; padding:10px 14px; font-weight:600; font-size:13px; }
+  details summary:hover { background:#f9fafb; }
+  details .body { padding:0 14px 14px; font-size:13px; white-space:pre-wrap; }
+  .peer { font-size:12px; }
+  .footer { color:var(--muted); font-size:11px; text-align:center; margin-top:24px; padding-top:12px; border-top:1px solid var(--border); }
+  .one-thing { background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:14px; font-weight:500; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; }
+  .badge-green { background:#d1fae5; color:#065f46; }
+  .badge-red { background:#fee2e2; color:#991b1b; }
+  .badge-amber { background:#fef3c7; color:#92400e; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Council Verdict</h1>
+  <div class="subtitle">Question: "what do we need to fix?" &nbsp;·&nbsp; 31 Oct 2026 &nbsp;·&nbsp; 9 advisors seated &nbsp;·&nbsp; 5 peer reviews</div>
+
+  <div class="card verdict">
+    <h2>The Recommendation</h2>
+    <p>Fix three things, in this order, each with a failing-repro-first + end-to-end create/read round-trip:</p>
+    <ol>
+      <li><strong>War Matrix plaintext password auth fallback</strong> — remove the <code>password</code> column branch, require <code>password_hash</code>, delete stale <code>seed.sql</code>/<code>migrate_auth.js</code>. Security, irreversible exposure risk. Check whether the fallback is reachable first (grep).</li>
+      <li><strong>DB schema verification per project</strong> — apply <code>schema.sql</code> by hand, hit <code>/api/health</code>, run one create/read round-trip per entity. Add a startup table-existence check so missing schema fails loudly. This is the #1 unknown.</li>
+      <li><strong>War Matrix <code>routes/sas.js</code> + absent <code>SASCodes</code> table</strong> — check call sites; if nothing calls <code>/api/sas</code>, remove the route (don't grow schema for dead code). If it's live, create the table.</li>
+    </ol>
+    <p>Then decide on DB automation (Expansionist's bet) only after verification is green. Defer all hygiene (lint, dead code, tmp/, stale seed) to a single cleanup pass.</p>
+  </div>
+
+  <div class="card">
+    <h3>The one thing to do first</h3>
+    <div class="one-thing">Verify one app end-to-end against a real MSSQL instance (apply schema.sql, boot, create+read an entity) before touching anything else — this converts "tests pass" from a frontend claim into a measured fact.</div>
+  </div>
+
+  <div class="card">
+    <h2>Where the Council Agrees <span class="badge badge-green">high confidence</span></h2>
+    <ul>
+      <li><strong>War Matrix plaintext password fallback is a real security issue, not hygiene.</strong> Nearly unanimous (only Expansionist deferred, and even they flagged it for a SECURITY.md). A fallback that activates on auth failure and stores/compares plaintext is a latent credential leak regardless of deployment intent.</li>
+      <li><strong>War Matrix <code>no-undef</code> bugs are latent runtime crashes, not mere lint noise.</strong> A, D, E, F, G, H, I all flag them as real. They bite on code paths tests don't cover.</li>
+      <li><strong>ProdIntel fail-fast <code>process.exit(1)</code> on missing DB is correct behavior, not a bug.</strong> B, C, E, F, H, I agree; only G wants it softened. Fail-fast on a missing dependency is a feature.</li>
+      <li><strong>Dead code, unused imports, stale seed.sql/migrate_auth.js, OmniPOS tmp/ scripts → hygiene, defer.</strong> Near-unanimous.</li>
+      <li><strong>Root node_modules/ and test-results/ → .gitignore.</strong> E, G, H, I.</li>
+      <li><strong>OpsGrid stubs (subscribe, agents) are a measurement gap, not a fix.</strong> A and F: passing tests on stubs prove the stubs don't crash, not that the features work.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Where the Council Clashes <span class="badge badge-red">genuine disagreement</span></h2>
+    <div class="grid">
+      <div>
+        <h3>DB setup: verify vs. automate</h3>
+        <p><strong>Expansionist:</strong> script <code>npm run db:setup</code> per project — highest ROI, enables CI and onboarding.</p>
+        <p><strong>First Principles / Pragmatist:</strong> verify first — don't automate unverified manual steps.</p>
+        <p><strong>Historian:</strong> verify by hand, then maybe automate.</p>
+        <p><em>Resolution: verify first, then automate if onboarding pain justifies it.</em></p>
+      </div>
+      <div>
+        <h3>SASCodes table</h3>
+        <p><strong>Expansionist:</strong> finish it — half-built feature, adjacent opportunity.</p>
+        <p><strong>Contrarian / Executor / Historian:</strong> remove the route — dead code, nothing calls <code>/api/sas</code>.</p>
+        <p><strong>Risk Assessor:</strong> decide by checking call sites first.</p>
+        <p><em>Resolution: grep for call sites/mounting; if nothing calls it, remove the route.</em></p>
+      </div>
+      <div>
+        <h3>Scope / purpose</h3>
+        <p><strong>First Principles:</strong> question whether maintaining 7 sandbox apps is worth it at all.</p>
+        <p><strong>Expansionist:</strong> sees a reusable app factory.</p>
+        <p><strong>Contrarian / Historian:</strong> focus on not shipping unverified persistence.</p>
+        <p><em>Genuine disagreement about the project's purpose — worth a deliberate decision.</em></p>
+      </div>
+      <div>
+        <h3>ProdIntel fail-fast</h3>
+        <p><strong>Pragmatist:</strong> soften to logged error + degraded mode.</p>
+        <p><strong>B/C/E/F/H/I:</strong> keep fail-fast (correct behavior; hiding the problem is worse).</p>
+        <p><em>Resolution: keep fail-fast but make the error message actionable (which DB, which env var).</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Blind Spots the Council Caught <span class="badge badge-amber">via peer review</span></h2>
+    <ul>
+      <li><strong>Verification gap (Outsider, Contrarian, Expansionist, First Principles, Executor):</strong> all advisors prioritized from an unverified issue list without checking call sites, mounted routes, or whether tests exercise auth/DB writes. The ordering is opinion, not evidence.</li>
+      <li><strong>No verification protocol (Contrarian, First Principles, Expansionist, Outsider):</strong> none specified how we'll know a fix worked — failing repro first, one end-to-end create/read per entity, migration rollback, owner/date.</li>
+      <li><strong>The gating question (First Principles, Executor):</strong> nobody asked the actual success criterion / deployment target for these seven apps. Without that, prioritization is taste.</li>
+      <li><strong>OpsGrid stubs as measurement gap (Skeptic):</strong> smoke tests prove boot, not behavior. Stubs paper over missing functionality and call it green.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Seated advisors</h2>
+    <div class="advisor-grid">
+      <div class="advisor-chip"><div class="name">Contrarian</div><div class="stance">core · find the flaw</div></div>
+      <div class="advisor-chip"><div class="name">First Principles</div><div class="stance">core · rethink the question</div></div>
+      <div class="advisor-chip"><div class="name">Expansionist</div><div class="stance">core · upside everyone misses</div></div>
+      <div class="advisor-chip"><div class="name">Outsider</div><div class="stance">core · fresh eyes</div></div>
+      <div class="advisor-chip"><div class="name">Executor</div><div class="stance">core · Monday morning</div></div>
+      <div class="advisor-chip"><div class="name">Skeptic</div><div class="stance">panel · demands evidence</div></div>
+      <div class="advisor-chip"><div class="name">Pragmatist</div><div class="stance">panel · real constraints</div></div>
+      <div class="advisor-chip"><div class="name">Risk Assessor</div><div class="stance">panel · blast radius</div></div>
+      <div class="advisor-chip"><div class="name">Historian</div><div class="stance">panel · precedent</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:8px 0 0;">Panel size 4 (within 4–6). Innovator not seated — its creative angle overlaps the Expansionist on this question.</p>
+  </div>
+
+  <div class="card">
+    <h2>Advisor responses (collapsible)</h2>
+    <details><summary>A — The Contrarian</summary><div class="body">The "all 7 apps pass" headline is the thing I'd distrust first. OpsGrid's SDK features are *stubbed*, not implemented — passing tests on stubs prove the stubs don't crash, not that the features work. That's a measurement gap, not a green light.
+
+Real blockers, in order:
+1. War Matrix plaintext password fallback. This isn't hygiene. A fallback that activates on auth failure and stores/compares plaintext is a latent credential leak waiting for the first misconfigured deploy. Fix or delete it; don't leave a "works in dev" landmine.
+2. routes/sas.js → absent SASCodes table. A wired route pointing at a missing table is a guaranteed 500 the moment anyone hits it. Tests didn't catch it because the route isn't exercised. Either create the table + migration or remove the route — leaving a live dead-end is worse than either.
+3. DB setup manual + unverified checklist. "Passes on all 7 live apps" actually means "passes on machines where someone ran SQL by hand." That's not reproducible; it's tribal knowledge. Until there's a single npm run db:setup per project, the pass/fail signal is meaningless for anyone else.
+4. War Matrix no-undef lint errors. These *can* be real runtime bugs on code paths tests don't cover. Don't dismiss as lint hygiene until someone confirms the referenced identifiers resolve.
+
+Defer/ignore: unused-import cleanup, dead localApiClient.jsx files, OmniPOS tmp/ scripts, root node_modules/test-results cleanup, ProdIntel fail-fast (that's correct behavior — keep it). None of these can break a user; they just offend tidy people. Fix the four that can first.</div></details>
+    <details><summary>B — The First Principles Thinker</summary><div class="body">You're asking which items to fix, but the prior question is: fix for whom, to what standard? These are sandbox apps whose smoke and deep-route tests already pass with zero fatal console errors. If there's no deployment target and no real users, "tests pass" is already done — the checklist being "not verified as done" is the actual blocker, because you can't prioritize what you haven't measured.
+
+So step one isn't fixing anything: verify. Run each app against a real or seeded MSSQL instance and exercise the deep routes that hit the backend. If those pass, most of this list is hygiene.
+
+Of the six items, only two are plausibly real blockers, and both are conditional:
+- War Matrix plaintext password auth + missing SASCodes table. These matter only if those code paths execute in your test matrix. Check whether smoke/deep tests actually hit them before touching. If they do, fix; if not, they're latent, not urgent.
+- ProdIntel fail-fast exit(1). This is correct behavior for a DB-dependent service, not a bug. Don't weaken it — ensure the DB is present where it runs. The fix is operational, not code.
+
+Everything else: unused imports, no-undef lint errors (unless in rendered components — then fix just those), dead localApiClient.jsx files, tmp/ scripts, stale seed.sql/migrate_auth.js, untracked root node_modules/ and test-results/. Defer all of it, or delete in one cleanup pass later. Add the root junk to .gitignore and move on.
+
+The meta-answer: with finite time, either verify DB-dependent paths end-to-end, or question whether maintaining seven sandbox apps is the right allocation at all. Hygiene on a codebase you may not ship is waste.</div></details>
+    <details><summary>C — The Expansionist</summary><div class="body">The real prize here isn't fixing bugs — it's that you already have a platform: seven apps sharing a dev-runner, passing smoke tests, with stubs bridging SDK gaps. That's the foundation for something bigger than seven demos.
+
+Fix next (high leverage, unlocks everything downstream):
+1. Automate DB schema application per project. This is the single biggest blocker hiding in plain sight. Manual schema apply means no CI, no clean onboarding, no reproducible demos. Script it (one command per app, driven by a manifest) and you unlock the ability to add an 8th app, run E2E in CI, and hand this to someone else. Highest ROI in the list.
+2. Build out the missing SASCodes table + routes/sas.js in War Matrix. This isn't dead code to delete — it's a half-built feature. The route exists, the schema doesn't. That's an adjacent opportunity sitting there. Either finish it or explicitly cut it; don't leave it dangling.
+
+Defer (hygiene, not blockers):
+- Lint unused imports / no-undef — run --fix, commit, move on. Not blocking anything.
+- Dead code (localApiClient.jsx files, tmp/ scripts) — delete in a single cleanup PR. No upside either way.
+- ProdIntel fail-fast process.exit(1) — keep it. That's correct behavior for a dev sandbox; it tells you immediately your DB is missing instead of serving 500s. Don't weaken it.
+- Root node_modules/ / test-results/ — add to .gitignore, delete, never think about again.
+
+Ignore for now:
+- War Matrix plaintext password fallback. Yes it's bad, but only matters if this ships to real users. In a portfolio sandbox, the risk is theoretical and the fix (bcrypt + migration) is a rabbit hole. Flag it in a SECURITY.md, don't spend a sprint on it.
+
+The bet I'd make: spend your finite time on DB automation + finishing SASCodes. Everything else is tidying. If this works even better than expected, you've turned seven sandbox apps into a reusable app factory — and that's worth 10x the cleanup work.</div></details>
+    <details><summary>D — The Outsider</summary><div class="body">Real blockers — fix now:
+1. War Matrix plaintext password auth fallback. This is a security defect, not hygiene. If that fallback is reachable in any deployed or demo path, it's a live credential exposure. Fix or remove it before anything else.
+2. War Matrix no-undef bugs + routes/sas.js referencing a nonexistent SASCodes table. These are actual runtime failures waiting for a user to hit the route. The sas.js reference is a crash, not a warning — either create the table or delete the route.
+3. ProdIntel's process.exit(1) on missing DB. In a dev/sandbox context this is tolerable but it turns a missing-DB condition into a hard crash with no diagnostic. At minimum, log the connection error and exit with a clear message; ideally degrade gracefully. Low effort, high clarity.
+
+Defer (real but not blocking):
+4. Manual DB schema application per project. This is operational friction, not a code defect. Verify the checklist items are actually done before claiming completion, but don't block feature work on automating migrations unless onboarding pain justifies it.
+5. Unused-import lint errors. Noise. Fix War Matrix's no-undef subset; leave the rest for a cleanup pass.
+
+Ignore:
+6. Dead code (localApiClient.jsx x2, OmniPOS tmp/ scripts). Harmless. Delete only if they confuse someone; not worth finite time.
+7. Root node_modules/ and test-results/. Git hygiene only — add to .gitignore in 30 seconds if not already, then stop thinking about it.
+
+Bottom line: The only items with real downside risk are War Matrix's auth fallback and the sas.js/table mismatch. Everything else is either hygiene or operational debt that doesn't threaten correctness. Don't let checklist anxiety redirect effort from the security and runtime bugs.</div></details>
+    <details><summary>E — The Executor</summary><div class="body">Fix next — real risk, small blast radius:
+1. War Matrix routes/sas.js → absent SASCodes table. If that route is mounted, any hit throws a 500 at runtime. Monday morning: grep for sas route mounting; if wired, either drop the route or ship the table in schema.sql. This is the only listed item that can crash a live request.
+2. War Matrix plaintext password auth fallback. Security, not hygiene — a fallback that compares raw passwords is a latent credential leak. Remove it; keep only the hashed path. Verify the hashed path actually works first (it should, smoke tests pass), then delete the fallback.
+3. Gitignore root node_modules/ and test-results/. Two lines in .gitignore. They're untracked and one git add away from a 200MB commit. Do it before anything else so you don't accidentally sweep them in.
+
+Defer (hygiene, no runtime impact): unused-import lint errors, dead localApiClient.jsx files, OmniPOS tmp/ scripts, stale seed.sql/migrate_auth.js. None of these break a running app or a test. Batch them into one "cleanup" pass later; don't let them eat a day.
+
+Ignore / leave as-is: ProdIntel's fail-fast process.exit(1) — that's correct behavior, not a bug; the checklist just documents the symptom. Manual DB setup is an ops task, not code; smoke tests already prove the DBs that matter exist. HotelOps folder still on disk is harmless (already removed from the 7-app set).
+
+Bottom line: one potential 500, one security hole, one gitignore line — that's Monday. Everything else is noise until those three are closed.</div></details>
+    <details><summary>F — The Skeptic</summary><div class="body">The Skeptic's take:
+
+The "all 7 apps pass smoke tests" claim is the first thing I'd challenge. Smoke tests that check "pages render with zero fatal console errors" prove the app boots, not that it works. OpsGrid's SDK features were stubbed — that's a lie detector for the test suite, not a fix. You've papered over missing functionality and called it green. Before prioritizing anything, answer: do these tests assert real behavior, or just that render() didn't throw?
+
+Real blockers (fix now):
+1. Plaintext password auth fallback in War Matrix — this is a security defect, not hygiene. If it's reachable in any environment, it's a liability. Verify it's actually dead code first; if reachable, fix or delete it.
+2. War Matrix no-undef bugs — these are latent runtime crashes, not lint noise. They will bite someone.
+3. routes/sas.js referencing absent SASCodes table — if this route is mounted, it's a 500 waiting to happen. Check whether it's wired into the router before deciding.
+4. DB setup unverified — "checklist items not verified as done" means you don't actually know if a fresh environment works. This is the highest-risk unknown. Verify one app end-to-end from empty DB before touching anything else.
+
+Defer or ignore:
+- Unused imports, dead localApiClient.jsx files, tmp/ scripts, stale seed.sql/migrate_auth.js — pure hygiene, zero runtime impact. Batch into a cleanup PR later.
+- Root node_modules/test-results/ — add to .gitignore, move on.
+- ProdIntel's process.exit(1) on missing DB — this is correct behavior. Fail-fast is a feature. Stop treating it as a bug unless it's breaking a documented dev workflow.
+
+The meta-issue: you have unverified assumptions stacked on unverified assumptions. Fix the verification gap first.</div></details>
+    <details><summary>G — The Pragmatist</summary><div class="body">Fix next (real blockers / risk):
+1. War Matrix plaintext password auth fallback. This is a security liability, not hygiene. Even as a "fallback," a plaintext comparison path is a breach waiting to happen. Remove it or hash it. This is the #1 priority — nothing else on the list has blast radius like a credential leak.
+2. Verify DB schemas are actually applied. "Not verified as done" is the dangerous phrase. Smoke tests passing only proves shallow paths work; data writes may fail on uncreated tables. Run a schema-diff per project against the live MSSQL instances. If schemas are missing, that's a correctness blocker, not paperwork.
+
+Fix soon (dev-experience, moderate risk):
+3. ProdIntel fail-fast process.exit(1) on missing DB. Makes local setup fragile and gives no recovery path. Convert to a logged error with connection details, or degraded mode. Not user-facing, but it actively hurts onboarding and debugging.
+4. War Matrix no-undef bugs. Tests pass with zero fatal console errors, so these may sit in dead paths — but verify that before dismissing. If any hit a live route, it's a runtime crash, not lint.
+
+Defer / ignore (hygiene):
+- Unused-import lint errors → cosmetic; batch into a dedicated lint pass.
+- Dead code (localApiClient.jsx ×2, OmniPOS tmp/ scripts) → remove in a cleanup sprint.
+- War Matrix stale seed.sql / migrate_auth.js / routes/sas.js (absent SASCodes table) → only fix if that route is live; otherwise delete the route.
+- Root node_modules/ + test-results/ → .gitignore entry; not worth a sprint.
+
+Bottom line: Two real items (plaintext auth, unverified schemas). Everything else is hygiene. Don't spend finite time on lint and dead code while a plaintext password path exists.</div></details>
+    <details><summary>H — The Risk Assessor</summary><div class="body">Risk assessment, ranked by blast radius and irreversibility:
+
+Fix now (real blockers / security):
+1. War Matrix plaintext password fallback. This is the only item with a security downside that compounds over time — every login against it leaks or stores recoverable credentials. Irreversible exposure risk. Kill the fallback and force the migrated auth path; delete stale seed.sql/migrate_auth.js so nobody runs them.
+2. War Matrix routes/sas.js → absent SASCodes table. A route that 500s on every hit is a live defect, not hygiene. Either create the table + migration or remove the route. Decide by checking call sites first.
+3. DB schema application verification. "Not verified as done" across 7 apps means we don't actually know the backends run against real schemas. This is the #1 unknown-unknown: smoke tests passing against stubbed/empty DBs proves nothing. Verify each app's schema is applied and add a startup check (table existence) so missing schema fails loudly instead of silently.
+
+Fix soon (correctness, low effort):
+4. War Matrix no-undef bugs — these are latent runtime crashes on specific code paths, not style. Fix before they bite in prod.
+5. ProdIntel process.exit(1) on missing DB — keep fail-fast, but make the error message actionable (which DB, which env var). Don't soften it; a silent degraded mode is worse.
+
+Defer / ignore (hygiene, no downside):
+6. Unused imports, dead localApiClient.jsx files, tmp/ scripts — lint debt, zero runtime impact. Batch into a cleanup PR when convenient.
+7. Root node_modules/ + test-results/ — add to .gitignore if not already; don't delete blindly until you confirm nothing references them. Low risk, low value.
+
+Bottom line: security + schema verification first; everything else is cosmetic until those are green.</div></details>
+    <details><summary>I — The Historian</summary><div class="body">The Historian's read: This is the classic "migration declared done before the data layer is" pattern. The smoke tests passing is a frontend signal; it says nothing about whether any app can actually persist. That is the single biggest latent risk, and it's the one item that, if wrong, makes every other fix moot.
+
+Fix next (real blockers / security):
+1. Verify DB setup per project. The checklist is entirely unchecked and the assistant is barred from running DDL, so the only honest move is a verification pass: apply schema.sql by hand, hit /api/health, and run one create/read round-trip per entity. Until that's green, "tests pass" is a frontend-only claim. This is the HotelOps-removal lesson in reverse — we removed an app but never proved the remaining seven persist.
+2. War Matrix plaintext password fallback. Compatibility shims for stale seed DBs are exactly how "temporary" becomes a breach. Remove the password column branch, require password_hash, and delete seed.sql/migrate_auth.js or repoint them. Do this before any auth-adjacent work.
+3. War Matrix no-undef lint bugs. These are latent runtime failures, not style. Fix them; they're cheap and they bite in production.
+
+Defer (hygiene, not blockers):
+- Unused imports across frontends; dead localApiClient.jsx files; OmniPOS tmp/ scripts. Batch into one cleanup PR after blockers are green. They don't change behavior.
+- routes/sas.js references an absent SASCodes table, but nothing in src calls /api/sas. Treat as dead route: remove the mount rather than build a table for a feature nobody uses. (Pattern: don't grow schema to support dead code.)
+
+Ignore / leave alone:
+- ProdIntel's process.exit(1) on missing DB. This is correct behavior, not a bug. Fail-fast on a missing dependency is what you want; "fixing" it to limp along would hide the DB-setup problem above. Document it in the runbook instead.
+- Root node_modules/ and test-results/. Add them to .gitignore (one line each) and stop there — do not delete; they may be in use by the Playwright scaffold. Do not git add -f them.
+
+Bottom line: The historical failure mode here is shipping a migration that passes browser smoke tests while the persistence layer is unverified. Spend the finite time on DB verification + War Matrix auth. Everything else is cleanup that can ride along later.</div></details>
+
+  <div class="card">
+    <h2>Peer review highlights</h2>
+    <div class="peer">
+      <p><strong>Strongest (consensus):</strong> H (Risk Assessor) — named by 4 of 5 reviewers. A (Contrarian) named by 1 (Outsider lens). H prioritizes irreversible/security risk, demands per-app schema verification + startup table checks, keeps ProdIntel fail-fast but makes it actionable.</p>
+      <p><strong>Biggest blind spot (consensus):</strong> C (Expansionist) — named by all 5 reviewers. It discounts the plaintext password fallback as "theoretical" in a sandbox and bets on DB automation/SASCodes before establishing whether any app actually ships or persists.</p>
+      <p><strong>What all 9 advisors missed (consensus across reviews):</strong></p>
+      <ul>
+        <li>A verification protocol — failing repro first, one end-to-end create/read per entity, migration rollback, owner/date. "Fix" lists without verification criteria are just opinions.</li>
+        <li>The gating question — what is the actual success criterion / deployment target for these seven apps? Without that, prioritization is taste.</li>
+        <li>Validating the premise — checking call sites, mounted routes, and whether tests exercise auth/DB writes before ranking items.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    Generated by the LLM Council &nbsp;·&nbsp; Methodology by Andrej Karpathy &nbsp;·&nbsp; 31 Oct 2026<br>
+    Full transcript: <code>council-transcript-20261031.md</code> &nbsp;·&nbsp; 9 advisors, 5 peer reviewers, 1 chairman synthesis
+  </div>
+</div>
+</body>
+</html>
