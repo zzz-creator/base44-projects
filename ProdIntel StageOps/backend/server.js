@@ -483,8 +483,27 @@ app.use((err, _req, res, _next) => {
 // ─── Start ────────────────────────────────────────────────────────────────────
 
 const PORT = parseInt(process.env.PORT) || 3001;
-app.listen(PORT, () => {
-  console.log(`\n🎭 ProdIntel StageOps backend (MSSQL) running on http://localhost:${PORT}`);
-  console.log(`   Health: http://localhost:${PORT}/health`);
+
+// Bind the first free port at or above PORT (3001, 3002, ...), like Vite does,
+// so a stale instance or another project on 3001 does not abort startup.
+function listenWithFallback(port, onReady) {
+  port = Number(port) || 3001;
+  const server = app.listen(port);
+  server.on('listening', () => onReady(server.address().port));
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`Port ${port} is in use, trying ${port + 1}...`);
+      server.close();
+      listenWithFallback(port + 1, onReady);
+    } else {
+      console.error('Failed to start server:', err);
+      process.exit(1);
+    }
+  });
+}
+
+listenWithFallback(PORT, (actualPort) => {
+  console.log(`\n🎭 ProdIntel StageOps backend (MSSQL) running on http://localhost:${actualPort}`);
+  console.log(`   Health: http://localhost:${actualPort}/health`);
   console.log(`   Frontend: ${process.env.FRONTEND_URL || 'http://localhost:5173'}\n`);
 });

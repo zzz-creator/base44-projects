@@ -185,8 +185,16 @@ Entity route prefix per project — set the client's `SDK_CONFIG.entityPathPrefi
 3. Ensure `@google/genai` is a dependency of the project root.
 4. Root `package.json` dev script:
    ```json
-   "dev": "concurrently \"vite\" \"node backend/server.js\""
+   "dev": "node ../dev-runner.mjs"
    ```
+   `../dev-runner.mjs` (shared at the workspace root, beside `test-all-projects.mjs`) picks
+   the first free backend port at or above `PORT` (3001 → 3002 → …), starts
+   `backend/server.js` on it, then starts Vite with `VITE_API_URL` pointed at that exact
+   port — so the UI always talks to the backend that is actually running. Streams are
+   labelled `[backend]` / `[frontend]`, and `vite --logLevel info` restores Vite's URL
+   banner that `vite.config.js`'s `logLevel: 'error'` would otherwise swallow.
+   Each backend also retries the next port itself on `EADDRINUSE`, so running one
+   standalone (`cd backend; npm run dev`) is resilient too.
 
 ## 9. Verification
 
@@ -194,10 +202,11 @@ Entity route prefix per project — set the client's `SDK_CONFIG.entityPathPrefi
 cd "<Project>"
 npm install
 cd backend; npm install; cd ..
-npm run dev                     # concurrently: vite + node backend/server.js
+npm run dev                     # shared dev-runner; prints both URLs, backend falls forward 3001→3002
 ```
 
-- `GET http://localhost:3001/api/health` → `{ "status": "ok" }`
+- `GET http://localhost:3001/api/health` → `{ "status": "ok" }` (use the port the launcher
+  printed if 3001 was busy)
 - `npm run build` exits 0; `node --check backend/server.js` is clean.
 - From the workspace root: `node test-all-projects.mjs` → 8/8 passed (client contract).
 - Browser network tab shows entity calls to `http://localhost:3001/api/...`;

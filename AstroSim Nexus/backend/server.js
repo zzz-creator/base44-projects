@@ -415,4 +415,24 @@ app.post('/api/:entity/bulk', async (req, res) => {
 });
 
 
-app.listen(PORT, () => console.log(`🚀 AstroSim Nexus backend running on http://localhost:${PORT}`));
+// Bind the first free port at or above PORT (3001, 3002, ...), like Vite does,
+// so a stale instance or another project on 3001 does not abort startup.
+function listenWithFallback(port, onReady) {
+  port = Number(port) || 3001;
+  const server = app.listen(port);
+  server.on('listening', () => onReady(server.address().port));
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`Port ${port} is in use, trying ${port + 1}...`);
+      server.close();
+      listenWithFallback(port + 1, onReady);
+    } else {
+      console.error('Failed to start server:', err);
+      process.exit(1);
+    }
+  });
+}
+
+listenWithFallback(PORT, (actualPort) => {
+  console.log(`🚀 AstroSim Nexus backend running on http://localhost:${actualPort}`);
+});

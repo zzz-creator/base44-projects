@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"node backend/server.js\"",
+    "dev": "node ../dev-runner.mjs",
     "fix:imports": "node tools/replace-at-imports.cjs",
     "build": "vite build",
     "lint": "eslint .",
