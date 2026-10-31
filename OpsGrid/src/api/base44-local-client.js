@@ -261,6 +261,28 @@ export function configureSDK(config) {
   Object.assign(SDK_CONFIG, config);
 }
 
+// ─── Agents (Base44 AI agents — stubbed for local dev) ───────────────────────
+// OpsGrid's WorkspaceControl / IncidentResolution pages use Base44's agent
+// conversation API. The local client has no realtime agent backend, so these
+// return empty/no-op results to keep the pages rendering without crashing.
+const agents = {
+  async listConversations() {
+    return [];
+  },
+  async createConversation(params) {
+    return { id: `local-conv-${Date.now()}`, agent_name: params?.agent_name, metadata: params?.metadata, messages: [] };
+  },
+  async getConversation(id) {
+    return { id, messages: [] };
+  },
+  async addMessage() {
+    return { success: true };
+  },
+  subscribeToConversation() {
+    return () => {};
+  },
+};
+
 // ─── Export Client ───────────────────────────────────────────────────────────
 
 export const base44LocalClient = {
@@ -268,6 +290,7 @@ export const base44LocalClient = {
   auth: new UserEntity(),
   integrations,
   appLogs,
+  agents,
   configure: configureSDK,
 };
 
