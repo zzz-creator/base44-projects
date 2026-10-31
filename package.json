@@ -1,0 +1,27 @@
+{
+  "name": "base44",
+  "version": "1.0.0",
+  "description": "",
+  "main": "custom-sdk.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzz-creator/base44-projects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zzz-creator/base44-projects/issues"
+  },
+  "homepage": "https://github.com/zzz-creator/base44-projects#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}
