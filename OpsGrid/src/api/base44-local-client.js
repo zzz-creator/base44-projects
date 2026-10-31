@@ -126,6 +126,13 @@ export class CustomEntity {
   async bulkCreate(items) {
     return apiFetch('POST', `${this.basePath}/bulk`, items);
   }
+
+  // Base44 SDK supports realtime subscriptions; the local client has no realtime
+  // transport, so this is a no-op that returns an unsubscribe function. Callers
+  // still get their initial data from list()/filter() and never crash.
+  subscribe(_callback) {
+    return () => {};
+  }
 }
 
 // ─── User Entity (Auth) ──────────────────────────────────────────────────────

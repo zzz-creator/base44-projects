@@ -7,7 +7,7 @@ test('app loads without fatal console errors', async ({ page }) => {
   });
   page.on('pageerror', (err) => errors.push(err.message));
 
-  const base = process.env.BASE_URL || 'http://127.0.0.1:5173';
+  const base = process.env.BASE_URL || 'http://localhost:5173';
   await page.goto(base, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(3000);
 
@@ -26,7 +26,7 @@ test('app loads without fatal console errors', async ({ page }) => {
 });
 
 test('navigation links do not crash', async ({ page }) => {
-  const base = process.env.BASE_URL || 'http://127.0.0.1:5173';
+  const base = process.env.BASE_URL || 'http://localhost:5173';
   await page.goto(base, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(2000);
   // Try clicking a few visible links/buttons safely.
