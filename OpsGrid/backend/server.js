@@ -389,14 +389,18 @@ function listenWithFallback(port, onReady) {
 listenWithFallback(PORT, (actualPort) => {
   console.log(`🚀 OpsGrid backend running on http://localhost:${actualPort}`);
   getPool()
-    .then((pool) => pool.request().query("SELECT COUNT(*) AS n FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"))
+    .then((pool) => pool.request().query("SELECT (SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') AS total, (SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Users') AS hasUsers"))
     .then((r) => {
-      const n = r.recordset[0].n;
-      if (n === 0) {
+      const { total, hasUsers } = r.recordset[0];
+      if (total === 0) {
         console.error(`❌ DB has no tables — apply backend/schema.sql to the database, then restart.`);
         process.exit(1);
       }
-      console.log(`✅ DB OK: ${n} tables present.`);
+      if (hasUsers === 0) {
+        console.error(`❌ 'Users' table missing — apply backend/schema.sql (creates Users) to the database, then restart.`);
+        process.exit(1);
+      }
+      console.log(`✅ DB OK: ${total} tables present (Users ✓).`);
     })
     .catch((err) => {
       console.error(`❌ DB connection failed: ${err.message}`);

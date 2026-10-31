@@ -4,6 +4,22 @@
 -- =============================================
 
 -- =============================================
+-- USERS (auth) — required by backend auth routes
+-- =============================================
+IF OBJECT_ID('Users', 'U') IS NULL
+CREATE TABLE [dbo].[Users] (
+    [UserID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [Email] NVARCHAR(255) NOT NULL UNIQUE,
+    [PasswordHash] NVARCHAR(255) NOT NULL,
+    [FullName] NVARCHAR(255) NULL,
+    [Role] NVARCHAR(50) NOT NULL DEFAULT 'user',
+    [Phone] NVARCHAR(50) NULL,
+    [ProfileImageUrl] NVARCHAR(500) NULL,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
+    [UpdatedAt] DATETIME2 NULL
+);
+
+-- =============================================
 -- PRODUCTION DOMAIN
 -- =============================================
 
