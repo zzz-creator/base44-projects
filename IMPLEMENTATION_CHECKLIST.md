@@ -16,7 +16,7 @@ CREATE DATABASE astrosim;          -- hotelops, kwanpro, nuclear_launch_sim,
 Then run that project's `backend/schema.sql` against its database (SQLTools in
 `Base44.code-workspace`, or `sqlcmd -S localhost -U admin -P admin -d <db> -i backend/schema.sql`).
 
-- [ ] AstroSim Nexus → `astrosim`
+- [x] AstroSim Nexus → `astrosim` (verified 2026-11-01: schema applied, /api/health ok, auth register+login round-trip with bcrypt hashing passed)
 - [ ] KwanPro → `kwanpro`
 - [ ] Nuclear Launch Sim → `nuclear_launch_sim`
 - [ ] OmniPOS Core → `omnipos`
