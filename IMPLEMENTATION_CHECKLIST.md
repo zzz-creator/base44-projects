@@ -17,7 +17,6 @@ Then run that project's `backend/schema.sql` against its database (SQLTools in
 `Base44.code-workspace`, or `sqlcmd -S localhost -U admin -P admin -d <db> -i backend/schema.sql`).
 
 - [ ] AstroSim Nexus → `astrosim`
-- [ ] HotelOps → `hotelops`
 - [ ] KwanPro → `kwanpro`
 - [ ] Nuclear Launch Sim → `nuclear_launch_sim`
 - [ ] OmniPOS Core → `omnipos`
@@ -77,10 +76,17 @@ Per project: `npm run build` (must exit 0) and `node --check backend/server.js`.
 
 ## Known pre-existing issues (not part of this migration)
 
-- Lint: unused-import errors across frontend files; a few `no-undef` bugs in
-  War Matrix components.
-- War Matrix: plaintext `password` auth fallback, stale `seed.sql` /
-  `scripts/migrate_auth.js`, `routes/sas.js` references an absent `SASCodes` table.
-- Dead code left in place: `AstroSim Nexus/src/components/localApiClient.jsx`,
-  `ProdIntel StageOps/src/components/api/localApiClient.jsx`, and `tmp/` scripts
-  in OmniPOS Core.
+- (Resolved) Lint unused-import / `no-undef` errors cleared across all 7 apps
+  (War Matrix no-undef fixes: AIStrategyAdvisor, CustomScenarioBuilder,
+  BranchComparisonChart).
+- (Resolved) Plaintext password auth restored to bcryptjs hashing across all 7
+  backends; War Matrix `resolvePasswordColumn` dual-column fallback removed.
+  Auth now requires the `password_hash` column.
+- (Resolved) Dead code removed: `localApiClient.jsx` (AstroSim, ProdIntel),
+  `War Matrix/backend/routes/sas.js`, `OmniPOS Core/tmp/` scripts.
+- (Resolved) Root `node_modules/` and `test-results/` added to `.gitignore`.
+- (Resolved) HotelOps app removed from monorepo.
+- Remaining: `Nuclear Launch Sim` mounts `/api/sas` (SASCodePuzzler) against an
+  absent `SASCodes` table — latent 500; needs the table created or the route cut.
+- Remaining: DB schemas not yet verified end-to-end against a live MSSQL
+  instance (permission-gated).
