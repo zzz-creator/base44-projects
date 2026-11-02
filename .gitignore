@@ -26,6 +26,10 @@ config.json
 logs/
 /tmp/
 
+# --- Root Playwright scaffold / deps ---
+node_modules/
+test-results/
+
 # --- OS / editor cruft ---
 .DS_Store
 Thumbs.db
