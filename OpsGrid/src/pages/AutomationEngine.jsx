@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Zap, Plus, Play, Pause, Trash2, ChevronRight, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Zap, Plus, Trash2, ChevronRight, ToggleLeft, ToggleRight } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import RuleBuilder from '@/components/automation/RuleBuilder';
 

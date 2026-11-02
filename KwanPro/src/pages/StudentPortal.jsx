@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { Award, CheckCircle, Clock, AlertCircle, Star } from "lucide-react";
+import { Award, CheckCircle, AlertCircle, Star } from "lucide-react";
 import { calculateMonthsInBelt } from "../utils/beltUtils";
 
 export default function StudentPortal() {

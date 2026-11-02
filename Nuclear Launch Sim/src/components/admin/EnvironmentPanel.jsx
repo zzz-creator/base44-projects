@@ -1,6 +1,6 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
-import { Cloud, Sun, Moon, CloudRain, Wind, Thermometer, Clock } from 'lucide-react';
+import { Cloud, Sun, Moon, CloudRain, Wind } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 
 const WEATHER_CONDITIONS = [

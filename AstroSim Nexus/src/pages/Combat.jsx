@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Button } from "../components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { Badge } from "../components/ui/badge";
-import { Swords, Play, SkipForward, AlertTriangle } from 'lucide-react';
+import { Swords, Play } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Combat() {

@@ -2,7 +2,7 @@ import * as React from 'react';
 const { useState, useEffect, useCallback } = React;
 import { Activity, Cpu, HardDrive, Wifi, AlertTriangle, TrendingUp, TrendingDown, Minus, Bell, BellOff } from 'lucide-react';
 {/* @ts-ignore */}
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const METRICS = [
   { id: 'cpu', name: 'CPU Usage', icon: Cpu, unit: '%', warningThreshold: 80, criticalThreshold: 95 },

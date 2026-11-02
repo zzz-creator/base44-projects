@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import {
   History,
   Search,
-  Filter,
   Plus,
   Pencil,
   Trash2,
@@ -17,7 +16,6 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Badge } from '../../components/ui/badge';
-import { Button } from '../../components/ui/button';
 import {
   Select,
   SelectContent,

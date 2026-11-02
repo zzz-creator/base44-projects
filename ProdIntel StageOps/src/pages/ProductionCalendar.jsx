@@ -5,14 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { Checkbox } from '../components/ui/checkbox';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../components/ui/select';
-import { Calendar, ChevronLeft, ChevronRight, Download, Loader2, Theater, ListTodo, Users } from 'lucide-react';
+
+
+import { ChevronLeft, ChevronRight, Download, Loader2, Theater, ListTodo, Users } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, isWithinInterval, parseISO } from 'date-fns';
 
 const eventTypes = [

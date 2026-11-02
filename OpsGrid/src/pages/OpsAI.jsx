@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Bot, Send, RefreshCw, Zap, AlertTriangle, FileText, TrendingUp, Cpu, X } from 'lucide-react';
+import { Bot, Send, RefreshCw, Zap, AlertTriangle, FileText, TrendingUp, Cpu } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 const SUGGESTIONS = [

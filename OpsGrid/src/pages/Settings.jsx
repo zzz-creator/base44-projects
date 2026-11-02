@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Settings, Bell, Shield, Database, Sliders, Save } from 'lucide-react';
+import { Settings, Bell, Shield, Sliders, Save } from 'lucide-react';
 import { toast } from 'sonner';
 import TwoFactorAuth from '@/components/settings/TwoFactorAuth';
 

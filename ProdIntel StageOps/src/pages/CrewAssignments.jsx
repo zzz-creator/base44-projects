@@ -5,12 +5,9 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
   Users, 
-  Search, 
-  Filter,
+  Search,
   Theater,
-  Loader2,
-  Phone,
-  Mail
+  Loader2
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';

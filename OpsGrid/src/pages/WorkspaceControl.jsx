@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Layers, Send, Loader2, Trash2, Plus } from 'lucide-react';
+import { Layers, Send, Loader2, Plus } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 export default function WorkspaceControl() {

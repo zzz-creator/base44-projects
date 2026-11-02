@@ -19,7 +19,6 @@ import {
   Box,
   ClipboardList,
   FileText,
-  Settings,
   Shield,
   Search,
   BarChart3,

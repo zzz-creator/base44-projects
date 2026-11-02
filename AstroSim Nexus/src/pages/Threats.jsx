@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '../api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
-import { AlertTriangle, Shield, Clock, TrendingUp } from 'lucide-react';
+import { AlertTriangle, Shield, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Threats() {

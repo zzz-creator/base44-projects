@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Shield, QrCode, CheckCircle2, XCircle, Loader2, Copy } from 'lucide-react';
+import { QrCode, CheckCircle2, Loader2, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 
 // Simple TOTP URI generator for display (real validation happens server-side via TOTP standard)

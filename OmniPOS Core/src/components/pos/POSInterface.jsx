@@ -8,7 +8,7 @@ import AuthorizationModal from "./AuthorizationModal";
 import POSDashboard from "./POSDashboard";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
-import { Package, AlertTriangle, RotateCcw, BarChart2 } from "lucide-react";
+import { Package, AlertTriangle, RotateCcw } from "lucide-react";
 
 export default function POSInterface() {
   const { cart, addToCart, clearCart, cartTotal, canPerform, logEvent } = usePOS();

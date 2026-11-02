@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { 
-  TrendingUp, TrendingDown, Clock, AlertTriangle, CheckCircle,
-  Activity, Zap, Target
+  TrendingUp, TrendingDown, Clock, AlertTriangle, Zap, Target
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 

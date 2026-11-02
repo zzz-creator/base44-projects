@@ -4,8 +4,7 @@ import { base44 } from '../api/base44Client';
 import { 
   Box, 
   Plus, 
-  Search, 
-  Filter,
+  Search,
   MoreVertical,
   Pencil,
   Trash2,

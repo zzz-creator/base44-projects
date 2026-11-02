@@ -1,6 +1,6 @@
 import React from "react";
 import { createPageUrl } from "@/utils";
-import { Monitor, Settings, ChevronRight, ShieldCheck, BarChart2 } from "lucide-react";
+import { Monitor, Settings, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {

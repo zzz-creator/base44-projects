@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Shield, LayoutDashboard, Calendar, Megaphone, CreditCard, LogOut, Menu, X, Swords } from "lucide-react";
+import { Shield, LayoutDashboard, Calendar, Megaphone, CreditCard, LogOut, Menu, Swords } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { base44 } from "@/api/base44Client";
 

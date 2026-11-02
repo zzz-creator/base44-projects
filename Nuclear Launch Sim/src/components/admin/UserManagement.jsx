@@ -2,9 +2,7 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
-import { Users, ShieldCheck, ShieldOff, Lock, Unlock, Trash2, Clock, Shield } from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
-import { Input } from "../../components/ui/input";
+import { ShieldCheck, Unlock, Clock, Shield } from 'lucide-react';
 
 const DURATION_PRESETS = [
   { label: '1 Hour', ms: 3600000 },

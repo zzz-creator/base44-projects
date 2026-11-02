@@ -8,6 +8,7 @@ import { Brain, Loader2, Target, Shield, Users, AlertTriangle, Lightbulb, Zap } 
 
 export default function AIStrategyAdvisor({ scenarioData, simulationResults, autoAnalyze = false }) {
   const [analysis, setAnalysis] = useState(null);
+  const [whatIfQuestions, setWhatIfQuestions] = useState([]);
 
   const generateAdvisoryMutation = useMutation({
     mutationFn: async () => {

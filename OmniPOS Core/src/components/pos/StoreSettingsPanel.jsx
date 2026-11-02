@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Save, Plus, Trash2, Store, Phone, MapPin, Percent, DollarSign, MessageSquare } from "lucide-react";
+import { Save, Plus, Trash2, Store, MapPin, Percent, DollarSign, MessageSquare } from "lucide-react";
 import { DEFAULT_SETTINGS, invalidateSettingsCache } from "./useStoreSettings";
 
 export default function StoreSettingsPanel() {

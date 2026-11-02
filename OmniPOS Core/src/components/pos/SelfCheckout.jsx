@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, HelpCircle, CreditCard, AlertTriangle, CheckCircle2, Trash2 } from "lucide-react";
+import { ShoppingCart, HelpCircle, CreditCard, CheckCircle2, Trash2 } from "lucide-react";
 import { usePOS } from "./POSContext";
 import { base44 } from "@/api/base44Client";
 import AuthorizationModal from "./AuthorizationModal";

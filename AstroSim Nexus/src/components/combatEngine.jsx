@@ -1,11 +1,6 @@
 import { base44 } from '../api/base44Client';
-import { calculateShipStats } from './shipUtils';
 import { 
-  getFleetComposition, 
-  selectTargetWithRole, 
-  shouldRetreat as shouldRoleRetreat,
-  calculateFleetStrength,
-  coordinateFleetAttack,
+  selectTargetWithRole,
   getFormationModifiers
 } from './fleetAI';
 

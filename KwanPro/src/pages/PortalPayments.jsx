@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { CreditCard, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { CheckCircle, AlertCircle, Clock } from "lucide-react";
 
 const STATUS_CONFIG = {
   paid: { icon: CheckCircle, color: "text-green-600", bg: "bg-green-100", label: "Paid" },

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, AlertTriangle, Activity, BarChart3,
   Terminal, Settings, Users, Zap, Radio, ChevronRight,
-  AlertOctagon, FlaskConical, Bot, Cpu, Monitor, Layers, ShieldAlert
+  AlertOctagon, FlaskConical, Bot, Monitor, Layers, ShieldAlert
 } from 'lucide-react';
 
 const navItems = [

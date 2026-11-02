@@ -1,8 +1,7 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
-import { AlertTriangle, Lock, Mail } from 'lucide-react';
-import { Input } from "../../components/ui/input";
+import { AlertTriangle, Lock } from 'lucide-react';
 import { Button } from "../../components/ui/button";
 
 const OWNER_EMAIL = 'mr.keefe.au@gmail.com';

@@ -10,8 +10,7 @@ import {
   Trash2,
   Wrench,
   Calendar,
-  Loader2,
-  Box
+  Loader2
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Circle, AlertTriangle, FileText, Target, Users, Shield, Clock, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle, Circle, AlertTriangle, FileText, Target, Users, Shield, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const DEFAULT_CHECKLIST = [

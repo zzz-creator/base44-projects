@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '../api/base44Client';
 import { 
-  Calendar, Box, Plus, Search, Loader2, Trash2, Theater, 
-  CheckCircle, XCircle, Clock
+  Calendar, Box, Plus, Search, Loader2, Trash2, Theater
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';

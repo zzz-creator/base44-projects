@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Bell, Search, Menu, Wifi, Clock, Shield, Command } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { Bell, Search, Menu, Wifi, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function TopBar({ onToggleSidebar, alertCount = 0, onOpenCommandBar }) {

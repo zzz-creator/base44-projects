@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { callGemini, hasGeminiApiKey } from './geminiClient';
+import { callGemini } from './geminiClient';
 import GeminiKeySetup from './GeminiKeySetup';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';

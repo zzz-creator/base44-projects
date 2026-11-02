@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Shield, AlertTriangle, Lock, Eye, UserX, Activity } from 'lucide-react';
+import { Shield, AlertTriangle, Lock, Eye, UserX } from 'lucide-react';
 
 const severityColor = {
   critical: 'text-neon-red border-neon-red/30 bg-neon-red/10',

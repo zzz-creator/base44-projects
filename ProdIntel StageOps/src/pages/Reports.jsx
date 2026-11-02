@@ -3,17 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { base44 } from '../api/base44Client';
 import {
   FileText,
-  Download,
   BarChart3,
   Users,
   Wrench,
-  DollarSign,
-  Calendar,
-  Loader2,
-  FileDown
+  DollarSign
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+import { Card, CardContent } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import {
   Select,

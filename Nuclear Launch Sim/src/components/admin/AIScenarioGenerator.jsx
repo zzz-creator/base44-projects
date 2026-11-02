@@ -1,11 +1,9 @@
 // @ts-nocheck
 import * as React from 'react';
 const { useState } = React;
-import { Sparkles, FileText, Zap, AlertTriangle, Target, Clock, Loader2 } from 'lucide-react';
+import { Sparkles, FileText, Loader2 } from 'lucide-react';
 {/* @ts-ignore */}
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 {/* @ts-ignore */}
-import { Input } from "../../components/ui/input";
 {/* @ts-ignore */}
 import { Textarea } from "../../components/ui/textarea";
 import { dataProvider as base44 } from '../../components/data/DataProvider';

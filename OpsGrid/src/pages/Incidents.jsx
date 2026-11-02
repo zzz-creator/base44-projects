@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { AlertOctagon, Plus, Clock, User, Tag, ChevronDown, ChevronUp } from 'lucide-react';
-import { formatDistanceToNow, format } from 'date-fns';
+import { AlertOctagon, Plus, Clock, User } from 'lucide-react';
+import { formatDistanceToNow } from 'date-fns';
 import IncidentDetail from '@/components/incidents/IncidentDetail';
 import CreateIncidentModal from '@/components/incidents/CreateIncidentModal';
 

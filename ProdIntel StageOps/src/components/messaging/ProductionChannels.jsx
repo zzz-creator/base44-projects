@@ -6,7 +6,7 @@ import { Input } from '../../components/ui/input';
 import { ScrollArea } from '../../components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '../../components/ui/avatar';
 import { 
-  Hash, Send, Plus, Loader2, MessageSquare, MoreVertical 
+  Hash, Send, Plus, Loader2, MessageSquare 
 } from 'lucide-react';
 import {
   Dialog,
@@ -15,12 +15,8 @@ import {
   DialogTitle,
   DialogFooter
 } from '../../components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '../../components/ui/dropdown-menu';
+
+
 import moment from 'moment';
 import { notifyNewMessage } from '../../components/notifications/NotificationService';
 

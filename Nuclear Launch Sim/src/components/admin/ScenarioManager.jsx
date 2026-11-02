@@ -1,13 +1,9 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
-import { Panel } from '../simulator/Panel';
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
 import { 
   FileText, Plus, Download, Upload, Play, Trash2, 
-  CheckCircle, XCircle, Clock, TrendingUp, Edit, Database, Globe, History
+  CheckCircle, TrendingUp, Edit, Database, Globe, History
 } from 'lucide-react';
 import ScenarioEditor from './ScenarioEditor';
 import ScenarioVersionHistory from './ScenarioVersionHistory';

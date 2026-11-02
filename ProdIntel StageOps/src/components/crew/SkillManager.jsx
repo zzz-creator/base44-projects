@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '../../api/base44Client';
 import {
   Dialog,
@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../components/ui/select';
-import { Star, Plus, Trash2, Award, Loader2, ThumbsUp } from 'lucide-react';
+import { Star, Plus, Trash2, Award, ThumbsUp } from 'lucide-react';
 
 const SKILL_LEVELS = [
   { value: 'beginner', label: 'Beginner', color: 'bg-slate-100 text-slate-700' },

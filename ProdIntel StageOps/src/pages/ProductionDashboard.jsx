@@ -4,14 +4,14 @@ import { base44 } from '../api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import {
-  Theater, ArrowLeft, MapPin, Calendar, Users, ListTodo,
+  Theater, ArrowLeft, Calendar, Users, ListTodo,
   AlertTriangle, Box, Loader2, CheckCircle2, Clock, TrendingUp, DollarSign
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { format, differenceInDays, isAfter, isBefore, addDays } from 'date-fns';
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, LineChart, Line, Legend, Area, AreaChart } from 'recharts';
+import { format, differenceInDays, isAfter, isBefore } from 'date-fns';
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import BudgetManager from '../components/budget/BudgetManager';
 import BudgetChart from '../components/budget/BudgetChart';
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Trash2, Tag, ChevronDown, Shield, AlertTriangle } from "lucide-react";
+import { Trash2, Tag, AlertTriangle } from "lucide-react";
 import { usePOS } from "./POSContext";
 import AuthorizationModal from "./AuthorizationModal";
 import { motion, AnimatePresence } from "framer-motion";

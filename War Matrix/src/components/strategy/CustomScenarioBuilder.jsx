@@ -220,7 +220,7 @@ Use real-world geopolitical knowledge and historical patterns.`,
         add_context_from_internet: true
       });
 
-      onResultsGenerated(result, scenario, suggestions);
+      onResultsGenerated(result, scenario, aiSuggestions);
       return result;
     }
   });

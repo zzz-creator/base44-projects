@@ -18,7 +18,7 @@ import {
   Mail,
   Phone
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
@@ -30,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../components/ui/select';
-import { format, isWithinInterval, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const roleLabels = {
   stage_manager: 'Stage Manager',

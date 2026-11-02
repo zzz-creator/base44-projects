@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { X, Printer, ChevronDown } from "lucide-react";
+import { X, Printer } from "lucide-react";
 
 // Renders a simple visual barcode from a string using alternating bars
 function Barcode({ value, width = 180, height = 40 }) {

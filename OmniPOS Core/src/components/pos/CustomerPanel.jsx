@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Search, Plus, Pencil, Trash2, X, Star, ShoppingBag, Phone, Mail, ChevronDown, ChevronUp } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Search, Plus, Pencil, Trash2, X, Star, Phone, Mail } from "lucide-react";
 
 const EMPTY = { first_name: "", last_name: "", email: "", phone: "", address: "", notes: "" };
 

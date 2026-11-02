@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../components/ui/select';
-import { Search, Users, Plus, Loader2, Mail, Phone, Award, CheckCircle2 } from 'lucide-react';
+import { Search, Users, Plus, Loader2, Mail, Phone, Award } from 'lucide-react';
 import CrewMemberForm from '../components/crew/CrewMemberForm';
 
 const roles = [

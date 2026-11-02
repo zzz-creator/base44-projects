@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { base44 } from '../api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '../utils';
 import { format, isAfter, parseISO } from 'date-fns';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
@@ -34,14 +32,12 @@ import {
   Users,
   Hash,
   Plus,
-  Search,
   Send,
   Pin,
   AlertTriangle,
   Loader2,
   Building2,
-  ArrowLeft,
-  Bell
+  ArrowLeft
 } from 'lucide-react';
 
 const DEPARTMENTS = [

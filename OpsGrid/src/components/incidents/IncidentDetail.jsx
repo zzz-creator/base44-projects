@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { X, User, Tag, Clock, ChevronDown, Plus, CheckCircle } from 'lucide-react';
+import { X, User, Tag } from 'lucide-react';
 import { format } from 'date-fns';
 
 const STATUSES = ['open', 'investigating', 'mitigated', 'resolved'];

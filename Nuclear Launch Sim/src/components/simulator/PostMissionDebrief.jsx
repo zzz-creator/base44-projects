@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { 
-  CheckCircle, XCircle, AlertTriangle, Clock, Target, Activity,
-  TrendingUp, TrendingDown, Award, FileText, Download, RotateCcw,
+  CheckCircle, XCircle, AlertTriangle, Clock, Activity,
+  TrendingUp, Award, FileText, Download, RotateCcw,
   PlayCircle, BarChart3, MessageSquare
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
+import { XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import MissionPlayback from './MissionPlayback';
 import KPIOverlay from './KPIOverlay';
 import InstructorAnnotations from './InstructorAnnotations';

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { Award, CheckCircle, XCircle, Clock, GripVertical } from "lucide-react";
+import { Award, CheckCircle, Clock, GripVertical } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/button";
 import BeltBadge from "../components/BeltBadge";
 import BeltProgressBar from "../components/BeltProgressBar";
-import { DEFAULT_BELT_REQUIREMENTS, checkEligibility, getNextBelt, BELT_ORDER } from "../utils/beltUtils";
+import { DEFAULT_BELT_REQUIREMENTS, checkEligibility, getNextBelt } from "../utils/beltUtils";
 import { toast } from "sonner";
 
 export default function Promotions() {

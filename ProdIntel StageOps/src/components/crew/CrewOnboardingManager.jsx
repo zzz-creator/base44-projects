@@ -6,15 +6,9 @@ import { Button } from '../../components/ui/button';
 import { Checkbox } from '../../components/ui/checkbox';
 import { Badge } from '../../components/ui/badge';
 import { Progress } from '../../components/ui/progress';
-import { Loader2, CheckCircle2, Clock, Plus } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '../../components/ui/dialog';
-import { Input } from '../../components/ui/input';
-import { Textarea } from '../../components/ui/textarea';
+import { Loader2, CheckCircle2, Clock } from 'lucide-react';
+
+
 
 const defaultChecklist = [
   { title: 'Complete employee paperwork', completed: false },

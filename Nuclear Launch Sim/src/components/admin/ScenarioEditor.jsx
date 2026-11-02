@@ -2,8 +2,8 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { 
-  Save, X, Target, Clock, Zap, Cloud, AlertTriangle, 
-  Plus, Trash2, Settings, FileText, CheckCircle
+  Save, X, Target, Zap, Cloud, 
+  Plus, Trash2, FileText, CheckCircle
 } from 'lucide-react';
 {/* @ts-ignore */}
 import { Input } from "../../components/ui/input";

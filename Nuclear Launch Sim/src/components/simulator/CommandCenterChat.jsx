@@ -1,6 +1,6 @@
 import * as React from 'react';
 const { useState, useEffect, useRef, useCallback } = React;
-import { MessageSquare, Send, Radio, Volume2, VolumeX, Minimize2, Maximize2 } from 'lucide-react';
+import { Send, Radio, Volume2, VolumeX, Minimize2, Maximize2 } from 'lucide-react';
 // base44 import removed - using direct API calls
 // @ts-ignore
 import { motion, AnimatePresence } from 'framer-motion';

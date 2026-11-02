@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Activity, Cpu, HardDrive, Wifi, Server, MemoryStick, Zap, Monitor } from 'lucide-react';
+import { Cpu, HardDrive, Server, MemoryStick, Zap, Monitor } from 'lucide-react';
 
 function MetricBar({ label, value, icon: Icon, colorClass }) {
   const pct = Math.min(100, Math.max(0, value || 0));

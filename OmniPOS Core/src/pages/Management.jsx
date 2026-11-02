@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { motion } from "framer-motion";
-import { Users, Package, FileText, ShieldCheck, Plus, Edit2, Trash2, ChevronRight, BarChart2 } from "lucide-react";
+import { Plus, Edit2, Trash2, ChevronRight } from "lucide-react";
 
 const TABS = ["Staff", "Inventory", "Transactions", "Logs", "Reports"];
 

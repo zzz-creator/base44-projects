@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Zap, Radio, Wifi, Cpu, Database, Power, AlertTriangle, CheckCircle, XCircle, Settings, X } from 'lucide-react';
+import { Zap, Radio, Wifi, Cpu, Database, Power, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SUBSYSTEM_POSITIONS = {

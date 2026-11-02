@@ -1,8 +1,8 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
-import { Activity, AlertTriangle, CheckCircle, XCircle, TrendingUp, History, Wrench, Edit2 } from 'lucide-react';
+import { Activity, AlertTriangle, History, Edit2 } from 'lucide-react';
 {/* @ts-ignore */}
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function SubsystemHealthMonitor({ subsystems, diagnostics, faultConfig, addLog, onHealthOverride }) {
   const [healthHistory, setHealthHistory] = useState({});

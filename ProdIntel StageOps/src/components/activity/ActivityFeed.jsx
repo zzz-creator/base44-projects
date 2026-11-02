@@ -3,8 +3,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '../../api/base44Client';
 import PullToRefresh from '../../components/mobile/PullToRefresh';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '../../utils';
 import {
   Activity,
   MessageSquare,
@@ -17,7 +15,6 @@ import {
   Loader2
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
 import { ScrollArea } from '../../components/ui/scroll-area';
 
 const activityIcons = {

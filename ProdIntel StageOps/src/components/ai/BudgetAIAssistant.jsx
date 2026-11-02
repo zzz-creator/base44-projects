@@ -3,7 +3,6 @@ import { base44 } from '../../api/base44Client';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { callGemini } from './geminiClient';
 import { Button } from '../../components/ui/button';
-import { Textarea } from '../../components/ui/textarea';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';

@@ -4,8 +4,7 @@ import { base44 } from '../api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import {
-  Theater, Calendar, Clock, CheckCircle2, Loader2, 
-  AlertCircle, Users, Filter
+  Theater, Calendar, Clock, CheckCircle2, Loader2, Users, Filter
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -13,8 +12,8 @@ import { Button } from '../components/ui/button';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '../components/ui/select';
-import { format, isPast, isFuture, isToday } from 'date-fns';
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { format, isPast, isFuture } from 'date-fns';
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 
 const statusColors = {
   assigned: 'bg-slate-100 text-slate-700',

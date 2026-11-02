@@ -3,7 +3,7 @@ const { useState, useEffect } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
 import { 
   History, GitBranch, RotateCcw, Eye, Clock, User,
-  ChevronRight, Check, X, Diff, ArrowLeft
+  ChevronRight, X, Diff
 } from 'lucide-react';
 // @ts-ignore
 import { motion, AnimatePresence } from 'framer-motion';

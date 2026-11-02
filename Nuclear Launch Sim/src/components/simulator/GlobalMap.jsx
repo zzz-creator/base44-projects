@@ -3,7 +3,7 @@ import * as React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { Target, Navigation } from 'lucide-react';
+import { Navigation } from 'lucide-react';
 
 // Fix for default Leaflet icon issues in React
 // @ts-ignore

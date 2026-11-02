@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Server, Cpu, HardDrive, MemoryStick, Zap, Circle } from 'lucide-react';
+import { Server, Cpu, HardDrive, MemoryStick, Zap } from 'lucide-react';
 
 const statusColors = {
   online:   { dot: 'bg-neon-green status-pulse-green', text: 'text-neon-green',       label: 'Online' },

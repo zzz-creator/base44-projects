@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  Users, UserPlus, Shield, Mail, Loader2, Trash2,
-  Settings, CheckCircle, AlertCircle, MoreVertical, History, LogIn
+  Users, UserPlus, Shield, Loader2, Trash2,
+  Settings, CheckCircle, AlertCircle, History, LogIn
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -15,9 +15,7 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from '../components/ui/dialog';
-import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from '../components/ui/dropdown-menu';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import RoleGuard from '../components/auth/RoleGuard';
 import AuditLogViewer from '../components/audit/AuditLogViewer';

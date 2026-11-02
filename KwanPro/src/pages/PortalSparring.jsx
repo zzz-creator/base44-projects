@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { Swords, Trophy, MessageSquare } from "lucide-react";
+import { Swords, MessageSquare } from "lucide-react";
 
 export default function PortalSparring() {
   const [matches, setMatches] = useState([]);

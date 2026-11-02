@@ -3,13 +3,11 @@ const { useState, useEffect, useMemo } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
 import { 
   BarChart3, TrendingUp, TrendingDown, Target, AlertTriangle,
-  Clock, CheckCircle, XCircle, Filter, RefreshCw, Calendar,
-  PieChart, Activity, Zap, Award
+  Clock, CheckCircle, Filter, RefreshCw, Calendar, Award
 } from 'lucide-react';
 // @ts-ignore
-import { 
-  LineChart, Line, BarChart, Bar, PieChart as RechartsPie, Pie, Cell,
-  XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, Area, AreaChart
+import { BarChart, Bar, PieChart as RechartsPie, Pie, Cell,
+  XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart
 } from 'recharts';
 // import { motion } from 'framer-motion';
 

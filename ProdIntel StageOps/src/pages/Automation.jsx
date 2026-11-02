@@ -9,8 +9,6 @@ import {
   Pencil,
   Trash2,
   Loader2,
-  Play,
-  Pause,
   Clock,
   CheckCircle,
   XCircle

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { base44 } from '../../api/base44Client';
-import { format, addDays, addWeeks, addMonths } from 'date-fns';
 import {
   Dialog,
   DialogContent,
@@ -21,8 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../components/ui/select';
-import { Loader2, Link as LinkIcon, RefreshCw, AlertTriangle } from 'lucide-react';
-import { notifyTaskAssigned, notifyTaskOverdue } from '../../components/notifications/NotificationService';
+import { Loader2, Link as LinkIcon, RefreshCw } from 'lucide-react';
+import { notifyTaskAssigned } from '../../components/notifications/NotificationService';
 
 const CATEGORIES = [
   { value: 'technical', label: 'Technical' },

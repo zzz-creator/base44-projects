@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
-import { Users, Award, TrendingUp, CreditCard, AlertTriangle, CheckCircle, ChevronRight, Calendar } from "lucide-react";
+import { Users, Award, CreditCard, AlertTriangle, CheckCircle, ChevronRight } from "lucide-react";
 import BeltBadge from "../components/BeltBadge";
 import { BELT_ORDER, BELT_COLORS, checkEligibility, DEFAULT_BELT_REQUIREMENTS } from "../utils/beltUtils";
 

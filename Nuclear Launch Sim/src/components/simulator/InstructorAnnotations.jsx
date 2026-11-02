@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  MessageSquarePlus, Pencil, Trash2, Save, X, Pin, Clock,
+  MessageSquarePlus, Pencil, Trash2, Save, Pin, Clock,
   AlertCircle, CheckCircle, Info, Flag
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

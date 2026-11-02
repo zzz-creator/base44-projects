@@ -3,16 +3,14 @@ import * as React from 'react';
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 {/* @ts-ignore */}
 import { 
-  Shield, AlertTriangle, CheckCircle, XCircle, Lock, Unlock,
-  Radio, Cpu, Database, Wifi, Power, Activity, Terminal,
+  Shield, AlertTriangle, CheckCircle, Lock, Unlock,
+  Radio, Cpu, Database, Wifi, Power,
   Clock, AlertOctagon, ChevronRight, RotateCcw, Zap, LogOut, Play,
   ShieldCheck, User, X, Eye, EyeOff
 } from 'lucide-react';
 // @ts-ignore
-import { 
-  LineChart, Line, BarChart, Bar, PieChart as RechartsPie, Pie, Cell,
-  XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, Area, AreaChart
-} from 'recharts';
+
+
 import { dataProvider as base44 } from '../components/data/DataProvider';
 {/* @ts-ignore */}
 import { AnimatePresence } from 'framer-motion';

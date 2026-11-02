@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
-import { TrendingUp, ShoppingCart, DollarSign, Clock, List, Package, Settings, BarChart2, Gift, Truck, Tag, Users, CalendarDays } from "lucide-react";
+import { TrendingUp, ShoppingCart, DollarSign, Clock } from "lucide-react";
 import TransactionHistory from "./TransactionHistory";
 import InventoryPanel from "./InventoryPanel";
 import StoreSettingsPanel from "./StoreSettingsPanel";

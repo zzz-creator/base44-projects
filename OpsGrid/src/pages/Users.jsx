@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Users, Mail, Shield, Clock } from 'lucide-react';
+import { Users, Mail, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 
 const roleConfig = {

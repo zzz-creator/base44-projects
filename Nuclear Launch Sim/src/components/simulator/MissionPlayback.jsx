@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Play, Pause, SkipBack, SkipForward, Rewind, FastForward,
-  Eye, Monitor, Cpu, User, Settings, ChevronLeft, ChevronRight
+  Eye, Cpu, User, Settings
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 

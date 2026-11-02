@@ -9,6 +9,7 @@ import { TrendingUp, Users, DollarSign, Shield, AlertTriangle } from 'lucide-rea
 export default function BranchComparisonChart({ branches, currentScenarioId }) {
   const [selectedBranches, setSelectedBranches] = useState([]);
   const [selectedMetrics, setSelectedMetrics] = useState(['casualties', 'economic', 'stability']);
+  const selectedBranchData = branches.filter(b => selectedBranches.includes(b.id));
 
   const availableMetrics = [
     { id: 'casualties', name: 'Casualties', icon: Users },

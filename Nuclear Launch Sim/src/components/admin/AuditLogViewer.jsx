@@ -1,7 +1,7 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { dataProvider as base44 } from '../../components/data/DataProvider';
-import { LogOut, Download, RefreshCw } from 'lucide-react';
+import { Download, RefreshCw } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 
 const ACTION_ICONS = {

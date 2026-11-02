@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '../api/base44Client';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
   Users, Plus, Search, MoreVertical, Pencil, Trash2, 
-  Loader2, Phone, Mail, Shield
+  Loader2, Phone, Mail
 } from 'lucide-react';
 import { useCurrentUser } from '../components/auth/RoleGuard';
 import { Card, CardContent } from '../components/ui/card';

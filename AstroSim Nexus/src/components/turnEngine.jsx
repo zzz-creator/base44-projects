@@ -5,7 +5,7 @@ import {
   selectOptimalResearch, 
   updateStrategicMemory 
 } from './aiStrategy';
-import { updateMarketPrices, calculateEconomicHealthScore } from './marketEngine';
+import { updateMarketPrices } from './marketEngine';
 
 export const executeTurn = async () => {
   const startTime = Date.now();

@@ -1,9 +1,8 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { useAuth } from "@/lib/AuthContext";
 import {
-  LayoutDashboard, Users, Calendar, CheckSquare, Award, CreditCard, Megaphone, Settings, Menu, X, Shield, LogOut, QrCode, FileText, Package, Swords
+  LayoutDashboard, Users, Calendar, CheckSquare, Award, CreditCard, Megaphone, Settings, Menu, Shield, LogOut, QrCode, FileText, Package, Swords
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Monitor, ChevronDown, Plus, Pencil, Trash2, RefreshCw, Wifi, WifiOff, Loader2 } from 'lucide-react';
+import { Monitor, ChevronDown, Plus, Pencil, Trash2, RefreshCw, Loader2 } from 'lucide-react';
 import ComputerSetupWizard from './ComputerSetupWizard';
 
 const statusConfig = {
