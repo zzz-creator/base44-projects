@@ -98,5 +98,20 @@ IF OBJECT_ID('Users', 'U') IS NOT NULL
    AND NOT EXISTS (SELECT 1 FROM Users WHERE email = 'admin@centcom.com')
 BEGIN
     INSERT INTO Users (id, email, password_hash, full_name, role)
-    VALUES (CONVERT(NVARCHAR(36), NEWID()), 'admin@centcom.com', 'SUPERVISOR-OMEGA-1', 'CENTCOM Commander', 'admin');
+    VALUES (CONVERT(NVARCHAR(36), NEWID()), 'admin@centcom.com', '$2b$10$IC.s/nIsW2TDldquxR25HuHg4SlbCKJVQqD.DsI5AabESBTkxoaQu', 'CENTCOM Commander', 'admin');
 END
+
+
+-- SASCodes table for the Strategic Authentication System (routes/sas.js)
+IF OBJECT_ID('SASCodes', 'U') IS NULL
+BEGIN
+    CREATE TABLE SASCodes (
+        Id         INT IDENTITY(1,1) PRIMARY KEY,
+        Code1      NVARCHAR(16)  NOT NULL,
+        Code2      NVARCHAR(16)  NOT NULL,
+        ExpiresAt  DATETIME2     NOT NULL,
+        Used       BIT           NOT NULL DEFAULT 0
+    );
+END
+GO
+

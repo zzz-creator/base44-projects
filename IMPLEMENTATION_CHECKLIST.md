@@ -17,12 +17,12 @@ Then run that project's `backend/schema.sql` against its database (SQLTools in
 `Base44.code-workspace`, or `sqlcmd -S localhost -U admin -P admin -d <db> -i backend/schema.sql`).
 
 - [x] AstroSim Nexus → `astrosim` (verified 2026-11-01: schema applied, /api/health ok, auth register+login round-trip with bcrypt hashing passed)
-- [ ] KwanPro → `kwanpro`
-- [ ] Nuclear Launch Sim → `nuclear_launch_sim`
-- [ ] OmniPOS Core → `omnipos`
-- [ ] OpsGrid → `opsgrid`
-- [ ] ProdIntel StageOps → `prodintel`
-- [ ] War Matrix → `warmatrix`
+- [x] KwanPro → `kwanpro` (verified 2026-11-01)
+- [x] Nuclear Launch Sim → `nuclear_launch_sim` (verified 2026-11-01; seeded admin password migrated to bcrypt hash)
+- [x] OmniPOS Core → `omnipos` (verified 2026-11-01)
+- [x] OpsGrid → `opsgrid` (verified 2026-11-01)
+- [x] ProdIntel StageOps → `prodintel` (verified 2026-11-01)
+- [x] War Matrix → `warmatrix` (verified 2026-11-01)
 
 Each schema creates every entity table plus a `Users` table (`id`, `email`,
 `password_hash`, `full_name`, `role`, `created_date`, `updated_date`).
@@ -86,7 +86,7 @@ Per project: `npm run build` (must exit 0) and `node --check backend/server.js`.
   `War Matrix/backend/routes/sas.js`, `OmniPOS Core/tmp/` scripts.
 - (Resolved) Root `node_modules/` and `test-results/` added to `.gitignore`.
 - (Resolved) HotelOps app removed from monorepo.
-- Remaining: `Nuclear Launch Sim` mounts `/api/sas` (SASCodePuzzler) against an
-  absent `SASCodes` table — latent 500; needs the table created or the route cut.
-- Remaining: DB schemas not yet verified end-to-end against a live MSSQL
-  instance (permission-gated).
+- (Resolved) `Nuclear Launch Sim` `/api/sas` route: `SASCodes` table added to
+  schema.sql; route now functional.
+- (Resolved) All 7 apps' DB schemas verified end-to-end against live MSSQL
+  (schema applied, /api/health ok, auth register+login round-trip with bcrypt).
