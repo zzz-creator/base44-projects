@@ -4,6 +4,7 @@
 console.log('--- BACKEND STARTUP DEBUG ---');
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config({ path: require('path').join(__dirname, '.env') });
@@ -144,7 +145,7 @@ app.post('/api/auth/login', async (req, res) => {
       .query('SELECT * FROM Users WHERE Email = @email');
     
     const user = result.recordset[0];
-    if (!user || user.PasswordHash !== password) {
+    if (!user || !(await bcrypt.compare(password, user.PasswordHash))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -163,7 +164,7 @@ app.post('/api/auth/register', async (req, res) => {
   const { email, password, full_name, role = 'user' } = req.body;
   try {
     const pool = await poolPromise;
-    const password_hash = password;
+    const password_hash = await bcrypt.hash(password, 10);
     const id = uuidv4();
     await pool.request()
       .input('id', sql.UniqueIdentifier, id)

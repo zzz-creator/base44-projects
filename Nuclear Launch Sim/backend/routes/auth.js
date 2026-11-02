@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 const { sql, poolPromise } = require('../db');
+const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'nuclear-launch-sim-local-dev-secret';
 
@@ -80,8 +81,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Direct comparison (CAUTION: Not secure for production, but requested)
-        const storedPassword = user.password_hash !== undefined ? user.password_hash : user.password;
-        if (storedPassword !== password) {
+        if (!user.password_hash || !(await bcrypt.compare(password, user.password_hash))) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 

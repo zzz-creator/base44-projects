@@ -52,7 +52,7 @@ a new project.
 <Project>/backend/schema.sql         hand-written from <Project>/entities/*
 <Project>/backend/.env               DB + JWT + Gemini secrets (untracked)
 <Project>/backend/.env.example       same keys, blank values (committed)
-<Project>/backend/package.json       express, mssql, cors, dotenv, jsonwebtoken
+<Project>/backend/package.json       express, mssql, cors, dotenv, bcryptjs, jsonwebtoken
 <Project>/.env                       VITE_API_URL, VITE_GEMINI_API_KEY (Vite reads here)
 <Project>/src/api/base44-local-client.js
 <Project>/src/api/base44Client.js     re-exports the local client as `base44`

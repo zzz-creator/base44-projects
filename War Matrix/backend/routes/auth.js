@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 const { sql, poolPromise } = require('../db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'warmatrix-local-dev-secret';
@@ -24,17 +25,8 @@ function bearerToken(req) {
   return header && header.startsWith('Bearer ') ? header.slice(7) : null;
 }
 
-// The Users table stores the credential in `password_hash` (canonical local
-// schema) but older/seed databases use a plaintext `password` column; pick
-// whichever exists so register/login work against either.
-async function resolvePasswordColumn(pool) {
-  const result = await pool.request().query(`
-    SELECT TOP 1 name FROM sys.columns
-    WHERE object_id = OBJECT_ID('Users') AND name IN ('password_hash', 'password')
-    ORDER BY CASE name WHEN 'password_hash' THEN 0 ELSE 1 END
-  `);
-  return result.recordset[0] ? result.recordset[0].name : 'password_hash';
-}
+// Credentials are stored hashed in the `password_hash` column (bcrypt). The
+// plaintext `password` column fallback was removed (security regression fix).
 
 // Login Route
 router.post('/login', async (req, res) => {
@@ -57,9 +49,8 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Plaintext comparison, matching the prior backend behaviour.
-        const storedPassword = user.password_hash !== undefined ? user.password_hash : user.password;
-        if (storedPassword !== password) {
+        // Hashed comparison (bcrypt).
+        if (!user.password_hash || !(await bcrypt.compare(password, user.password_hash))) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
@@ -105,20 +96,20 @@ router.post('/register', async (req, res) => {
             return res.status(409).json({ error: 'Email already registered' });
         }
 
-        const passwordColumn = await resolvePasswordColumn(pool);
         const id = crypto.randomUUID();
-
+        const password_hash = await bcrypt.hash(password, 10);
+ 
         const request = pool.request();
         request.input('id', sql.NVarChar, id)
             .input('email', sql.NVarChar, email)
-            .input('password', sql.NVarChar, password)
+            .input('password_hash', sql.NVarChar, password_hash)
             .input('full_name', sql.NVarChar, full_name || null)
             .input('role', sql.NVarChar, role);
-
+ 
         const result = await request.query(`
-            INSERT INTO Users (id, email, ${ident(passwordColumn)}, full_name, role)
+            INSERT INTO Users (id, email, password_hash, full_name, role)
             OUTPUT inserted.id, inserted.email, inserted.full_name, inserted.role
-            VALUES (@id, @email, @password, @full_name, @role)
+            VALUES (@id, @email, @password_hash, @full_name, @role)
         `);
 
         const user = result.recordset[0] || { id, email, full_name: full_name || null, role };

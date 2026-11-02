@@ -8,6 +8,7 @@ const path = require('path');
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 // Load backend/.env explicitly – cwd is the project root, not backend/
@@ -151,7 +152,7 @@ app.post('/api/auth/login', async (req, res) => {
     const user = result.recordset[0];
     if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
-    if (user.PasswordHash !== password) return res.status(401).json({ error: 'Invalid credentials' });
+    if (!(await bcrypt.compare(password, user.PasswordHash))) return res.status(401).json({ error: 'Invalid credentials' });
 
     const token = jwt.sign(
       { id: user.UserID, email: user.Email, role: user.Role, full_name: user.FullName },
@@ -180,7 +181,7 @@ app.post('/api/auth/register', async (req, res) => {
     
     if (existing.recordset.length > 0) return res.status(409).json({ error: 'User already exists' });
 
-    const password_hash = password;
+    const password_hash = await bcrypt.hash(password, 10);
     const id = uuidv4();
     const now = new Date();
 

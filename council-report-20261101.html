@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Council Report — what should we do next?</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555;
+    --border: #e2e2e2;
+    --accent: #2563eb;
+    --accent-soft: #eff6ff;
+    --warn: #b45309;
+    --ok: #166534;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  header { border-bottom: 2px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .q { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 16px 0 24px; border-radius: 4px; }
+  .q strong { color: var(--accent); }
+  h2 { font-size: 18px; margin: 28px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+  h3 { font-size: 15px; margin: 16px 0 6px; color: var(--accent); }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  .verdict { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; }
+  .verdict h2 { margin-top: 0; }
+  .one-thing { background: #fef3c7; border-left: 4px solid var(--warn); padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+  .one-thing strong { color: var(--warn); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .card { border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
+  .card h4 { margin: 0 0 4px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .pos-agree { border-left: 3px solid var(--ok); }
+  .pos-clash { border-left: 3px solid var(--warn); }
+  details { border: 1px solid var(--border); border-radius: 6px; margin: 8px 0; }
+  summary { cursor: pointer; padding: 10px 14px; font-weight: 600; background: #f9fafb; border-radius: 6px; }
+  summary:hover { background: #f1f5f9; }
+  details[open] summary { border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0; }
+  .detail-body { padding: 12px 14px; }
+  .advisor-name { font-weight: 600; color: var(--accent); }
+  .letter { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; background: var(--accent); color: #fff; border-radius: 4px; font-size: 12px; font-weight: 700; margin-right: 6px; }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  .tag { display: inline-block; font-size: 11px; padding: 2px 6px; border-radius: 3px; background: #eef2ff; color: #3730a3; margin-left: 6px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>LLM Council Report</h1>
+    <div class="meta">Question: <strong>what should we do next?</strong> &nbsp;|&nbsp; Date: 1 November 2026 &nbsp;|&nbsp; Seated: core 5 + 5 panelists (Skeptic, Pragmatist, Risk Assessor, Ethicist, Historian)</div>
+  </header>
+
+  <div class="q">
+    <strong>The question:</strong> Given finite time on a 7-app migrated Base44 monorepo where a previous council's #1 recommendation (remove plaintext passwords) was silently reversed by commit <code>8a91226</code>, what should we do next? Prioritize by impact and risk: is the plaintext regression #1? Restore hashing or accept plaintext for sandbox? What about the uncommitted HotelOps deletion, stale checklist, dead code, lint, and DB verification?
+  </div>
+
+  <div class="verdict">
+    <h2>The Recommendation</h2>
+    <ol>
+      <li><strong>Resolve the uncommitted HotelOps deletion first.</strong> Inspect the diff, then commit or revert it by name. ~5 minutes; it is the only item that can be silently lost.</li>
+      <li><strong>Determine why bcrypt was removed</strong> (read commit <code>8a91226</code>'s diff + CI logs). Then either restore bcrypt (removing War Matrix's <code>resolvePasswordColumn</code> fallback in the same change) or make an explicit, documented sandbox-vs-real decision with a promotion gate. Either way, add a regression test that fails on plaintext storage. Handle credential migration (hash-on-next-login or reset) and document rollback.</li>
+      <li><strong>DB end-to-end verification on one app</strong> (AstroSim Nexus) against a real MSSQL instance once permission is granted; use as template. Add a storage-format assertion to tests.</li>
+      <li><strong>Batch hygiene:</strong> update/delete stale <code>IMPLEMENTATION_CHECKLIST.md</code>, delete dead code (<code>sas.js</code> file, <code>localApiClient.jsx</code> x2, OmniPOS <code>tmp/</code>), fix lint no-undef/unused imports, add root <code>node_modules/</code> and <code>test-results/</code> to <code>.gitignore</code>. After blockers.</li>
+    </ol>
+    <div class="one-thing">
+      <strong>The one thing to do first:</strong> Resolve the uncommitted HotelOps deletion — inspect the diff, then commit or revert it by name — before touching anything else.
+    </div>
+  </div>
+
+  <h2>Where the Council Agrees</h2>
+  <div class="grid">
+    <div class="card pos-agree"><h4>Agree</h4><p>Uncommitted HotelOps deletion is the most immediate, lowest-effort, highest-risk-in-progress item. Commit or revert today.</p></div>
+    <div class="card pos-agree"><h4>Agree</h4><p>Plaintext-password regression (commit <code>8a91226</code>) is a real problem, not hygiene. It silently inverted a prior council's #1 security recommendation across all 7 apps.</p></div>
+    <div class="card pos-agree"><h4>Agree</h4><p>DB verification end-to-end is a genuine gap. Startup schema checks prove tables exist, not that data/auth flow works. Permission-blocked but not optional.</p></div>
+    <div class="card pos-agree"><h4>Agree</h4><p>Dead code, lint, stale checklist, untracked <code>node_modules/</code> + <code>test-results/</code> = hygiene. Defer / batch.</p></div>
+    <div class="card pos-agree"><h4>Agree</h4><p>War Matrix <code>resolvePasswordColumn</code> dual-column fallback should be removed (with the hashing fix).</p></div>
+    <div class="card pos-agree"><h4>Agree</h4><p>ProdIntel fail-fast <code>process.exit(1)</code> on missing DB is correct behavior. Keep; make the error message actionable.</p></div>
+  </div>
+
+  <h2>Where the Council Clashes</h2>
+  <div class="grid">
+    <div class="card pos-clash"><h4>Clash</h4><p><strong>Is plaintext THE #1 blocker, or a documented sandbox tradeoff?</strong> Security-leaning advisors say restore bcrypt now, no exceptions. Pragmatists say decide from real exposure + the commit's cause first. Expansionist says accept plaintext behind a gate and invest in a shared auth layer. Resolution: the disagreement is about evidence. Restore is cheap IF no real users exist, but confirm exposure and the commit's cause first. Either way, remove the fallback and add a storage-format regression test.</p></div>
+    <div class="card pos-clash"><h4>Clash</h4><p><strong>Scope: platform consolidation vs blockers-only.</strong> Expansionist sees a reusable app factory; most see unverified persistence. Resolution: do blockers first, then decide on consolidation with evidence.</p></div>
+    <div class="card pos-clash"><h4>Clash</h4><p><strong>DB verification vs hashing ordering.</strong> Some say verify DB first; most say hashing first. Resolution: hashing first (security, compounding downside), then DB verification (permission-gated).</p></div>
+  </div>
+
+  <h2>Blind Spots Caught (peer review)</h2>
+  <ul>
+    <li><strong>Credential migration (Executor reviewer):</strong> restoring bcrypt is not only code — existing plaintext passwords need hash-on-next-login or reset, lockout, and rollback. Unaddressed.</li>
+    <li><strong>Root cause of the regression (First Principles, Outsider reviewers):</strong> no one inspected why <code>8a91226</code> removed bcrypt. Could be a build failure or broken login. Restoring blindly may reintroduce the original failure.</li>
+    <li><strong>Exposure/ownership inventory (Contrarian reviewer):</strong> which apps are reachable, who has credentials, where backups/logs go. Never established before arguing policy.</li>
+    <li><strong>Storage-format regression test (Contrarian, Outsider reviewers):</strong> no test that fails on plaintext storage, so the next <code>8a91226</code>-type reversal passes CI silently.</li>
+    <li><strong>HotelOps deletion diff (First Principles, Outsider reviewers):</strong> "commit or revert" was said without first inspecting what is actually being deleted.</li>
+  </ul>
+
+  <h2>Advisor Responses (collapsed)</h2>
+  <p class="meta">Click to expand each advisor's full response. Letters map to anonymized peer-review labels.</p>
+
+  <details>
+    <summary><span class="letter">H</span> The Contrarian <span class="tag">core</span></summary>
+    <div class="detail-body">
+      <p>The plaintext-password regression is not a "should we accept it" question. It's a "why did nobody catch it" question. Commit 8a91226 reverted council #1's explicit recommendation, and the response so far has been to note it as a known issue. That's not a plan. If these apps ever leave sandbox—or if anyone reuses credentials across environments—this is a breach, not a hygiene item. Restore bcrypt. Now. Before anything else. The "sandbox" framing is a rationalization; sandboxes get promoted and credentials get reused.</p>
+      <p>The uncommitted HotelOps deletion is your most immediate footgun. Untracked deletions don't show up the way you expect, and a git reset or fresh clone silently resurrects a project you already removed. Commit it or revert it today, explicitly, by name.</p>
+      <p>DB verification is the second real blocker, and your own constraint is the problem, not the excuse. Startup schema checks prove tables exist, not that they're correct. You're flying blind on data integrity across 7 apps. Get permission or get a read-only verification script. Don't ship "verified" when you mean "started."</p>
+      <p>Everything else — dead code, lint, untracked node_modules, stale checklist — is hygiene. It will not wake you at 3am. Sequence: (1) commit/revert HotelOps deletion, (2) restore bcrypt + remove resolvePasswordColumn fallback, (3) DB verification with explicit permission, (4) checklist update, (5) everything else. Don't let the passing Playwright tests convince you the hard problems are solved. They test the happy path; they don't test what's wrong.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">C</span> The First Principles Thinker <span class="tag">core</span></summary>
+    <div class="detail-body">
+      <p>The wrong question is "should we restore hashing?" The right question is "what is the actual goal of these apps?" They're sandbox apps migrated from Base44. If the goal is demos/prototypes, plaintext passwords are a known-acceptable tradeoff, not a blocker — and the previous council's rec #1 assumed production-grade auth that nobody actually needs here. Chasing bcrypt across 7 apps burns finite time for zero user-visible value.</p>
+      <p>The real #1 blocker nobody's asking about: no DB has been verified end-to-end. Startup schema checks prove tables exist; they prove nothing about whether login → query → render actually works with real data. That's the thing that, if broken, makes every other effort moot. Verify one app fully (OpsGrid or ProdIntel) before touching anything else.</p>
+      <p>Sequencing, by impact/risk: 1. Commit or stash the HotelOps deletion first. 2. DB end-to-end verification on one app. 3. Decide hashing policy once, in writing. 4. Everything else is hygiene, defer.</p>
+      <p>Don't restore hashing as a reflex — it's a decision, not a default. But do stop pretending the checklist reflects reality.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">J</span> The Expansionist <span class="tag">core</span></summary>
+    <div class="detail-body">
+      <p>The plaintext regression is a sandbox paper cut, not the #1 blocker — treat it as one. Restoring bcrypt across 7 apps burns finite time for zero user-visible gain in sandbox. Accept plaintext behind a documented "not for production" gate, and when you do restore hashing, do it once behind a single shared auth module rather than seven times.</p>
+      <p>What's being undervalued: all 7 apps pass smoke and deep Playwright tests. The migration is effectively done; you're now in platform territory. The adjacent opportunity hiding in plain sight is consolidation — a shared Express/MSSQL auth and user layer across all apps, one Users table, one login flow. You already started this with ProdIntel's Users table. Finish that pattern everywhere instead of patching per-app auth.</p>
+      <p>The HotelOps deletion is progress, not a blocker — commit it, it's free money. The stale checklist is an opportunity to redefine "done" as platform-ready. Dead code, lint, untracked root folders are hygiene; batch into one cleanup commit.</p>
+      <p>DB verification is the real ceiling. Pick AstroSim Nexus, verify schema + auth flow against a real DB, and use it as the template for the other six. Stop treating this as cleanup. It's a platform launch.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">A</span> The Outsider <span class="tag">core</span></summary>
+    <div class="detail-body">
+      <p>The plaintext regression is your #1 blocker, and the framing that makes it debatable is the problem. You call these "sandbox apps," but you also report smoke and deep Playwright tests passing on 7 *live* apps. Live apps with plaintext password storage and a login comparing <code>PasswordHash !== password</code> are not sandboxed in any meaningful sense — they're apps with a label. A prior council told you to remove plaintext fallback; a commit then removed bcrypt from *all* apps. That's not drift, it's an active reversal, and your suite didn't catch it because no test ever asserted on password storage.</p>
+      <p>Restore hashing. Do not accept plaintext "for sandbox" — that's the rationalization that got you here. Restoring bcrypt costs hours; a leak's cost is not bounded by sandbox status.</p>
+      <p>Sequence by reversibility and blast radius: 1. Commit or stash the HotelOps deletion first. 2. Restore bcrypt across all 7 backends. 3. Then hygiene: stale checklist, dead code, lint, .gitignore. DB verification stays permission-blocked; note that startup schema checks only prove the app boots, not that data is correct.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">F</span> The Executor <span class="tag">core</span></summary>
+    <div class="detail-body">
+      <p>The plaintext regression is the #1 blocker and it's not close. Commit 8a91226 undid the council's top recommendation across all seven apps — that's a security regression in the default auth path, not a hygiene item. Restore bcrypt Monday morning: revert the commit or re-add the dependency and swap the two comparison/store lines per app. It's a 30–60 minute job and the Playwright suite already covers login/register, so verification comes free. Do not accept plaintext "for sandbox" — sandbox code becomes the template, and the cost to fix is trivial.</p>
+      <p>Second, commit the HotelOps deletion now. Two minutes. Third, DB verification is a real blocker but external — file the permission request and park it.</p>
+      <p>Everything else is hygiene in one cleanup pass: update IMPLEMENTATION_CHECKLIST.md, delete dead files (grep first), fix lint, add root <code>node_modules/</code> and <code>test-results/</code> to <code>.gitignore</code>. Sequencing: bcrypt restore → commit HotelOps deletion → (permission-gated) DB verification → hygiene batch. Remove War Matrix's <code>resolvePasswordColumn</code> fallback as part of the bcrypt restore.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">D</span> The Skeptic <span class="tag">panel</span></summary>
+    <div class="detail-body">
+      <p>"Tests pass" and "schema checks implemented" are claims, not evidence, and the bcrypt removal is an unexplained process failure nobody has diagnosed. Commit 8a91226 removed bcrypt with no stated rationale. Restoring hashing before answering <em>why</em> is cargo-culting the opposite direction. Maybe bcrypt's native build failed; maybe the author found login broken. Until we read that commit's diff and any CI/build log, "restore hashing" is a guess that could reintroduce the original failure. The real blocker isn't plaintext itself — it's that a security-relevant change landed with no justification and no test guarding it. Fix the process: require the commit to justify itself, then decide.</p>
+      <p>If these are sandboxes with no real user data and no external exposure, plaintext is a documented, accepted risk, not a blocker. If real credentials exist, it's exposure today.</p>
+      <p>DB verification: startup checks never run against a real MSSQL instance. Run the startup check against one live DB before trusting any "verified" language. Resolve the HotelOps deletion now. Hygiene is not a blocker.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">I</span> The Pragmatist <span class="tag">panel</span></summary>
+    <div class="detail-body">
+      <p>The plaintext regression is NOT automatically the #1 blocker. It's only a blocker if these apps are reachable by anyone but you. They're sandbox apps. Restoring bcrypt means: migrations, re-hashing or password-reset flows, re-testing login on all 7 apps, and risking the one thing currently working (smoke tests pass). That's a real multi-day project with real regression risk. If there are zero real users and no network exposure, accept plaintext and document the decision. If there's any chance of real credentials, restore hashing — but treat it as a scoped project, not a quick fix. Do not half-restore it.</p>
+      <p>Do immediately: commit the HotelOps deletion. Update or delete the stale checklist. Park: DB verification (not actionable now), dead code, lint, untracked node_modules/test-results. Sequence: (1) commit HotelOps + fix checklist, (2) make the explicit sandbox-vs-real decision on passwords and document it, (3) only then consider hashing restoration as a planned project.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">B</span> The Risk Assessor <span class="tag">panel</span></summary>
+    <div class="detail-body">
+      <p>Plaintext is not the #1 blocker for sandbox operation — Playwright passes and no real users exist — but it is the #1 latent risk: the moment any app is promoted or handles real credentials, every password is recoverable. The actual #1 immediate risk is the uncommitted HotelOps deletion: uncommitted deletions are fragile and can be silently lost on a reset or <code>git checkout</code>. Commit or revert it today before anything else.</p>
+      <p>On hashing: restore bcrypt, do not accept plaintext. Cost is low (sandbox test accounts can be reset; no real users to migrate). Benefit removes the single regression that undoes the prior council's #1 recommendation. Delaying only grows the plaintext user base and the eventual migration cost. If deferred, the tripwire must be: any non-sandbox deploy or real-user onboarding blocks until hashing returns.</p>
+      <p>Sequencing by risk: 1. Commit/revert HotelOps deletion. 2. Restore bcrypt across all 7 apps; update auth tests; reset test accounts. 3. DB end-to-end verification once DDL permission granted. 4. Batch hygiene. Do not spend finite time on #4 before #2.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">G</span> The Ethicist <span class="tag">panel</span></summary>
+    <div class="detail-body">
+      <p>The plaintext-password regression is not merely the #1 blocker — it is the only item on this list that constitutes an active betrayal of user trust, and it must be reversed before anything else. Commit 8a91226 took a deliberate safety decision (council #1) and inverted it silently: every app now stores recoverable credentials, and <code>login</code> does a string compare against <code>PasswordHash</code>. Smoke tests passing is not evidence of safety; they never inspected storage format, so they give false assurance. "Sandbox" is not a license to store real people's reusable passwords in plaintext — test accounts get reused, credentials leak into logs and backups, and the harm lands on users who never consented to that exposure. The cost of restoring bcrypt is trivial; the cost of a leak is not.</p>
+      <p>Restore hashing across all seven apps and delete <code>resolvePasswordColumn</code> in War Matrix in the same change — the fallback is a second door left open on purpose. Everything else is hygiene and sequencing, not harm. Commit the HotelOps deletion so repository state stops lying. Update <code>IMPLEMENTATION_CHECKLIST.md</code>. Then dead code, lint, and untracked <code>node_modules/</code>/<code>test-results/</code>. DB verification is important but gated on permission; schedule it after hashing is restored, since verifying a schema that stores plaintext passwords only certifies a broken design. Do not accept plaintext "for now." There is no "for now" with credentials.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="letter">E</span> The Historian <span class="tag">panel</span></summary>
+    <div class="detail-body">
+      <p>The Historian's read: The bcrypt removal commit (8a91226) is the single most dangerous artifact in this repo, and it should be treated as an emergency, not a backlog item. Historical precedent is unambiguous here: every "temporary plaintext fallback" in every codebase I've seen that wasn't reverted within a week became permanent, and the ones that leaked became breaches. The War Matrix dual-column fallback (resolvePasswordColumn) is the exact pattern that keeps plaintext alive indefinitely — it's a compatibility shim that never gets removed. You already had a council tell you to remove plaintext; a commit reversed that; that's the regression that matters.</p>
+      <p>Blockers (do now): 1. Restore bcrypt hashing across all 7 apps. 2. Commit or revert the HotelOps deletion. 3. War Matrix resolvePasswordColumn fallback — remove it as part of #1.</p>
+      <p>Hygiene (do after): dead code, lint, stale checklist, root node_modules/test-results, DB verification (blocked on permission). Sequencing: Hashing first (security), then commit HotelOps + update checklist (state hygiene), then dead code/lint (quality). DB verification waits on permission. The plaintext regression is your #1 blocker. Accept nothing else until it's fixed.</p>
+    </div>
+  </details>
+
+  <h2>Peer Reviews (collapsed)</h2>
+  <details>
+    <summary>Review 1 — Contrarian lens</summary>
+    <div class="detail-body">
+      <p><strong>Strongest:</strong> D. It resists reflexive action: demands the <code>8a91226</code> diff/build logs and a real-DB startup check before restoring or accepting plaintext, treats the HotelOps deletion as immediate, and correctly labels dead code/lint/checklist as hygiene.</p>
+      <p><strong>Biggest blind spot:</strong> J. It reframes plaintext as a sandbox paper cut and jumps to platform consolidation, but misses that a shared auth layer would propagate the regression and that "sandbox" code becomes templates.</p>
+      <p><strong>All 10 missed:</strong> an exposure/ownership inventory (which apps are reachable, who has credentials, where backups/logs go) and a documented promotion gate before accepting plaintext; plus a storage-format regression test so the next <code>8a91226</code>-type reversal fails CI.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Review 2 — First Principles lens</summary>
+    <div class="detail-body">
+      <p><strong>Strongest:</strong> D. It refuses to treat "restore bcrypt" as the answer until the diff/CI logs explain why commit <code>8a91226</code> landed, and separates documented sandbox risk from an unexplained security-relevant process failure.</p>
+      <p><strong>Biggest blind spot:</strong> J. It reframes an unexplained auth regression as a "sandbox paper cut," accepts plaintext behind an undefined gate, and pivots to broad consolidation/platform work before resolving the unknown regression, uncommitted deletion, and unverified DB path.</p>
+      <p><strong>All 10 missed:</strong> inspecting the actual diff/CI history to determine <em>why</em> bcrypt was removed and whether a straight restore is viable; checking real exposure/data/credentials before deciding hashing policy; and inspecting the HotelOps deletion diff first.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Review 3 — Expansionist lens</summary>
+    <div class="detail-body">
+      <p><strong>Strongest:</strong> J. It turns the migration's passing tests into leverage: a shared auth/user layer, one Users table, one verified template. It questions whether bcrypt churn is worth it in a true sandbox.</p>
+      <p><strong>Biggest blind spot:</strong> I. It makes sandbox-vs-real a documentation exercise but ignores the War Matrix dual-column fallback and unverified exposure/credential reuse. Accepting plaintext without removing the fallback leaves a known bypass in place.</p>
+      <p><strong>All 10 missed:</strong> quantifying real exposure and credential reuse, inspecting commit <code>8a91226</code>'s diff/reason before choosing restore vs. accept, protecting the uncommitted HotelOps deletion first, and defining "done" as verified end-to-end DB/auth behavior rather than Playwright green.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Review 4 — Outsider lens</summary>
+    <div class="detail-body">
+      <p><strong>Strongest:</strong> D. It does not assume restoring bcrypt is automatic; it identifies the real defect as an unexplained, unguarded security-relevant change, makes plaintext acceptance conditional on documented sandbox boundaries, and prioritizes HotelOps plus real MSSQL verification over hygiene.</p>
+      <p><strong>Biggest blind spot:</strong> J. It reframes the regression as a "paper cut," accepts plaintext behind a documented gate, and pivots to consolidation/platform work without first verifying exposure, users, or why bcrypt was removed — risking normalization of a silent security inversion.</p>
+      <p><strong>All 10 missed:</strong> evidence and guardrails before action — inspecting diffs/blame for <code>8a91226</code> and HotelOps, confirming actual network/user exposure, adding a regression test that fails on plaintext storage, and defining rollback/branch strategy.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Review 5 — Executor lens</summary>
+    <div class="detail-body">
+      <p><strong>Strongest:</strong> H. It names the unexplained bcrypt removal as a real blocker, rejects "sandbox" rationalization, puts the uncommitted HotelOps deletion first, restores hashing and removes the War Matrix fallback together, keeps DB verification as the second blocker, and defers hygiene/checklist cleanup.</p>
+      <p><strong>Biggest blind spot:</strong> J. It reframes plaintext storage as a sandbox paper cut and pivots to consolidation, underestimating that commit <code>8a91226</code> silently inverted a prior security decision and that "sandbox" apps often become demos/shared environments.</p>
+      <p><strong>All 10 missed:</strong> the credential-migration problem — restoring bcrypt must handle existing plaintext passwords (hash-on-next-login or reset, lockout, rollback) without breaking login. None also demand the root cause of why bcrypt was removed before treating the regression as closed.</p>
+    </div>
+  </details>
+
+  <footer>
+    Generated by LLM Council &nbsp;|&nbsp; 1 November 2026 &nbsp;|&nbsp; Transcript: <code>council-transcript-20261101.md</code> &nbsp;|&nbsp; Full advisor responses and peer reviews in transcript.
+  </footer>
+</div>
+</body>
+</html>
